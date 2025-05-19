@@ -25,34 +25,38 @@
       showSizeChanger
       :pageSizeOptions="['12', '24', '36', '48']"
       @showSizeChange="handleSizeChange"
-      showTotal="共 {{totalItems}} 项"
+      :showTotal="(total) => `共 ${total} 项`"
       class="pagination"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { message } from 'ant-design-vue';
-import { getMaterials } from '@/api/material';
-import { getCategoryById } from '@/api/category';
 import MaterialCard from '@/components/material/MaterialCard.vue';
+import { useCategoryStore } from '@/stores/category';
+import { useMaterialStore } from '@/stores/material';
 
 const route = useRoute();
+const categoryStore = useCategoryStore();
+const materialStore = useMaterialStore();
+
 const categoryId = ref(null);
-const category = ref(null);
-const materials = ref([]);
-const loading = ref(false);
 const currentPage = ref(1);
 const pageSize = ref(12);
-const totalItems = ref(0);
+
+// 从store获取数据
+const category = computed(() => categoryStore.getCategoryById(categoryId.value));
+const materials = computed(() => materialStore.materials);
+const totalItems = computed(() => materialStore.totalMaterials);
+const loading = computed(() => materialStore.loading || categoryStore.loading);
 
 // 获取分类详情
 async function fetchCategory() {
   try {
-    const data = await getCategoryById(categoryId.value);
-    category.value = data;
+    await categoryStore.fetchCategoryById(categoryId.value);
   } catch (error) {
     console.error('获取分类详情失败:', error);
     message.error('获取分类详情失败');
@@ -61,23 +65,19 @@ async function fetchCategory() {
 
 // 获取分类下的素材
 async function fetchMaterials() {
-  loading.value = true;
   try {
     const params = {
       page: currentPage.value - 1,
       pageSize: pageSize.value,
       categoryId: categoryId.value,
-      sort: 'latest'
+      sort: 'latest',
+      status: 'APPROVED' // 只显示已审核的素材
     };
     
-    const response = await getMaterials(params);
-    materials.value = response.items;
-    totalItems.value = response.total;
+    await materialStore.fetchMaterials(params);
   } catch (error) {
     console.error('获取素材失败:', error);
     message.error('获取素材列表失败');
-  } finally {
-    loading.value = false;
   }
 }
 
@@ -90,6 +90,7 @@ function handlePageChange(page) {
 // 改变每页数量
 function handleSizeChange(current, size) {
   pageSize.value = size;
+  currentPage.value = 1; // 更改每页大小时通常重置到第一页
   fetchMaterials();
 }
 

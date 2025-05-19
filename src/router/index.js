@@ -50,6 +50,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: () => import('@/views/user/ProfileView.vue')
+  },
+        {
+    path: '/category/:id',
+    name: 'CategoryMaterialView',
+    component: () => import('@/views/category/CategoryMaterialView.vue')
   }
 ];
 
