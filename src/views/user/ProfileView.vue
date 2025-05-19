@@ -75,7 +75,7 @@
                         <a-upload
                           name="file"
                           :show-upload-list="false"
-                          action="/api/user/upload-avatar"
+                          action="/api/api/profile/upload-avatar"
                           :headers="uploadHeaders"
                           :before-upload="beforeAvatarUpload"
                           @change="handleAvatarChange"
@@ -240,7 +240,7 @@ const passwordForm = reactive({
 // 上传头像的请求头，包含token
 const uploadHeaders = computed(() => {
   return {
-    Authorization: `Bearer ${userStore.token.value}`
+    Authorization: `Bearer ${userStore.token}`
   };
 });
 
@@ -253,6 +253,7 @@ onMounted(async () => {
 // 获取用户信息
 async function fetchUser() {
   try {
+    // 获取用户详细信息，包含统计数据
     const userData = await userStore.fetchUserInfo();
     
     if (userData) {
@@ -275,19 +276,31 @@ async function fetchUserMaterials() {
   materialsLoading.value = true;
   
   try {
-    // 获取用户上传 - 页码从0开始
-    const uploadsResult = await materialStore.getUserUploads({ 
-      page: 0, 
-      size: 6 
+    // 直接使用 axios 获取用户上传的素材
+    const uploadsResponse = await axios.get('/api/api/user/materials', {
+      params: { 
+        page: 0, 
+        pageSize: 6 
+      },
+      headers: { 
+        Authorization: `Bearer ${userStore.token}` 
+      }
     });
-    userUploads.value = uploadsResult.content || [];
+    userUploads.value = uploadsResponse.data?.items || 
+                       uploadsResponse.data?.content || [];
     
-    // 获取用户收藏 - 页码从0开始
-    const favoritesResult = await materialStore.getUserFavorites({ 
-      page: 0, 
-      size: 6 
+    // 直接使用 axios 获取用户收藏的素材
+    const favoritesResponse = await axios.get('/api/api/user/favorites', {
+      params: { 
+        page: 0, 
+        pageSize: 6 
+      },
+      headers: { 
+        Authorization: `Bearer ${userStore.token}` 
+      }
     });
-    userFavorites.value = favoritesResult.content || [];
+    userFavorites.value = favoritesResponse.data?.items || 
+                         favoritesResponse.data?.content || [];
   } catch (error) {
     console.error('获取素材失败:', error);
     message.error('获取素材数据失败');
@@ -296,7 +309,7 @@ async function fetchUserMaterials() {
   }
 }
 
-// 处理头像URL
+// 处理头像URL - 简化版本
 function processAvatarUrl(url) {
   if (!url) return defaultAvatar;
   
@@ -305,20 +318,8 @@ function processAvatarUrl(url) {
     return url;
   }
   
-  // 如果已经包含 /uploads/avatars 前缀，则直接使用
-  if (url.startsWith('/uploads/avatars/')) {
-    return url;
-  }
-  
-  // 如果已经包含 /uploads 前缀，但不是avatars子目录
-  if (url.startsWith('/uploads/')) {
-    // 获取文件名并添加到avatars子目录
-    const fileName = url.split('/').pop();
-    return `/uploads/avatars/${fileName}`;
-  }
-  
-  // 否则，加上 /uploads/avatars/ 前缀
-  return url.startsWith('/') ? `/uploads/avatars${url}` : `/uploads/avatars/${url}`;
+  // 直接拼接到 /uploads/ 路径
+  return url.startsWith('/') ? url : `/uploads/${url}`;
 }
 
 // 头像错误处理
@@ -348,23 +349,30 @@ function beforeAvatarUpload(file) {
   return true; // 允许上传
 }
 
-// 处理头像变化
-function handleAvatarChange(info) {
+// 处理头像变化 - 简化版本
+async function handleAvatarChange(info) {
   if (info.file.status === 'uploading') {
     return;
   }
   
   if (info.file.status === 'done') {
-    // 获取上传后的头像URL
-    const avatarPath = info.file.response.data || info.file.response.url;
-    profileForm.avatar = avatarPath;
-    message.success('头像上传成功');
+    console.log("头像上传响应:", info.file.response);
+    
+    // 服务器返回成功消息
+    if (info.file.response && info.file.response.message) {
+      message.success('头像上传成功');
+      
+      // 直接重新获取用户信息，更新头像
+      await fetchUser();
+    } else {
+      message.warning('头像上传成功，但未收到有效响应');
+    }
   } else if (info.file.status === 'error') {
     message.error('头像上传失败: ' + (info.file.response?.message || '未知错误'));
   }
 }
 
-// 更新个人资料
+// 更新个人资料 - 简化版本
 async function updateProfile() {
   if (!profileForm.username.trim()) {
     message.warning('用户名不能为空');
@@ -374,22 +382,28 @@ async function updateProfile() {
   profileSubmitting.value = true;
   
   try {
-    const result = await userStore.updateProfile({
+    // 构建个人资料数据
+    const profileData = {
       username: profileForm.username,
-      bio: profileForm.bio,
-      avatar: profileForm.avatar
+      bio: profileForm.bio || ''
+      // 不需要发送avatar字段，头像已通过单独的上传接口处理
+    };
+    
+    console.log('发送更新资料请求:', profileData);
+    
+    // 发送请求
+    const response = await axios.put('/api/api/auth/profile', profileData, {
+      headers: { Authorization: `Bearer ${userStore.token}` }
     });
     
-    if (result.success) {
-      // 更新本地状态
-      userInfo.value = {...userInfo.value, ...result.user};
+    // 更新本地用户信息
+    if (response.data) {
+      userInfo.value = {...userInfo.value, ...response.data};
       message.success('个人资料更新成功');
-    } else {
-      message.error(result.message || '更新资料失败');
     }
   } catch (error) {
     console.error('更新个人资料失败:', error);
-    message.error('更新失败: ' + error.message);
+    message.error('更新失败: ' + (error.response?.data?.message || '服务器错误'));
   } finally {
     profileSubmitting.value = false;
   }
@@ -413,27 +427,33 @@ async function updatePassword() {
     return;
   }
   
+  if (passwordForm.newPassword.length < 6) {
+    message.warning('密码长度不能少于6个字符');
+    return;
+  }
+  
   passwordSubmitting.value = true;
   
   try {
-    const result = await userStore.updatePassword({
+    // 发送密码更新请求
+    const response = await axios.put('/api/api/profile/password', {
       currentPassword: passwordForm.currentPassword,
       newPassword: passwordForm.newPassword
+    }, {
+      headers: { Authorization: `Bearer ${userStore.token}` }
     });
     
-    if (result.success) {
+    if (response.status === 200) {
       message.success('密码修改成功');
       
       // 清空表单
       passwordForm.currentPassword = '';
       passwordForm.newPassword = '';
       passwordForm.confirmPassword = '';
-    } else {
-      message.error(result.message || '修改密码失败');
     }
   } catch (error) {
     console.error('密码修改失败:', error);
-    message.error('密码修改失败: ' + error.message);
+    message.error('密码修改失败: ' + (error.response?.data?.message || '服务器错误'));
   } finally {
     passwordSubmitting.value = false;
   }
