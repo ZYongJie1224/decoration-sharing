@@ -30,10 +30,10 @@
         <a-select
           v-model:value="formState.categoryId"
           placeholder="请选择分类"
-          :loading="loadingCategories"
+          :loading="categoryStore.loading"
         >
           <a-select-option 
-            v-for="category in categories" 
+            v-for="category in categoryStore.categories" 
             :key="category.id" 
             :value="category.id"
           >
@@ -92,11 +92,11 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted, computed } from 'vue';
 import { message } from 'ant-design-vue';
 import { InboxOutlined } from '@ant-design/icons-vue';
-import { getCategories } from '@/api/category';
-import { uploadMaterial } from '@/api/material';
+import { useCategoryStore } from '@/stores/category';
+import { useMaterialStore } from '@/stores/material';
 
 const props = defineProps({
   onSuccess: {
@@ -104,6 +104,10 @@ const props = defineProps({
     default: () => {}
   }
 });
+
+// 使用 Store 替代 API 调用
+const categoryStore = useCategoryStore();
+const materialStore = useMaterialStore();
 
 const formRef = ref(null);
 
@@ -120,8 +124,6 @@ const formState = reactive({
 const fileList = ref([]);
 const fileError = ref('');
 const uploading = ref(false);
-const loadingCategories = ref(false);
-const categories = ref([]);
 
 // 表单验证规则
 const rules = {
@@ -140,15 +142,11 @@ const rules = {
 
 // 获取分类列表
 async function fetchCategories() {
-  loadingCategories.value = true;
   try {
-    const data = await getCategories();
-    categories.value = data;
+    await categoryStore.fetchCategories();
   } catch (error) {
     console.error('获取分类失败:', error);
     message.error('获取分类列表失败');
-  } finally {
-    loadingCategories.value = false;
   }
 }
 
@@ -227,22 +225,29 @@ async function handleSubmit() {
   uploading.value = true;
   
   try {
-    const result = await uploadMaterial(formData);
-    message.success('素材上传成功，等待审核');
+    // 使用 materialStore 替代直接 API 调用
+    const result = await materialStore.uploadMaterial(formData);
     
-    // 重置表单
-    fileList.value = [];
-    fileError.value = '';
-    Object.assign(formState, {
-      title: '',
-      description: '',
-      categoryId: undefined,
-      tags: [],
-      license: 'own'
-    });
-    
-    // 调用成功回调
-    props.onSuccess(result);
+    if (result.success) {
+      message.success('素材上传成功，等待审核');
+      
+      // 重置表单
+      fileList.value = [];
+      fileError.value = '';
+      Object.assign(formState, {
+        title: '',
+        description: '',
+        categoryId: undefined,
+        tags: [],
+        license: 'own'
+      });
+      
+      // 调用成功回调
+      props.onSuccess(result.data);
+    } else {
+      // 处理失败情况
+      message.error('上传素材失败: ' + (result.message || '请稍后再试'));
+    }
   } catch (error) {
     console.error('上传素材失败:', error);
     message.error('上传素材失败: ' + (error.response?.data?.message || '请稍后再试'));

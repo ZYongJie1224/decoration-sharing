@@ -89,7 +89,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MaterialCard from '@/components/material/MaterialCard.vue'
 import { useMaterialStore } from '@/stores/material'
-import { getCategories } from '@/api/category'
+import { useCategoryStore } from '@/stores/category'
 // 导入常用的Ant Design图标
 import {
   HomeOutlined,
@@ -112,6 +112,7 @@ const categoryIcons = [
 const route = useRoute()
 const router = useRouter()
 const materialStore = useMaterialStore()
+const categoryStore = useCategoryStore()
 
 // 状态
 const searchKeyword = ref('')
@@ -124,25 +125,19 @@ const popularTags = ref(['北欧风', '简约', '现代', '中式', '地中海',
 const topCategories = ref([])
 
 // 计算属性
-const loading = computed(() => materialStore.loading)
+const loading = computed(() => materialStore.loading || categoryStore.loading)
 const materials = computed(() => materialStore.materials)
 const totalItems = computed(() => materialStore.totalMaterials)
 
 // 初始化
 onMounted(async () => {
   try {
-    // 获取分类列表
-    const categoriesResponse = await getCategories()
-    console.log('分类API响应:', categoriesResponse)
-
-    // 确保我们有一个数组
-    const categoriesArray = Array.isArray(categoriesResponse)
-      ? categoriesResponse
-      : (categoriesResponse?.content || categoriesResponse?.data || [])
-
-    // 使用前6个分类，并为每个分类分配Ant Design图标
-    if (categoriesArray && categoriesArray.length) {
-      topCategories.value = categoriesArray.slice(0, 6).map((cat, index) => ({
+    // 使用 categoryStore 获取分类列表
+    await categoryStore.fetchCategories()
+    
+    // 使用 categoryStore 的 categories 数据
+    if (categoryStore.categories.length) {
+      topCategories.value = categoryStore.categories.slice(0, 6).map((cat, index) => ({
         ...cat,
         // 使用对应索引的图标，如果索引超出范围则使用最后一个图标
         iconComponent: categoryIcons[index % categoryIcons.length],
@@ -194,10 +189,8 @@ async function loadMaterials() {
       sort: currentFilter.value,
       status: "APPROVED"
     }
-
-    console.log('请求参数:', params)
     
-    // 使用store的fetchMaterials方法，它会自动更新store的状态
+    // 使用 materialStore 的 fetchMaterials 方法
     await materialStore.fetchMaterials(params)
   } catch (error) {
     console.error('加载材料失败:', error)
@@ -209,6 +202,7 @@ async function searchMaterials(keyword) {
   if (!keyword.trim()) return
   
   try {
+    // 使用 materialStore 的 searchMaterials 方法
     await materialStore.searchMaterials(keyword, {
       page: currentPage.value - 1, // 后端是0基索引
       pageSize: pageSize.value
@@ -241,6 +235,7 @@ function quickSearch(tag) {
 </script>
 
 <style scoped>
+/* CSS 保持不变 */
 .home-view {
   width: 100%;
 }
