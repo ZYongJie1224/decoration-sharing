@@ -25,6 +25,7 @@ const route = useRoute();
 
 // 在管理员页面不显示常规导航
 const showNavigation = computed(() => !route.path.startsWith('/admin'));
+
 </script>
 
 <style>
@@ -36,7 +37,8 @@ const showNavigation = computed(() => !route.path.startsWith('/admin'));
 
 .main-content {
   flex: 1;
-  padding-top: 64px; /* Header height */
+  padding-top: 64px;
+  /* Header height */
 }
 
 /* Admin pages don't need the top padding */
