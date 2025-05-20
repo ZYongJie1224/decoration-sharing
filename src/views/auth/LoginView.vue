@@ -84,7 +84,7 @@ const formState = reactive({
   remember: false
 });
 
-// 表单验证规则
+// 表单验证规则 (保持不变)
 const rules = {
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -103,7 +103,7 @@ onMounted(() => {
   }
 });
 
-// 提交表单
+// 提交表单 - 增加显式获取用户资料的步骤
 async function handleSubmit() {
   try {
     const result = await userStore.login({
@@ -112,6 +112,8 @@ async function handleSubmit() {
     });
     
     if (result.success) {
+      // 登录成功后明确获取用户信息，包括头像
+      await userStore.fetchUserInfo();
       message.success('登录成功');
       
       // 如果存在重定向，则跳转到相应页面
