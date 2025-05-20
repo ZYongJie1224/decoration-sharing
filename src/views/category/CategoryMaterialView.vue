@@ -63,15 +63,15 @@ async function fetchCategory() {
   }
 }
 
-// 获取分类下的素材
+// 获取分类下的素材 - 确保只获取已审核的素材
 async function fetchMaterials() {
   try {
     const params = {
-      page: currentPage.value - 1,
+      page: currentPage.value - 1, // 后端页码从0开始
       pageSize: pageSize.value,
       categoryId: categoryId.value,
       sort: 'latest',
-      status: 'APPROVED' // 只显示已审核的素材
+      status: 'APPROVED' // 明确指定只获取已审核的素材
     };
     
     await materialStore.fetchMaterials(params);
@@ -90,7 +90,7 @@ function handlePageChange(page) {
 // 改变每页数量
 function handleSizeChange(current, size) {
   pageSize.value = size;
-  currentPage.value = 1; // 更改每页大小时通常重置到第一页
+  currentPage.value = 1; // 更改每页数量时重置到第一页
   fetchMaterials();
 }
 
@@ -98,7 +98,7 @@ function handleSizeChange(current, size) {
 watch(() => route.params.id, (newId) => {
   if (newId) {
     categoryId.value = parseInt(newId);
-    currentPage.value = 1;
+    currentPage.value = 1; // 切换分类时重置到第一页
     fetchCategory();
     fetchMaterials();
   }
