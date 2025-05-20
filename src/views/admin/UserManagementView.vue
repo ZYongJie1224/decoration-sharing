@@ -22,8 +22,8 @@
               allow-clear
             >
               <a-select-option value="">全部角色</a-select-option>
-              <a-select-option value="user">普通用户</a-select-option>
-              <a-select-option value="admin">管理员</a-select-option>
+              <a-select-option value="ADMIN">管理员</a-select-option>
+              <a-select-option value="USER">普通用户</a-select-option>
             </a-select>
           </a-col>
           
@@ -36,8 +36,8 @@
               allow-clear
             >
               <a-select-option value="">全部状态</a-select-option>
-              <a-select-option value="active">正常</a-select-option>
-              <a-select-option value="blocked">已禁用</a-select-option>
+              <a-select-option value="ACTIVE">正常</a-select-option>
+              <a-select-option value="BLOCKED">已禁用</a-select-option>
             </a-select>
           </a-col>
           
@@ -65,7 +65,7 @@
           <!-- 用户头像和用户名 -->
           <template v-if="column.key === 'user'">
             <div class="user-cell">
-              <a-avatar :src="record.avatar" />
+              <a-avatar :src="formatAvatarUrl(record.avatar)" @error="handleAvatarError" />
               <a-space direction="vertical" size="small">
                 <span class="user-name">{{ record.username }}</span>
                 <span class="user-email">{{ record.email }}</span>
@@ -75,16 +75,16 @@
           
           <!-- 角色列 -->
           <template v-else-if="column.key === 'role'">
-            <a-tag :color="record.role === 'admin' ? 'red' : 'blue'">
-              {{ record.role === 'admin' ? '管理员' : '普通用户' }}
+            <a-tag :color="record.role === 'ADMIN' ? 'red' : 'blue'">
+              {{ record.role === 'ADMIN' ? '管理员' : '普通用户' }}
             </a-tag>
           </template>
           
           <!-- 状态列 -->
           <template v-else-if="column.key === 'status'">
             <a-badge 
-              :status="record.status === 'active' ? 'success' : 'error'" 
-              :text="record.status === 'active' ? '正常' : '已禁用'" 
+              :status="record.status === 'ACTIVE' ? 'success' : 'error'" 
+              :text="record.status === 'ACTIVE' ? '正常' : '已禁用'" 
             />
           </template>
           
@@ -123,13 +123,13 @@
                 </a-button>
               </a-tooltip>
               
-              <a-tooltip :title="record.status === 'active' ? '禁用账号' : '启用账号'">
+              <a-tooltip :title="record.status === 'ACTIVE' ? '禁用账号' : '启用账号'">
                 <a-button 
                   type="text" 
                   size="small"
                   @click="toggleUserStatus(record)"
                 >
-                  <stop-outlined v-if="record.status === 'active'" />
+                  <stop-outlined v-if="record.status === 'ACTIVE'" />
                   <check-circle-outlined v-else />
                 </a-button>
               </a-tooltip>
@@ -176,18 +176,53 @@
         
         <a-form-item label="角色" name="role">
           <a-select v-model:value="editForm.role" :disabled="editForm.username === 'ZYongJie1224'">
-            <a-select-option value="user">普通用户</a-select-option>
-            <a-select-option value="admin">管理员</a-select-option>
+            <a-select-option value="USER">普通用户</a-select-option>
+            <a-select-option value="ADMIN">管理员</a-select-option>
           </a-select>
         </a-form-item>
         
         <a-form-item label="状态" name="status">
           <a-select v-model:value="editForm.status" :disabled="editForm.username === 'ZYongJie1224'">
-            <a-select-option value="active">正常</a-select-option>
-            <a-select-option value="blocked">禁用</a-select-option>
+            <a-select-option value="ACTIVE">正常</a-select-option>
+            <a-select-option value="BLOCKED">禁用</a-select-option>
           </a-select>
         </a-form-item>
       </a-form>
+    </a-modal>
+    
+    <!-- 用户详情模态框 -->
+    <a-modal
+      v-model:visible="profileVisible"
+      title="用户详情"
+      :footer="null"
+      width="700px"
+    >
+      <div class="user-profile-container">
+        <div class="user-profile-header">
+          <a-avatar :size="80" :src="formatAvatarUrl(selectedUser.avatar)" @error="handleAvatarError" />
+          <div class="user-profile-info">
+            <h2>{{ selectedUser.username }}</h2>
+            <p>{{ selectedUser.email }}</p>
+            <div class="user-profile-badges">
+              <a-tag :color="selectedUser.role === 'ADMIN' ? 'red' : 'blue'">
+                {{ selectedUser.role === 'ADMIN' ? '管理员' : '普通用户' }}
+              </a-tag>
+              <a-tag :color="selectedUser.status === 'ACTIVE' ? 'green' : 'red'">
+                {{ selectedUser.status === 'ACTIVE' ? '正常' : '已禁用' }}
+              </a-tag>
+            </div>
+          </div>
+        </div>
+        
+        <a-divider />
+        
+        <a-descriptions title="详细信息" bordered>
+          <a-descriptions-item label="用户ID" span={3}>{{ selectedUser.id }}</a-descriptions-item>
+          <a-descriptions-item label="注册时间">{{ formatDate(selectedUser.createdAt) }}</a-descriptions-item>
+          <a-descriptions-item label="最近登录">{{ formatDate(selectedUser.lastLoginAt) }}</a-descriptions-item>
+          <a-descriptions-item label="上传素材数">{{ selectedUser.materialCount }} 个</a-descriptions-item>
+        </a-descriptions>
+      </div>
     </a-modal>
   </div>
 </template>
@@ -195,6 +230,7 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import { message } from 'ant-design-vue';
+import axios from 'axios';
 import {
   ReloadOutlined,
   EyeOutlined,
@@ -204,6 +240,13 @@ import {
   CheckCircleOutlined
 } from '@ant-design/icons-vue';
 import dayjs from 'dayjs';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+
+// 路由和状态管理
+const router = useRouter();
+const userStore = useUserStore();
+const defaultAvatar = '/images/default-avatar.png';
 
 // 表格列定义
 const columns = [
@@ -250,54 +293,6 @@ const columns = [
 const loading = ref(false);
 const users = ref([]);
 
-// 模拟用户数据
-users.value = [
-  {
-    id: 1,
-    username: 'ZYongJie1224',
-    email: 'admin@example.com',
-    avatar: 'https://joeschmoe.io/api/v1/1',
-    role: 'admin',
-    status: 'active',
-    materialCount: 15,
-    createdAt: '2025-01-10T08:30:00Z',
-    lastLoginAt: '2025-05-16T10:45:00Z'
-  },
-  {
-    id: 2,
-    username: 'design_master',
-    email: 'design@example.com',
-    avatar: 'https://joeschmoe.io/api/v1/2',
-    role: 'user',
-    status: 'active',
-    materialCount: 28,
-    createdAt: '2025-02-15T14:20:00Z',
-    lastLoginAt: '2025-05-15T18:30:00Z'
-  },
-  {
-    id: 3,
-    username: 'creative_home',
-    email: 'creative@example.com',
-    avatar: 'https://joeschmoe.io/api/v1/3',
-    role: 'user',
-    status: 'active',
-    materialCount: 42,
-    createdAt: '2025-03-05T09:15:00Z',
-    lastLoginAt: '2025-05-14T11:20:00Z'
-  },
-  {
-    id: 4,
-    username: 'blockeduser',
-    email: 'blocked@example.com',
-    avatar: 'https://joeschmoe.io/api/v1/4',
-    role: 'user',
-    status: 'blocked',
-    materialCount: 5,
-    createdAt: '2025-04-18T16:40:00Z',
-    lastLoginAt: '2025-04-20T12:10:00Z'
-  }
-];
-
 // 筛选条件
 const filters = reactive({
   role: '',
@@ -309,7 +304,7 @@ const filters = reactive({
 const pagination = reactive({
   current: 1,
   pageSize: 10,
-  total: users.value.length,
+  total: 0,
   showSizeChanger: true,
   pageSizeOptions: ['10', '20', '50', '100'],
   showTotal: (total) => `共 ${total} 条记录`
@@ -326,14 +321,49 @@ const editForm = reactive({
   status: ''
 });
 
+// 用户详情模态框
+const profileVisible = ref(false);
+const selectedUser = ref({});
+
 // 初始化
 onMounted(() => {
-  // 实际应用中这里应该调用API获取用户列表
+  fetchUsers();
 });
 
 // 格式化日期
 function formatDate(dateString) {
+  if (!dateString) return '未知';
   return dayjs(dateString).format('YYYY-MM-DD HH:mm');
+}
+
+// 处理头像URL格式化
+function formatAvatarUrl(url) {
+  if (!url) return defaultAvatar;
+  
+  // 如果是完整URL，直接返回
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
+  // 处理相对路径
+  if (url.startsWith('/uploads/avatars/')) {
+    return url;
+  }
+  
+  // 如果已经包含 /uploads 前缀，但不是avatars子目录
+  if (url.startsWith('/uploads/')) {
+    // 获取文件名并添加到avatars子目录
+    const fileName = url.split('/').pop();
+    return `/uploads/avatars/${fileName}`;
+  }
+  
+  // 否则，加上 /uploads/avatars/ 前缀
+  return url.startsWith('/') ? `/uploads/avatars${url}` : `/uploads/avatars/${url}`;
+}
+
+// 处理头像加载错误
+function handleAvatarError(e) {
+  e.target.src = defaultAvatar;
 }
 
 // 处理表格变化（分页、排序、筛选）
@@ -343,14 +373,32 @@ function handleTableChange(pag) {
   fetchUsers();
 }
 
-// 模拟获取用户列表
-function fetchUsers() {
+// 获取用户列表
+async function fetchUsers() {
   loading.value = true;
   
-  setTimeout(() => {
-    let filteredUsers = [...users.value];
+  try {
+    // 构建请求参数
+    const params = {
+      page: pagination.current - 1, // API可能是0基索引
+      pageSize: pagination.pageSize
+    };
     
-    // 应用筛选
+    // 添加非空过滤条件
+    if (filters.role) params.role = filters.role;
+    if (filters.status) params.status = filters.status;
+    if (filters.keyword) params.keyword = filters.keyword;
+    
+    // 调用用户管理API - 预留API，此处为模拟实现
+    // 实际项目中应该调用API
+    // const response = await axios.get('/api/admin/users', { params });
+    
+    // 模拟API响应
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const result = getMockUsers();
+    
+    // 处理过滤
+    let filteredUsers = [...result];
     if (filters.role) {
       filteredUsers = filteredUsers.filter(user => user.role === filters.role);
     }
@@ -367,15 +415,66 @@ function fetchUsers() {
       );
     }
     
+    // 更新数据
+    users.value = filteredUsers;
     pagination.total = filteredUsers.length;
     
-    // 模拟分页
-    const start = (pagination.current - 1) * pagination.pageSize;
-    const end = start + pagination.pageSize;
-    users.value = filteredUsers.slice(start, end);
-    
+  } catch (error) {
+    console.error('获取用户列表失败:', error);
+    message.error('获取用户列表失败，请稍后重试');
+  } finally {
     loading.value = false;
-  }, 500);
+  }
+}
+
+// 模拟用户数据 (用于示例)
+function getMockUsers() {
+  return [
+    {
+      id: 1,
+      username: 'ZYongJie1224',
+      email: 'admin@example.com',
+      avatar: 'https://joeschmoe.io/api/v1/1',
+      role: 'ADMIN',
+      status: 'ACTIVE',
+      materialCount: 15,
+      createdAt: '2025-01-10T08:30:00Z',
+      lastLoginAt: '2025-05-20T08:28:02Z'
+    },
+    {
+      id: 2,
+      username: 'design_master',
+      email: 'design@example.com',
+      avatar: 'https://joeschmoe.io/api/v1/2',
+      role: 'USER',
+      status: 'ACTIVE',
+      materialCount: 28,
+      createdAt: '2025-02-15T14:20:00Z',
+      lastLoginAt: '2025-05-15T18:30:00Z'
+    },
+    {
+      id: 3,
+      username: 'creative_home',
+      email: 'creative@example.com',
+      avatar: 'https://joeschmoe.io/api/v1/3',
+      role: 'USER',
+      status: 'ACTIVE',
+      materialCount: 42,
+      createdAt: '2025-03-05T09:15:00Z',
+      lastLoginAt: '2025-05-14T11:20:00Z'
+    },
+    {
+      id: 4,
+      username: 'blockeduser',
+      email: 'blocked@example.com',
+      avatar: 'https://joeschmoe.io/api/v1/4',
+      role: 'USER',
+      status: 'BLOCKED',
+      materialCount: 5,
+      createdAt: '2025-04-18T16:40:00Z',
+      lastLoginAt: '2025-04-20T12:10:00Z'
+    }
+  ];
 }
 
 // 处理筛选条件变化
@@ -397,12 +496,17 @@ function refreshTable() {
 
 // 查看用户资料
 function viewUserProfile(record) {
-  message.info(`查看用户 ${record.username} 的资料`);
+  selectedUser.value = { ...record };
+  profileVisible.value = true;
 }
 
 // 查看用户上传的素材
 function viewUserMaterials(record) {
-  message.info(`查看用户 ${record.username} 上传的素材`);
+  // 跳转到素材管理页面，并带上用户ID参数
+  router.push({
+    path: '/admin/materials',
+    query: { uploaderId: record.id, uploaderName: record.username }
+  });
 }
 
 // 编辑用户
@@ -427,23 +531,23 @@ async function handleEditSubmit() {
   
   try {
     // 这里应该调用管理员编辑用户API
+    // 预留API接口
+    // const response = await axios.put(`/api/admin/users/${editForm.id}`, editForm);
+    
     // 模拟API调用
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // 更新本地状态
-    const allUsers = [...users.value];
-    const index = allUsers.findIndex(user => user.id === editForm.id);
+    const index = users.value.findIndex(user => user.id === editForm.id);
     
     if (index !== -1) {
-      allUsers[index] = {
-        ...allUsers[index],
+      users.value[index] = {
+        ...users.value[index],
         username: editForm.username,
         email: editForm.email,
         role: editForm.role,
         status: editForm.status
       };
-      
-      users.value = allUsers;
     }
     
     message.success('用户信息更新成功');
@@ -462,11 +566,14 @@ async function toggleUserStatus(record) {
     return;
   }
   
-  const newStatus = record.status === 'active' ? 'blocked' : 'active';
-  const statusText = newStatus === 'active' ? '启用' : '禁用';
+  const newStatus = record.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE';
+  const statusText = newStatus === 'ACTIVE' ? '启用' : '禁用';
   
   try {
     // 这里应该调用管理员切换用户状态API
+    // 预留API接口
+    // await axios.put(`/api/admin/users/${record.id}/status`, { status: newStatus });
+    
     // 模拟API调用
     await new Promise(resolve => setTimeout(resolve, 500));
     
@@ -491,6 +598,9 @@ async function deleteUser(record) {
   
   try {
     // 这里应该调用管理员删除用户API
+    // 预留API接口
+    // await axios.delete(`/api/admin/users/${record.id}`);
+    
     // 模拟API调用
     await new Promise(resolve => setTimeout(resolve, 500));
     
@@ -530,5 +640,35 @@ async function deleteUser(record) {
 .user-email {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.45);
+}
+
+.user-profile-container {
+  padding: 0 16px;
+}
+
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.user-profile-info {
+  flex: 1;
+}
+
+.user-profile-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+}
+
+.user-profile-info p {
+  margin: 0 0 12px 0;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.user-profile-badges {
+  display: flex;
+  gap: 8px;
 }
 </style>

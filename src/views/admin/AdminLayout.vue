@@ -10,10 +10,10 @@
         :width="240"
       >
         <div class="logo">
-          <router-link to="/admin">
+          <div class="logo-link">
             <img src="@/assets/logo.png" alt="Logo" class="logo-img" />
             <span v-if="!collapsed" class="logo-text">管理控制台</span>
-          </router-link>
+          </div>
         </div>
         
         <a-menu
@@ -21,37 +21,33 @@
           mode="inline"
           v-model:selectedKeys="selectedKeys"
           class="side-menu"
+          @select="handleMenuSelect"
         >
           <a-menu-item key="dashboard" class="menu-item">
             <template #icon><dashboard-outlined /></template>
             <span>控制面板</span>
-            <router-link to="/admin"></router-link>
           </a-menu-item>
           
           <a-menu-item key="users" class="menu-item">
             <template #icon><user-outlined /></template>
             <span>用户管理</span>
-            <router-link to="/admin/users"></router-link>
           </a-menu-item>
           
           <a-menu-item key="materials" class="menu-item">
             <template #icon><appstore-outlined /></template>
             <span>素材管理</span>
-            <router-link to="/admin/materials"></router-link>
           </a-menu-item>
           
           <a-menu-item key="categories" class="menu-item">
             <template #icon><folder-outlined /></template>
             <span>分类管理</span>
-            <router-link to="/admin/categories"></router-link>
           </a-menu-item>
           
           <a-divider style="background-color: #303030; margin: 16px 0" />
           
-          <a-menu-item key="frontend" class="menu-item">
+          <a-menu-item key="frontend" class="menu-item" @click="goToFrontend">
             <template #icon><home-outlined /></template>
             <span>返回前台</span>
-            <router-link to="/"></router-link>
           </a-menu-item>
         </a-menu>
       </a-layout-sider>
@@ -160,7 +156,28 @@
         
         <a-layout-content class="admin-content">
           <div class="content-container">
-            <router-view></router-view>
+            <!-- 使用Tab组件替代router-view -->
+            <a-tabs 
+              v-model:activeKey="activeTab" 
+              :tabBarStyle="{ display: 'none' }"
+              :animated="{ tabPane: true }"
+            >
+              <a-tab-pane key="dashboard" forceRender>
+                <admin-dashboard />
+              </a-tab-pane>
+              
+              <a-tab-pane key="users" forceRender>
+                <user-management-view />
+              </a-tab-pane>
+              
+              <a-tab-pane key="materials" forceRender>
+                <material-management-view />
+              </a-tab-pane>
+              
+              <a-tab-pane key="categories" forceRender>
+                <category-management-view />
+              </a-tab-pane>
+            </a-tabs>
           </div>
         </a-layout-content>
         
@@ -173,7 +190,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
 import {
@@ -191,6 +208,12 @@ import {
 } from '@ant-design/icons-vue';
 import { useUserStore } from '@/stores/user';
 
+// 导入各个管理页面组件
+import AdminDashboard from './DashboardView.vue';
+import UserManagementView from './UserManagementView.vue';
+import MaterialManagementView from './MaterialManagementView.vue';
+import CategoryManagementView from './CategoryManagementView.vue';
+
 const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
@@ -199,6 +222,7 @@ const userStore = useUserStore();
 const collapsed = ref(false);
 const selectedKeys = ref(['dashboard']);
 const defaultAvatar = '/images/default-avatar.png';
+const activeTab = ref('dashboard'); // 当前激活的Tab
 
 // 模拟通知数据
 const notifications = ref([
@@ -226,7 +250,7 @@ const notifications = ref([
 ]);
 
 // 计算属性
-const username = computed(() => userStore.username);
+const username = computed(() => userStore.username || 'admin');
 
 // 处理头像URL
 const processedAvatar = computed(() => {
@@ -259,33 +283,57 @@ function handleAvatarError(e) {
   e.target.src = defaultAvatar;
 }
 
-// 监听路由变化，更新选中的菜单项
-watch(
-  () => route.path,
-  (path) => {
-    if (path === '/admin') {
-      selectedKeys.value = ['dashboard'];
-    } else if (path === '/admin/users') {
-      selectedKeys.value = ['users'];
-    } else if (path === '/admin/materials') {
-      selectedKeys.value = ['materials'];
-    } else if (path === '/admin/categories') {
-      selectedKeys.value = ['categories'];
-    } else if (path === '/') {
-      selectedKeys.value = ['frontend'];
-    }
-  },
-  { immediate: true }
-);
-
-// 根据路由获取页面标题
-function getPageTitle() {
+// 组件挂载时，根据当前路由设置初始选中的Tab
+onMounted(() => {
   const path = route.path;
-  if (path === '/admin') return '控制面板';
-  if (path === '/admin/users') return '用户管理';
-  if (path === '/admin/materials') return '素材管理';
-  if (path === '/admin/categories') return '分类管理';
-  return '控制面板';
+  if (path.includes('/admin/users')) {
+    activeTab.value = 'users';
+    selectedKeys.value = ['users'];
+  } else if (path.includes('/admin/materials')) {
+    activeTab.value = 'materials';
+    selectedKeys.value = ['materials'];
+  } else if (path.includes('/admin/categories')) {
+    activeTab.value = 'categories';
+    selectedKeys.value = ['categories'];
+  } else {
+    activeTab.value = 'dashboard';
+    selectedKeys.value = ['dashboard'];
+  }
+  
+  // 监听自定义事件以在组件间切换Tab
+  window.addEventListener('switch-tab', (event) => {
+    if (event.detail && event.detail.tab) {
+      activeTab.value = event.detail.tab;
+      selectedKeys.value = [event.detail.tab];
+    }
+  });
+});
+
+// 处理菜单选择，切换Tab而不是路由
+function handleMenuSelect({ key }) {
+  if (key === 'frontend') {
+    goToFrontend();
+    return;
+  }
+  
+  activeTab.value = key;
+  selectedKeys.value = [key];
+}
+
+// 返回前台
+function goToFrontend() {
+  router.push('/');
+}
+
+// 根据当前Tab获取页面标题
+function getPageTitle() {
+  switch (activeTab.value) {
+    case 'dashboard': return '控制面板';
+    case 'users': return '用户管理';
+    case 'materials': return '素材管理';
+    case 'categories': return '分类管理';
+    default: return '控制面板';
+  }
 }
 
 // 处理退出登录
@@ -298,6 +346,10 @@ function handleLogout() {
 
 <style scoped>
 /* 管理页面整体样式 */
+.admin-content {
+  margin: 0; /* 原来是 margin: 24px; - 修改为0以减少空白 */
+  background-color: #f0f2f5;
+}
 .admin-page {
   background-color: #f0f2f5;
 }
@@ -318,7 +370,7 @@ function handleLogout() {
   background-color: #001529;
 }
 
-.logo a {
+.logo-link {
   display: flex;
   align-items: center;
   color: white;
@@ -447,18 +499,23 @@ function handleLogout() {
   color: rgba(0, 0, 0, 0.5);
 }
 
-/* 内容区域样式 */
+/* 内容区域样式 - 修改这些值以减少空白区域 */
 .admin-content {
-  margin: 24px;
+  margin: 0; /* 原来是 margin: 24px; - 修改为0以减少空白 */
   background-color: #f0f2f5;
 }
 
 .content-container {
-  padding: 24px;
+  padding: 0; /* 原来是 padding: 24px; - 修改为0以减少空白 */
   background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  min-height: calc(100vh - 184px);
+  border-radius: 0; /* 原来是 border-radius: 4px; - 移除圆角使内容区域贴合边缘 */
+  box-shadow: none; /* 移除阴影效果增加内容空间 */
+  min-height: calc(100vh - 128px); /* 调整最小高度，减少底部空白 */
+}
+
+/* 确保Tab内容不会有多余的空白 */
+:deep(.ant-tabs-tabpane) {
+  padding: 0 !important;
 }
 
 /* 通知样式 */
@@ -549,7 +606,7 @@ function handleLogout() {
 /* 页脚样式 */
 .admin-footer {
   text-align: center;
-  padding: 16px 50px;
+  padding: 16px 0; /* 减小页脚上下内边距 */
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
   background: #fff;
@@ -559,11 +616,11 @@ function handleLogout() {
 /* 响应式调整 */
 @media (max-width: 768px) {
   .admin-content {
-    margin: 16px;
+    margin: 0;
   }
   
   .content-container {
-    padding: 16px;
+    padding: 0;
   }
   
   .username {
@@ -576,5 +633,67 @@ function handleLogout() {
 /* 全局样式 - 通知弹窗 */
 .notification-popover .ant-popover-inner-content {
   padding: 0;
+}
+
+/* 确保tab组件没有额外的间距 */
+.ant-tabs {
+  margin: 0 !important;
+}
+
+.ant-tabs-content {
+  height: 100%;
+}
+
+/* 修复子页面的内边距问题 */
+.dashboard-view,
+.user-management-view,
+.material-management-view,
+.category-management-view {
+  padding: 20px;
+}
+</style>
+<style>
+/* 全局样式覆盖 */
+/* 通知弹窗样式 */
+.notification-popover .ant-popover-inner-content {
+  padding: 0;
+}
+
+/* 覆盖Ant Design布局组件的默认内边距 */
+.ant-layout-content {
+  padding: 0 !important;
+}
+
+/* 直接覆盖main-content类的padding */
+.main-content {
+  padding: 0 !important;
+}
+
+/* 确保tab组件没有额外的间距 */
+.ant-tabs {
+  margin: 0 !important;
+}
+
+.ant-tabs-content {
+  height: 100%;
+  padding: 0 !important;
+}
+
+/* 确保内容区域没有额外间距 */
+.content-container {
+  padding: 0 !important;
+}
+
+/* 修复子页面的内边距问题 */
+.dashboard-view,
+.user-management-view,
+.material-management-view,
+.category-management-view {
+  padding: 20px;
+}
+
+/* 确保Ant Design的布局组件中的内容不受默认样式影响 */
+.ant-layout .ant-layout-content > div {
+  padding: 0 !important;
 }
 </style>

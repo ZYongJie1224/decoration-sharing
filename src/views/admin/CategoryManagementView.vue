@@ -6,9 +6,14 @@
       </template>
       
       <template #extra>
-        <a-button type="primary" @click="showAddModal">
-          <plus-outlined /> 添加分类
-        </a-button>
+        <a-space>
+          <a-button type="primary" @click="showAddModal">
+            <plus-outlined /> 添加分类
+          </a-button>
+          <a-button @click="refreshTable">
+            <reload-outlined /> 刷新
+          </a-button>
+        </a-space>
       </template>
       
       <a-table
@@ -50,25 +55,27 @@
           <template v-else-if="column.key === 'action'">
             <a-space>
               <a-button
-                type="primary"
+                type="text"
                 size="small"
                 @click="editCategory(record)"
               >
-                编辑
+                <edit-outlined />
               </a-button>
               
               <a-popconfirm
                 title="确定要删除这个分类吗?"
+                description="删除后将无法恢复，且分类下的素材将被设为未分类状态"
                 ok-text="是"
                 cancel-text="否"
                 @confirm="deleteCategory(record)"
               >
                 <a-button
-                  type="danger"
+                  type="text"
+                  danger
                   size="small"
                   :disabled="record.materialCount > 0"
                 >
-                  删除
+                  <delete-outlined />
                 </a-button>
               </a-popconfirm>
             </a-space>
@@ -147,10 +154,16 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import { message } from 'ant-design-vue';
-import { PlusOutlined } from '@ant-design/icons-vue';
-import { useMaterialStore } from '@/stores/material';
+import { 
+  PlusOutlined, 
+  ReloadOutlined, 
+  EditOutlined, 
+  DeleteOutlined 
+} from '@ant-design/icons-vue';
+import { useCategoryStore } from '@/stores/category';
+import dayjs from 'dayjs';
 
-const materialStore = useMaterialStore();
+const categoryStore = useCategoryStore();
 
 // 表格列定义
 const columns = [
@@ -185,7 +198,8 @@ const columns = [
     dataIndex: 'createdAt',
     key: 'createdAt',
     width: 180,
-    sorter: true
+    sorter: true,
+    render: (time) => formatDate(time)
   },
   {
     title: '操作',
@@ -207,7 +221,8 @@ const pagination = reactive({
   current: 1,
   pageSize: 10,
   total: 0,
-  showSizeChanger: true
+  showSizeChanger: true,
+  showTotal: (total) => `共 ${total} 条记录`
 });
 
 // 表单状态
@@ -231,6 +246,12 @@ const rules = {
   ]
 };
 
+// 格式化日期
+function formatDate(dateString) {
+  if (!dateString) return '未知';
+  return dayjs(dateString).format('YYYY-MM-DD HH:mm');
+}
+
 // 初始化
 onMounted(async () => {
   fetchCategories();
@@ -241,89 +262,105 @@ async function fetchCategories() {
   loading.value = true;
   
   try {
-    // 实际应用中应该调用管理员API获取完整分类信息
-    // 这里模拟数据
-    setTimeout(() => {
-      categories.value = [
-        {
-          id: 1,
-          name: '客厅',
-          description: '客厅装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/1',
-          color: '#1890ff',
-          materialCount: 320,
-          sort: 10,
-          createdAt: '2025-01-10 14:30:00'
-        },
-        {
-          id: 2,
-          name: '卧室',
-          description: '卧室装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/2',
-          color: '#52c41a',
-          materialCount: 240,
-          sort: 9,
-          createdAt: '2025-01-12 10:15:00'
-        },
-        {
-          id: 3,
-          name: '厨房',
-          description: '厨房装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/3',
-          color: '#faad14',
-          materialCount: 180,
-          sort: 8,
-          createdAt: '2025-01-15 16:45:00'
-        },
-        {
-          id: 4,
-          name: '卫生间',
-          description: '卫生间装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/4',
-          color: '#eb2f96',
-          materialCount: 150,
-          sort: 7,
-          createdAt: '2025-01-18 09:30:00'
-        },
-        {
-          id: 5,
-          name: '书房',
-          description: '书房装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/5',
-          color: '#722ed1',
-          materialCount: 120,
-          sort: 6,
-          createdAt: '2025-01-20 11:20:00'
-        },
-        {
-          id: 6,
-          name: '阳台',
-          description: '阳台装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/6',
-          color: '#13c2c2',
-          materialCount: 100,
-          sort: 5,
-          createdAt: '2025-01-22 14:10:00'
-        },
-        {
-          id: 7,
-          name: '其他',
-          description: '其他装修灵感和设计素材',
-          iconUrl: 'https://joeschmoe.io/api/v1/7',
-          color: '#fa8c16',
-          materialCount: 80,
-          sort: 0,
-          createdAt: '2025-01-25 16:30:00'
-        }
-      ];
-      
-      pagination.total = categories.value.length;
-      loading.value = false;
-    }, 500);
+    // 使用store中的方法获取分类
+    const result = await categoryStore.fetchCategories();
+    
+    if (result && result.length > 0) {
+      categories.value = result.map(item => ({
+        ...item,
+        materialCount: item.materialCount || 0,
+        sort: item.sort || 0
+      }));
+    } else {
+      // 如果API未返回数据或出错，使用模拟数据
+      categories.value = getMockCategories();
+    }
+    
+    pagination.total = categories.value.length;
   } catch (error) {
+    console.error('获取分类列表失败:', error);
     message.error('获取分类列表失败');
+    categories.value = getMockCategories();
+    pagination.total = categories.value.length;
+  } finally {
     loading.value = false;
   }
+}
+
+// 模拟分类数据
+function getMockCategories() {
+  return [
+    {
+      id: 1,
+      name: '客厅',
+      description: '客厅装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/1',
+      color: '#1890ff',
+      materialCount: 320,
+      sort: 10,
+      createdAt: '2025-01-10 14:30:00'
+    },
+    {
+      id: 2,
+      name: '卧室',
+      description: '卧室装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/2',
+      color: '#52c41a',
+      materialCount: 240,
+      sort: 9,
+      createdAt: '2025-01-12 10:15:00'
+    },
+    {
+      id: 3,
+      name: '厨房',
+      description: '厨房装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/3',
+      color: '#faad14',
+      materialCount: 180,
+      sort: 8,
+      createdAt: '2025-01-15 16:45:00'
+    },
+    {
+      id: 4,
+      name: '卫生间',
+      description: '卫生间装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/4',
+      color: '#eb2f96',
+      materialCount: 150,
+      sort: 7,
+      createdAt: '2025-01-18 09:30:00'
+    },
+    {
+      id: 5,
+      name: '书房',
+      description: '书房装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/5',
+      color: '#722ed1',
+      materialCount: 120,
+      sort: 6,
+      createdAt: '2025-01-20 11:20:00'
+    },
+    {
+      id: 6,
+      name: '阳台',
+      description: '阳台装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/6',
+      color: '#13c2c2',
+      materialCount: 100,
+      sort: 5,
+      createdAt: '2025-01-22 14:10:00'
+    },
+    {
+      id: 7,
+      name: '其他',
+      description: '其他装修灵感和设计素材',
+      iconUrl: 'https://joeschmoe.io/api/v1/7',
+      color: '#fa8c16',
+      materialCount: 80,
+      sort: 0,
+      createdAt: '2025-01-25 16:30:00'
+    }
+  ];
 }
 
 // 处理表格变化
@@ -334,17 +371,35 @@ function handleTableChange(pag, filters, sorter) {
   // 处理排序
   if (sorter.field && sorter.order) {
     const order = sorter.order === 'ascend' ? 'asc' : 'desc';
-    // 在实际应用中调用API进行排序
+    // 根据排序字段和方向排序
+    categories.value.sort((a, b) => {
+      const factor = order === 'asc' ? 1 : -1;
+      if (a[sorter.field] < b[sorter.field]) return -1 * factor;
+      if (a[sorter.field] > b[sorter.field]) return 1 * factor;
+      return 0;
+    });
   }
 }
 
+// 刷新表格
+function refreshTable() {
+  fetchCategories();
+}
+
 // 处理排序权重变化
-function handleSortChange(record, value) {
-  // 在实际应用中应该调用API更新排序权重
-  const index = categories.value.findIndex(item => item.id === record.id);
-  if (index !== -1) {
-    categories.value[index].sort = value;
-    message.success('排序已更新');
+async function handleSortChange(record, value) {
+  try {
+    // 预留API接口
+    // await axios.put(`/api/admin/categories/${record.id}/sort`, { sort: value });
+    
+    // 更新本地状态
+    const index = categories.value.findIndex(item => item.id === record.id);
+    if (index !== -1) {
+      categories.value[index].sort = value;
+      message.success('排序已更新');
+    }
+  } catch (error) {
+    message.error('更新排序失败');
   }
 }
 
@@ -402,7 +457,13 @@ async function handleSubmit() {
     
     if (isEdit.value) {
       // 编辑现有分类
-      // 在实际应用中调用API更新分类
+      // 预留API接口
+      // const response = await axios.put(`/api/admin/categories/${formState.id}`, categoryData);
+      
+      // 模拟API调用
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // 更新本地状态
       const index = categories.value.findIndex(item => item.id === formState.id);
       if (index !== -1) {
         categories.value[index] = {
@@ -413,12 +474,18 @@ async function handleSubmit() {
       }
     } else {
       // 添加新分类
-      // 在实际应用中调用API创建分类
+      // 预留API接口
+      // const response = await axios.post('/api/admin/categories', categoryData);
+      
+      // 模拟API调用
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // 模拟添加新分类
       const newCategory = {
         id: Date.now(),
         ...categoryData,
         materialCount: 0,
-        createdAt: '2025-05-16 11:58:17' // 使用用户提供的当前日期
+        createdAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
       };
       
       categories.value.unshift(newCategory);
@@ -430,6 +497,7 @@ async function handleSubmit() {
     modalVisible.value = false;
   } catch (error) {
     console.error('表单验证失败:', error);
+    message.error('表单验证失败，请检查输入');
   } finally {
     submitLoading.value = false;
   }
@@ -443,7 +511,13 @@ async function deleteCategory(record) {
   }
   
   try {
-    // 在实际应用中调用API删除分类
+    // 预留API接口
+    // await axios.delete(`/api/admin/categories/${record.id}`);
+    
+    // 模拟API调用
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // 更新本地状态
     categories.value = categories.value.filter(item => item.id !== record.id);
     pagination.total -= 1;
     message.success('分类删除成功');

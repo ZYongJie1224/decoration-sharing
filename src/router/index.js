@@ -30,28 +30,34 @@ const routes = [
     name: 'NotFound',
     component: () => import('@/views/NotFound.vue')
   },
-    {
+  {
     path: '/admin',
-    name: 'admin',
-    component: () => import('@/views/admin/DashboardView.vue')
+    name: 'AdminLayout',
+    component: () => import('@/views/admin/AdminLayout.vue')
   },
-      {
+  {
     path: '/upload',
     name: 'Upload',
     component: () => import('@/views/UploadView.vue')
   },
-   {
+  {
     path: '/admin/materials',
     name: 'MaterialManagementView',
     component: () => import('@/views/admin/MaterialManagementView.vue'),
     props: true
   },
-        {
+  {
+    path: '/admin/users',
+    name: 'UserManagementView',
+    component: () => import('@/views/admin/UserManagementView.vue'),
+    props: true
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: () => import('@/views/user/ProfileView.vue')
   },
-        {
+  {
     path: '/category/:id',
     name: 'CategoryMaterialView',
     component: () => import('@/views/category/CategoryMaterialView.vue')
@@ -70,7 +76,7 @@ const router = createRouter({
 // 全局前置守卫 - 简化版
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
-  
+
   // 需要登录的页面
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!userStore.isLoggedIn) {

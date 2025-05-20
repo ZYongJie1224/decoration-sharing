@@ -163,7 +163,7 @@ export const useMaterialStore = defineStore('material', () => {
         }
       }
       
-      return { success: true, isFavorite: response.data.isFavorite }
+      return { success: true, isFavorite: response.data.favorite }
     } catch (error) {
       return {
         success: false,
