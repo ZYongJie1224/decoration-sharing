@@ -20,7 +20,7 @@
                     </a-menu-item>
 
                     <a-sub-menu key="categories" title="分类">
-                        <a-menu-item v-for="category in categories" :key="`cat-${category.id}`">
+                        <a-menu-item v-for="category in categoryStore.categories" :key="`cat-${category.id}`">
                             <router-link :to="`/category/${category.id}`">{{ category.name }}</router-link>
                         </a-menu-item>
                     </a-sub-menu>
@@ -37,7 +37,7 @@
                 <template v-if="isLoggedIn">
                     <a-dropdown>
                         <a class="user-dropdown-link" @click.prevent>
-                            <a-avatar :src="userAvatar" />
+                            <a-avatar :src="processedAvatar" />
                             <span class="username">{{ username }}</span>
                             <down-outlined />
                         </a>
@@ -102,27 +102,71 @@ import {
 } from '@ant-design/icons-vue'
 import { useUserStore } from '@/stores/user'
 import { useMaterialStore } from '@/stores/material'
-import { getCategories } from '@/api/category'
+import { useCategoryStore } from '@/stores/category'
 
 const router = useRouter()
 const route = useRoute()
 const userStore = useUserStore()
 const materialStore = useMaterialStore()
+const categoryStore = useCategoryStore()
 
 const searchKeyword = ref('')
 const selectedKeys = ref(['home'])
-const categories = ref([])
+const defaultAvatar = '/images/default-avatar.png'
 
 // 计算属性
 const isLoggedIn = computed(() => userStore.isLoggedIn)
 const isAdmin = computed(() => userStore.isAdmin)
 const username = computed(() => userStore.username)
-const userAvatar = computed(() => userStore.avatar)
 
-// 获取分类列表
+// 处理头像路径 - 添加错误处理和日志
+const processedAvatar = computed(() => {
+    const avatarUrl = userStore.avatar;
+    console.log('原始头像URL:', avatarUrl);
+    
+    if (!avatarUrl) {
+        console.log('头像URL为空，使用默认头像');
+        return defaultAvatar;
+    }
+    
+    // 如果是完整URL，直接返回
+    if (avatarUrl.startsWith('http://') || avatarUrl.startsWith('https://')) {
+        console.log('使用完整URL头像:', avatarUrl);
+        return avatarUrl;
+    }
+    
+    // 如果已经包含 /uploads/avatars 前缀，则直接使用
+    if (avatarUrl.startsWith('/uploads/')) {
+        console.log('使用已包含前缀的头像路径:', avatarUrl);
+        return avatarUrl;
+    }
+    
+    // 如果已经包含 /uploads 前缀，但不是avatars子目录
+    if (avatarUrl.startsWith('/uploads/')) {
+        // 获取文件名并添加到avatars子目录
+        const fileName = avatarUrl.split('/').pop();
+        const result = `/uploads/${fileName}`;
+        console.log('从uploads提取文件名后的头像路径:', result);
+        return result;
+    }
+    
+    // 否则，加上 /uploads/avatars/ 前缀
+    const result = avatarUrl.startsWith('/') ? 
+        `/uploads${avatarUrl}` : 
+        `/uploads/${avatarUrl}`;
+    
+    console.log('添加前缀后的头像路径:', result);
+    return result;
+})
+
+// 添加头像错误处理
+function handleAvatarError(e) {
+    console.log('头像加载失败，使用默认头像');
+    e.target.src = defaultAvatar;
+}
+// 获取分类列表 - 使用categoryStore替代API调用
 onMounted(async () => {
-    const result = await getCategories()
-    categories.value = result
+    await categoryStore.fetchCategories()
 })
 
 // 根据路由更新选中的菜单项
@@ -151,8 +195,8 @@ function handleSearch() {
     }
 
     router.push({
-        path: '/',
-        query: { search: searchKeyword.value }
+        path: '/search',
+        query: { keyword: searchKeyword.value }
     })
 }
 
