@@ -78,7 +78,7 @@
                                             <heart-filled v-if="material.isFavorite" />
                                             <heart-outlined v-else />
                                         </template>
-                                        {{ material.isFavorite ? '取消收藏' : '收藏素材' }}
+                                        {{ material.favorite ? '取消收藏' : '收藏素材' }}
                                     </a-button>
 
                                     <a-button type="default" size="large" block class="action-btn">
@@ -322,34 +322,33 @@ function formatDate(date) {
     return dayjs(date).format('YYYY-MM-DD HH:mm');
 }
 
-// 收藏素材
 async function handleFavorite() {
-    if (!userStore.isLoggedIn) {
-        message.warning('请先登录后再收藏');
-        router.push('/login');
-        return;
+  if (!userStore.isLoggedIn) {
+    message.warning('请先登录后再收藏');
+    router.push('/login');
+    return;
+  }
+
+  try {
+    const result = await materialStore.toggleFavorite(material.value.id);
+
+    if (result.success) {
+      material.value.isFavorite = result.isFavorite;
+
+      if (material.value.isFavorite) {
+        material.value.favorites = (material.value.favorites || 0) + 1;
+        message.success('收藏成功');
+      } else {
+        material.value.favorites = Math.max((material.value.favorites || 0) - 1, 0);
+        message.success('已取消收藏');
+      }
+    } else {
+      message.error(result.message || '操作失败');
     }
-
-    try {
-        const result = await materialStore.toggleFavorite(material.value.id);
-
-        if (result.success) {
-            material.value.isFavorite = !material.value.isFavorite;
-
-            if (material.value.isFavorite) {
-                material.value.favorites = (material.value.favorites || 0) + 1;
-                message.success('收藏成功');
-            } else {
-                material.value.favorites = Math.max((material.value.favorites || 0) - 1, 0);
-                message.success('已取消收藏');
-            }
-        } else {
-            message.error(result.message || '操作失败');
-        }
-    } catch (error) {
-        console.error('收藏操作失败:', error);
-        message.error('操作失败，请重试');
-    }
+  } catch (error) {
+    console.error('收藏操作失败:', error);
+    message.error('操作失败，请重试');
+  }
 }
 
 // 下载素材
