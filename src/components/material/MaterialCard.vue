@@ -8,12 +8,12 @@
         <div class="material-top-info">
           <a-tag color="blue">{{ material.categoryName || '未分类' }}</a-tag>
           <a-button 
-            :type="material.liked ? 'primary' : 'default'" 
+            :type="isFavorite ? 'primary' : 'default'" 
             shape="circle" 
             size="small"
             @click.stop="toggleLike"
           >
-            <template #icon><heart-outlined v-if="!material.liked" /><heart-filled v-else /></template>
+            <template #icon><heart-outlined v-if="!isFavorite" /><heart-filled v-else /></template>
           </a-button>
         </div>
         
@@ -25,7 +25,7 @@
           
           <div class="material-stats">
             <span><eye-outlined /> {{ formatNumber(material.views) }}</span>
-            <span><heart-outlined /> {{ formatNumber(material.likes) }}</span>
+            <span><heart-outlined /> {{ formatNumber(localFavoritesCount) }}</span>
           </div>
         </div>
       </div>
@@ -43,8 +43,10 @@
 <script setup>
 import { HeartOutlined, HeartFilled, EyeOutlined } from '@ant-design/icons-vue';
 import { useRouter } from 'vue-router';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useMaterialStore } from '@/stores/material';
+import { useUserStore } from '@/stores/user';
+import { message } from 'ant-design-vue';
 
 const props = defineProps({
   material: {
@@ -55,7 +57,25 @@ const props = defineProps({
 
 const router = useRouter();
 const materialStore = useMaterialStore();
+const userStore = useUserStore();
 const imageRef = ref(null);
+
+// 添加本地响应式状态来跟踪收藏状态和收藏数
+const isFavorite = ref(props.material.favorite);
+const localFavoritesCount = ref(props.material.favorites || 0);
+
+console.log(`传参fav: ${isFavorite.value}`, `初始收藏数: ${localFavoritesCount.value}`);
+
+// 当 props.material 相关属性变化时更新本地状态
+watch(() => props.material.favorite, (newValue) => {
+  isFavorite.value = newValue;
+});
+
+watch(() => props.material.favorites, (newValue) => {
+  if (newValue !== undefined) {
+    localFavoritesCount.value = newValue;
+  }
+});
 
 // 默认图片和头像
 const defaultImage = '/images/default-image.png';  // 默认图片放在 public/images 目录
@@ -99,7 +119,7 @@ const uploaderAvatarUrl = computed(() => {
     return url;
   }
   
-  return url.startsWith('/') ? url : `/uploads/avatars/${url}`;
+  return url.startsWith('/') ? url : `/uploads/${url}`;
 });
 
 // 处理图片加载错误
@@ -137,16 +157,83 @@ function navigateToDetail() {
 // 切换喜欢状态
 function toggleLike(event) {
   event.stopPropagation();
+  
+  // 检查用户是否已登录
+  if (!userStore.isLoggedIn) {
+    message.warning('请先登录后再收藏');
+    // 记录当前URL，以便登录后返回
+    const currentPath = router.currentRoute.value.fullPath;
+    router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+    return;
+  }
+  
+  // 先在本地立即更新状态，优化用户体验
+  const originalFavoriteState = isFavorite.value;
+  const newFavoriteState = !originalFavoriteState;
+  isFavorite.value = newFavoriteState;
+  
+  // 立即更新收藏计数
+  if (newFavoriteState) {
+    localFavoritesCount.value += 1;
+  } else {
+    localFavoritesCount.value = Math.max(0, localFavoritesCount.value - 1);
+  }
+  
+  // 显示操作进行中的状态
+  const loadingKey = `favorite-${props.material.id}`;
+  message.loading({ content: newFavoriteState ? '收藏中...' : '取消收藏中...', key: loadingKey });
+  
+  // 发送请求
   materialStore.toggleFavorite(props.material.id)
     .then(result => {
-      if (result.success) {
-        console.log('状态已更新:', result.isFavorite ? '已收藏' : '已取消收藏');
+      if (result) {
+        // 服务器确认后，确保状态与服务器一致
+        isFavorite.value = result.isFavorite;
+        console.log(result)
+        // 显示成功消息
+        if (result.isFavorite) {
+          message.success({ content: '收藏成功', key: loadingKey });
+        } else {
+          message.success({ content: '取消收藏成功', key: loadingKey });
+        }
+        
+        console.log('状态已更新:', result.favorite ? '已收藏' : '已取消收藏');
       } else {
-        console.error('切换收藏状态失败:', result.message);
+        // 如果请求成功但响应格式不正确，回滚本地状态
+        isFavorite.value = originalFavoriteState;
+        
+        // 回滚收藏计数
+        if (newFavoriteState) {
+          localFavoritesCount.value = Math.max(0, localFavoritesCount.value - 1);
+        } else {
+          localFavoritesCount.value += 1;
+        }
+        
+        message.error({ content: '操作失败，响应格式不正确', key: loadingKey });
       }
     })
     .catch(error => {
       console.error('操作失败:', error);
+      
+      // 错误处理：回滚本地状态
+      isFavorite.value = originalFavoriteState;
+      
+      // 回滚收藏计数
+      if (newFavoriteState) {
+        localFavoritesCount.value = Math.max(0, localFavoritesCount.value - 1);
+      } else {
+        localFavoritesCount.value += 1;
+      }
+      
+      // 判断是否是未授权错误
+      if (error.response && error.response.status === 401) {
+        message.error({ content: '请先登录后再收藏', key: loadingKey });
+        // 记录当前URL，以便登录后返回
+        const currentPath = router.currentRoute.value.fullPath;
+        router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+      } else {
+        message.error({ content: '操作失败，请稍后重试', key: loadingKey });
+      }
     });
 }
 </script>
