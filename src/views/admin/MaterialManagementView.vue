@@ -50,7 +50,7 @@
         <!-- 缩略图列 -->
         <template #bodyCell="{ column, record }">
           <template v-if="column.key === 'image'">
-            <img :src="record.thumbUrl || record.imageUrl" :alt="record.title" class="material-thumbnail"
+            <img :src="formatImageUrl(record.thumbUrl || record.imageUrl)" :alt="record.title" class="material-thumbnail"
               @click="previewImage(record)" />
           </template>
 
@@ -114,7 +114,7 @@
     <a-modal v-model:visible="previewVisible" :title="selectedMaterial.title || ''" :footer="null" width="800px">
       <div class="preview-modal-content">
         <div class="preview-image-container">
-          <img :src="selectedMaterial.imageUrl || ''" alt="预览图" class="preview-image" />
+          <img :src="formatImageUrl(selectedMaterial.imageUrl || '')" alt="预览图" class="preview-image" />
         </div>
 
         <div class="preview-details">
@@ -152,7 +152,7 @@
     >
       <div class="review-modal-content">
         <div class="review-preview">
-          <img :src="reviewMaterial.imageUrl || ''" alt="预览图" class="review-image" />
+          <img :src="formatImageUrl(reviewMaterial.imageUrl || '')" alt="预览图" class="review-image" />
 
           <div class="review-info">
             <h3>{{ reviewMaterial.title }}</h3>
@@ -225,6 +225,7 @@
 import { ref, reactive, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
+import axios from 'axios';
 import dayjs from 'dayjs';
 import {
   ReloadOutlined,
@@ -234,17 +235,18 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined
 } from '@ant-design/icons-vue';
-import { useMaterialStore } from '@/stores/material';
 import { useCategoryStore } from '@/stores/category';
 
 const route = useRoute();
 const router = useRouter();
-const materialStore = useMaterialStore();
 const categoryStore = useCategoryStore();
 
 // 默认图片和头像
 const defaultImage = '/images/default-image.png';
 const defaultAvatar = '/images/default-avatar.png';
+
+// API基础路径
+const API_BASE_URL = '/api/api/';
 
 // 表格列定义
 const columns = [
@@ -373,7 +375,7 @@ async function fetchMaterial() {
   try {
     // 构建请求参数
     const params = {
-      page: pagination.current - 1, // API可能是0基索引
+      page: pagination.current - 1, // 后端API接受0基索引
       pageSize: pagination.pageSize
     };
     
@@ -383,36 +385,33 @@ async function fetchMaterial() {
     if (filters.keyword) params.keyword = filters.keyword;
     if (filters.uploaderId) params.uploaderId = filters.uploaderId;
     
-    // 调用store中的方法获取素材列表
-    const result = await materialStore.fetchMaterials(params);
+    // 调用后端API
+    const response = await axios.get(`${API_BASE_URL}/admin/materials`, { params });
     
-    if (result) {
-      // 处理材料数据，确保有必要的属性
-      materials.value = (result.content || result.items || []).map(item => ({
+    if (response.data) {
+      // 处理材料数据
+      materials.value = (response.data.items || []).map(item => ({
         ...item,
-        thumbUrl: item.thumbUrl || item.imageUrl,
-        // 如果有分类ID但没有分类名称，获取分类名称
         categoryName: item.categoryName || getCategoryName(item.categoryId)
       }));
       
       // 更新分页信息
-      pagination.total = result.totalElements || result.total || 0;
+      pagination.total = response.data.totalElements || 0;
+      pagination.current = response.data.number + 1; // 后端返回0基索引
+      pagination.pageSize = response.data.size || 10;
     } else {
-      materials.value = getMockMaterials();
-      pagination.total = materials.value.length;
+      materials.value = [];
+      pagination.total = 0;
     }
   } catch (error) {
     console.error('获取素材列表失败:', error);
     message.error('获取素材列表失败');
-    // 使用模拟数据
-    materials.value = getMockMaterials();
-    pagination.total = materials.value.length;
+    materials.value = [];
+    pagination.total = 0;
   } finally {
     loading.value = false;
   }
 }
-
-
 
 // 根据分类ID获取分类名称
 function getCategoryName(categoryId) {
@@ -457,6 +456,24 @@ function handleSearch() {
 // 刷新表格
 function refreshTable() {
   fetchMaterial();
+}
+
+// 格式化图片URL
+function formatImageUrl(url) {
+  if (!url) return defaultImage;
+  
+  // 如果是完整URL，直接返回
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
+  // 处理相对路径，确保存放在 /uploads/ 目录
+  if (url.startsWith('/uploads/')) {
+    return url;
+  }
+  
+  // 否则，加上 /uploads/ 前缀
+  return url.startsWith('/') ? `/uploads${url}` : `/uploads/${url}`;
 }
 
 // 格式化头像URL
@@ -544,34 +561,41 @@ async function handleReviewSubmit() {
   reviewLoading.value = true;
 
   try {
-    // 构建审核数据
-    const reviewData = {
-      status: reviewForm.status,
-      rejectReason: reviewForm.status === 'REJECTED' ? reviewForm.rejectReason : null
-    };
+    let response;
+    const materialId = reviewMaterial.value.id;
     
-    // 预留API接口，后端实现后调整
-    // const response = await axios.post(`/api/admin/materials/${reviewMaterial.value.id}/review`, reviewData);
-    
-    // 模拟API调用
-    await new Promise(resolve => setTimeout(resolve, 800));
+    if (reviewForm.status === 'APPROVED') {
+      // 调用通过API
+      response = await axios.put(`${API_BASE_URL}/admin/materials/${materialId}/approve`);
+    } else {
+      // 调用拒绝API
+      response = await axios.put(`${API_BASE_URL}/admin/materials/${materialId}/reject`, {
+        reason: reviewForm.rejectReason
+      });
+    }
     
     // 更新本地状态
-    const index = materials.value.findIndex(item => item.id === reviewMaterial.value.id);
-    if (index !== -1) {
-      materials.value[index].status = reviewForm.status;
+    if (response.data) {
+      const index = materials.value.findIndex(item => item.id === materialId);
+      if (index !== -1) {
+        materials.value[index] = {
+          ...materials.value[index],
+          status: reviewForm.status,
+          rejectReason: reviewForm.status === 'REJECTED' ? reviewForm.rejectReason : null
+        };
+      }
+
+      message.success(
+        reviewForm.status === 'APPROVED'
+          ? '素材审核已通过'
+          : '素材已被拒绝'
+      );
+
+      reviewVisible.value = false;
     }
-
-    message.success(
-      reviewForm.status === 'APPROVED'
-        ? '素材审核已通过'
-        : '素材已被拒绝'
-    );
-
-    reviewVisible.value = false;
   } catch (error) {
     console.error('审核操作失败:', error);
-    message.error('审核操作失败');
+    message.error('审核操作失败: ' + (error.response?.data?.message || error.message));
   } finally {
     reviewLoading.value = false;
   }
@@ -598,15 +622,18 @@ async function handleEditSubmit() {
   editLoading.value = true;
 
   try {
-    // 使用 store 中的更新方法
-    const result = await materialStore.updateMaterial(editForm.id, {
+    // 构建请求数据
+    const editData = {
       title: editForm.title,
       categoryId: editForm.categoryId,
       description: editForm.description,
       status: editForm.status
-    });
+    };
     
-    if (result && result.success) {
+    // 调用后端API
+    const response = await axios.put(`${API_BASE_URL}/admin/materials/${editForm.id}`, editData);
+    
+    if (response.data) {
       // 更新本地状态
       const index = materials.value.findIndex(item => item.id === editForm.id);
       if (index !== -1) {
@@ -622,12 +649,10 @@ async function handleEditSubmit() {
 
       message.success('素材编辑成功');
       editVisible.value = false;
-    } else {
-      message.error(result?.message || '编辑素材失败');
     }
   } catch (error) {
     console.error('编辑素材失败:', error);
-    message.error('编辑素材失败');
+    message.error('编辑素材失败: ' + (error.response?.data?.message || error.message));
   } finally {
     editLoading.value = false;
   }
@@ -636,25 +661,21 @@ async function handleEditSubmit() {
 // 删除素材
 async function deleteMaterial(record) {
   try {
-    // 使用 store 中的删除方法
-    const result = await materialStore.deleteMaterial(record.id);
+    // 调用后端API
+    await axios.delete(`${API_BASE_URL}/admin/materials/${record.id}`);
     
-    if (result && result.success) {
-      // 更新本地状态
-      materials.value = materials.value.filter(item => item.id !== record.id);
-      message.success('素材已删除');
-      
-      // 如果删除后当前页没有数据，且不是第一页，则跳转到上一页
-      if (materials.value.length === 0 && pagination.current > 1) {
-        pagination.current -= 1;
-        fetchMaterial();
-      }
-    } else {
-      message.error(result?.message || '删除素材失败');
+    // 更新本地状态
+    materials.value = materials.value.filter(item => item.id !== record.id);
+    message.success('素材已删除');
+    
+    // 如果删除后当前页没有数据，且不是第一页，则跳转到上一页
+    if (materials.value.length === 0 && pagination.current > 1) {
+      pagination.current -= 1;
+      fetchMaterial();
     }
   } catch (error) {
     console.error('删除素材失败:', error);
-    message.error('删除素材失败');
+    message.error('删除素材失败: ' + (error.response?.data?.message || error.message));
   }
 }
 </script>

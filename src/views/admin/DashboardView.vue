@@ -11,9 +11,9 @@
             </div>
           </template>
           <div class="stat-content">
-            <div class="stat-value">{{ stats.userCount }}</div>
+            <div class="stat-value">{{ stats.totalUsers || 0 }}</div>
             <div class="stat-trend up">
-              <rise-outlined /> {{ stats.userGrowth }}%
+              <rise-outlined /> {{ stats.userGrowth || 0 }}%
             </div>
           </div>
         </a-card>
@@ -28,9 +28,9 @@
             </div>
           </template>
           <div class="stat-content">
-            <div class="stat-value">{{ stats.materialCount }}</div>
+            <div class="stat-value">{{ stats.totalMaterials || 0 }}</div>
             <div class="stat-trend up">
-              <rise-outlined /> {{ stats.materialGrowth }}%
+              <rise-outlined /> {{ stats.materialGrowth || 0 }}%
             </div>
           </div>
         </a-card>
@@ -41,13 +41,13 @@
           <template #title>
             <div class="stat-title">
               <eye-outlined />
-              <span>今日访问</span>
+              <span>活跃用户</span>
             </div>
           </template>
           <div class="stat-content">
-            <div class="stat-value">{{ stats.todayVisits }}</div>
+            <div class="stat-value">{{ stats.activeUsers || 0 }}</div>
             <div class="stat-trend up">
-              <rise-outlined /> {{ stats.visitGrowth }}%
+              <rise-outlined /> {{ stats.userGrowth || 0 }}%
             </div>
           </div>
         </a-card>
@@ -58,13 +58,13 @@
           <template #title>
             <div class="stat-title">
               <like-outlined />
-              <span>总收藏数</span>
+              <span>待审核素材</span>
             </div>
           </template>
           <div class="stat-content">
-            <div class="stat-value">{{ stats.totalFavorites }}</div>
+            <div class="stat-value">{{ stats.pendingMaterials || 0 }}</div>
             <div class="stat-trend up">
-              <rise-outlined /> {{ stats.favoriteGrowth }}%
+              <rise-outlined /> {{ stats.materialGrowth || 0 }}%
             </div>
           </div>
         </a-card>
@@ -81,11 +81,11 @@
           >
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'image'">
-                <img :src="record.imageUrl" :alt="record.title" class="material-thumb" />
+                <img :src="getImageUrl(record.thumbUrl || record.imageUrl)" :alt="record.title" class="material-thumb" />
               </template>
               
               <template v-else-if="column.key === 'uploader'">
-                <a-avatar :size="24" :src="record.uploaderAvatar" style="margin-right: 8px" />
+                <a-avatar :size="24" :src="getImageUrl(record.uploaderAvatar)" style="margin-right: 8px" />
                 {{ record.uploaderName }}
               </template>
               
@@ -94,7 +94,7 @@
                   <a-button type="primary" size="small" @click="() => reviewMaterial(record, 'APPROVED')">
                     通过
                   </a-button>
-                  <a-button type="danger" size="small" @click="() => reviewMaterial(record, 'REJECTED')">
+                  <a-button danger size="small" @click="() => showRejectModal(record)">
                     拒绝
                   </a-button>
                 </a-space>
@@ -109,13 +109,13 @@
         <a-card title="最近注册用户" :extra="{ content: '查看全部', onClick: goToUsers }">
           <a-list
             :data-source="recentUsers"
-            :loading="loading"
+            :loading="loadingUsers"
           >
             <template #renderItem="{ item }">
               <a-list-item>
                 <a-list-item-meta>
                   <template #avatar>
-                    <a-avatar :src="item.avatar" />
+                    <a-avatar :src="getImageUrl(item.avatar)" />
                   </template>
                   <template #title>{{ item.username }}</template>
                   <template #description>
@@ -143,6 +143,15 @@
         </a-card>
       </a-col>
     </a-row>
+    
+    <!-- 拒绝原因模态框 -->
+    <a-modal v-model:visible="rejectModalVisible" title="拒绝原因" @ok="confirmReject">
+      <a-form :model="rejectForm">
+        <a-form-item label="拒绝原因" name="reason" :rules="[{ required: true, message: '请输入拒绝原因' }]">
+          <a-textarea v-model:value="rejectForm.reason" :rows="4" placeholder="请输入拒绝原因" />
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 
@@ -156,17 +165,20 @@ import {
   RiseOutlined,
 } from '@ant-design/icons-vue';
 import dayjs from 'dayjs';
+import axios from 'axios';
+import { message } from 'ant-design-vue';
+import { useUserStore } from '../../stores/user';
+
+const userStore = useUserStore();
 
 // 数据统计
 const stats = ref({
-  userCount: 1285,
-  userGrowth: 4.2,
-  materialCount: 4728,
-  materialGrowth: 12.5,
-  todayVisits: 3214,
-  visitGrowth: 8.7,
-  totalFavorites: 12653,
-  favoriteGrowth: 6.3
+  totalUsers: 0,
+  userGrowth: 0,
+  totalMaterials: 0,
+  materialGrowth: 0,
+  activeUsers: 0,
+  pendingMaterials: 0
 });
 
 // 待审核素材列表
@@ -204,6 +216,61 @@ const pendingMaterials = ref([]);
 const recentUsers = ref([]);
 const systemLogs = ref([]);
 const loading = ref(false);
+const loadingUsers = ref(false);
+
+// 拒绝模态框相关
+const rejectModalVisible = ref(false);
+const rejectForm = ref({
+  reason: '',
+  materialId: null
+});
+const currentMaterial = ref(null);
+
+// 处理图片路径，确保能正确加载
+function getImageUrl(path) {
+  if (!path) return '';
+  
+  // 如果路径是完整的URL，直接返回
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  
+  // 如果路径不以/开头，添加/
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+  
+  // 确保图片从公共目录加载
+  if (!path.startsWith('/uploads/')) {
+    return '/uploads' + path;
+  }
+  
+  return path;
+}
+
+// 显示拒绝模态框
+function showRejectModal(material) {
+  currentMaterial.value = material;
+  rejectForm.value.materialId = material.id;
+  rejectForm.value.reason = '';
+  rejectModalVisible.value = true;
+}
+
+// 确认拒绝
+async function confirmReject() {
+  if (!rejectForm.value.reason) {
+    message.error('请输入拒绝原因');
+    return;
+  }
+  
+  try {
+    await reviewMaterial(currentMaterial.value, 'REJECTED', rejectForm.value.reason);
+    rejectModalVisible.value = false;
+  } catch (error) {
+    console.error('拒绝素材失败:', error);
+    message.error('拒绝素材失败: ' + (error.response?.data?.message || '未知错误'));
+  }
+}
 
 // 格式化日期
 function formatDate(dateString) {
@@ -211,9 +278,36 @@ function formatDate(dateString) {
 }
 
 // 审核素材
-function reviewMaterial(record, status) {
-  // 实现审核逻辑，成功后从待审核列表中移除该素材
-  pendingMaterials.value = pendingMaterials.value.filter(item => item.id !== record.id);
+async function reviewMaterial(record, status, reason = null) {
+  try {
+    if (status === 'APPROVED') {
+      await axios.put(`/api/api/admin/materials/${record.id}/approve`, {}, {
+        headers: { Authorization: `Bearer ${userStore.token}` }
+      });
+      message.success('素材已通过审核');
+    } else if (status === 'REJECTED') {
+      await axios.put(`/api/api/admin/materials/${record.id}/reject`, {
+        reason: reason
+      }, {
+        headers: { Authorization: `Bearer ${userStore.token}` }
+      });
+      message.success('素材已拒绝');
+    }
+    
+    // 从待审核列表中移除该素材
+    pendingMaterials.value = pendingMaterials.value.filter(item => item.id !== record.id);
+    
+    // 更新统计数据
+    if (stats.value.pendingMaterials > 0) {
+      stats.value.pendingMaterials--;
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('审核素材失败:', error);
+    message.error('审核素材失败: ' + (error.response?.data?.message || '未知错误'));
+    throw error;
+  }
 }
 
 // 跳转到素材管理
@@ -230,105 +324,125 @@ function goToUsers() {
   window.dispatchEvent(event);
 }
 
+// 获取系统日志（模拟数据，后端暂无此接口）
+function loadSystemLogs() {
+  systemLogs.value = [
+    {
+      id: 1,
+      title: '系统更新',
+      content: '系统已更新至v2.1.0版本',
+      time: dayjs().format('YYYY-MM-DD HH:mm'),
+      color: 'blue'
+    },
+    {
+      id: 2,
+      title: '安全警告',
+      content: '检测到3次失败的管理员登录尝试',
+      time: dayjs().subtract(1, 'hour').format('YYYY-MM-DD HH:mm'),
+      color: 'red'
+    },
+    {
+      id: 3,
+      title: '数据备份',
+      content: '系统数据已成功备份',
+      time: dayjs().subtract(3, 'hour').format('YYYY-MM-DD HH:mm'),
+      color: 'green'
+    },
+    {
+      id: 4,
+      title: '用户反馈',
+      content: '收到5条新的用户反馈信息',
+      time: dayjs().subtract(5, 'hour').format('YYYY-MM-DD HH:mm'),
+      color: 'orange'
+    }
+  ];
+}
+
+// 获取统计数据
+async function fetchStats() {
+  loading.value = true;
+  try {
+    const response = await axios.get('/api/api/admin/stats', {
+      headers: { Authorization: `Bearer ${userStore.token}` }
+    });
+    stats.value = response.data;
+    return response.data;
+  } catch (error) {
+    console.error('获取统计数据失败:', error);
+    message.error('获取统计数据失败: ' + (error.response?.data?.message || '未知错误'));
+    return null;
+  } finally {
+    loading.value = false;
+  }
+}
+
+// 获取待审核素材
+async function fetchPendingMaterials() {
+  loading.value = true;
+  try {
+    const response = await axios.get('/api/api/admin/materials/pending', {
+      params: { page: 0, pageSize: 5 },
+      headers: { Authorization: `Bearer ${userStore.token}` }
+    });
+    
+    // 根据AdminController的返回结构调整
+    pendingMaterials.value = response.data.items || [];
+    return response.data;
+  } catch (error) {
+    console.error('获取待审核素材失败:', error);
+    message.error('获取待审核素材失败: ' + (error.response?.data?.message || '未知错误'));
+    return [];
+  } finally {
+    loading.value = false;
+  }
+}
+
+// 获取最近注册用户
+async function fetchRecentUsers() {
+  loadingUsers.value = true;
+  try {
+    const response = await axios.get('/api/api/admin/users', {
+      params: { 
+        page: 0, 
+        pageSize: 4,
+        sort: 'createdAt,desc'
+      },
+      headers: { Authorization: `Bearer ${userStore.token}` }
+    });
+    
+    // 根据AdminController的返回结构调整
+    recentUsers.value = response.data.items || [];
+    return response.data;
+  } catch (error) {
+    console.error('获取最近用户失败:', error);
+    message.error('获取最近用户失败: ' + (error.response?.data?.message || '未知错误'));
+    return [];
+  } finally {
+    loadingUsers.value = false;
+  }
+}
+
 // 获取首页数据
 onMounted(async () => {
-  loading.value = true;
+  if (!userStore.isLoggedIn || !userStore.isAdmin) {
+    message.error('请先登录管理员账号');
+    return;
+  }
   
   try {
-    // 这里应该调用API获取首页统计数据
-    // 模拟数据加载
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // 并行加载数据提高性能
+    await Promise.all([
+      fetchStats(),
+      fetchPendingMaterials(),
+      fetchRecentUsers()
+    ]);
     
-    // 设置模拟数据
-    pendingMaterials.value = [
-      {
-        id: 1,
-        title: '现代简约客厅设计',
-        imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=100',
-        uploaderName: 'design_master',
-        uploaderAvatar: 'https://joeschmoe.io/api/v1/2',
-        createdAt: '2025-05-19T10:30:00Z'
-      },
-      {
-        id: 2,
-        title: '北欧风卧室装修',
-        imageUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=100',
-        uploaderName: 'nordic_style',
-        uploaderAvatar: 'https://joeschmoe.io/api/v1/3',
-        createdAt: '2025-05-19T14:45:00Z'
-      },
-      {
-        id: 3,
-        title: '日式厨房布局参考',
-        imageUrl: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e8d?w=100',
-        uploaderName: 'japan_lover',
-        uploaderAvatar: 'https://joeschmoe.io/api/v1/4',
-        createdAt: '2025-05-20T09:15:00Z'
-      }
-    ];
-    
-    recentUsers.value = [
-      {
-        id: 1,
-        username: 'creative_mind',
-        avatar: 'https://joeschmoe.io/api/v1/5',
-        createdAt: '2025-05-20T07:30:00Z'
-      },
-      {
-        id: 2,
-        username: 'design_pro',
-        avatar: 'https://joeschmoe.io/api/v1/6',
-        createdAt: '2025-05-19T22:15:00Z'
-      },
-      {
-        id: 3,
-        username: 'home_stylist',
-        avatar: 'https://joeschmoe.io/api/v1/7',
-        createdAt: '2025-05-19T16:40:00Z'
-      },
-      {
-        id: 4,
-        username: 'interior_guru',
-        avatar: 'https://joeschmoe.io/api/v1/8',
-        createdAt: '2025-05-19T12:20:00Z'
-      }
-    ];
-    
-    systemLogs.value = [
-      {
-        id: 1,
-        title: '系统更新',
-        content: '系统已更新至v2.1.0版本',
-        time: '2025-05-20 08:00',
-        color: 'blue'
-      },
-      {
-        id: 2,
-        title: '安全警告',
-        content: '检测到3次失败的管理员登录尝试',
-        time: '2025-05-19 23:42',
-        color: 'red'
-      },
-      {
-        id: 3,
-        title: '数据备份',
-        content: '系统数据已成功备份',
-        time: '2025-05-19 22:00',
-        color: 'green'
-      },
-      {
-        id: 4,
-        title: '用户反馈',
-        content: '收到5条新的用户反馈信息',
-        time: '2025-05-19 16:30',
-        color: 'orange'
-      }
-    ];
+    // 加载系统日志（模拟数据）
+    loadSystemLogs();
     
   } catch (error) {
     console.error('获取首页数据失败:', error);
-  } finally {
-    loading.value = false;
+    message.error('获取首页数据失败，请刷新页面重试');
   }
 });
 </script>
