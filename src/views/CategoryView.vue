@@ -115,6 +115,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.main-content {
+  padding: 64px ;
+}
 .category-materials {
   padding: 24px;
 }

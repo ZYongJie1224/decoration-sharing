@@ -397,7 +397,9 @@ async function fetchMaterial() {
       
       // 更新分页信息
       pagination.total = response.data.totalElements || 0;
-      pagination.current = response.data.number + 1; // 后端返回0基索引
+      
+      // 确保 current 始终是正数，至少为1
+      pagination.current = (response.data.number || 0) + 1;
       pagination.pageSize = response.data.size || 10;
     } else {
       materials.value = [];
@@ -422,7 +424,8 @@ function getCategoryName(categoryId) {
 
 // 处理表格变化（分页、排序、筛选）
 function handleTableChange(pag) {
-  pagination.current = pag.current;
+  // 确保 current 始终是正数
+  pagination.current = Math.max(1, pag.current || 1);
   pagination.pageSize = pag.pageSize;
   fetchMaterial();
 }
@@ -430,7 +433,7 @@ function handleTableChange(pag) {
 // 处理状态筛选变化
 function handleStatusChange(value) {
   filters.status = value;
-  pagination.current = 1;
+  pagination.current = 1; // 重置为第一页
 
   // 更新URL查询参数
   router.push({
@@ -443,13 +446,13 @@ function handleStatusChange(value) {
 
 // 处理其他筛选条件变化
 function handleFilterChange() {
-  pagination.current = 1;
+  pagination.current = 1; // 重置为第一页
   fetchMaterial();
 }
 
 // 处理搜索
 function handleSearch() {
-  pagination.current = 1;
+  pagination.current = 1; // 重置为第一页
   fetchMaterial();
 }
 

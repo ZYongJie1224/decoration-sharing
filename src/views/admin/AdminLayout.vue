@@ -38,10 +38,10 @@
             <span>素材管理</span>
           </a-menu-item>
           
-          <a-menu-item key="categories" class="menu-item">
+          <!-- <a-menu-item key="categories" class="menu-item">
             <template #icon><folder-outlined /></template>
             <span>分类管理</span>
-          </a-menu-item>
+          </a-menu-item> -->
           
           <a-divider style="background-color: #303030; margin: 16px 0" />
           
@@ -292,10 +292,7 @@ onMounted(() => {
   } else if (path.includes('/admin/materials')) {
     activeTab.value = 'materials';
     selectedKeys.value = ['materials'];
-  } else if (path.includes('/admin/categories')) {
-    activeTab.value = 'categories';
-    selectedKeys.value = ['categories'];
-  } else {
+  }  else {
     activeTab.value = 'dashboard';
     selectedKeys.value = ['dashboard'];
   }
@@ -627,6 +624,7 @@ function handleLogout() {
     display: none;
   }
 }
+
 </style>
 
 <style>
@@ -651,8 +649,11 @@ function handleLogout() {
 .category-management-view {
   padding: 20px;
 }
+.main-content {
+  padding: 0 ;
+}
 </style>
-<style>
+<!-- <style>
 /* 全局样式覆盖 */
 /* 通知弹窗样式 */
 .notification-popover .ant-popover-inner-content {
@@ -696,4 +697,4 @@ function handleLogout() {
 .ant-layout .ant-layout-content > div {
   padding: 0 !important;
 }
-</style>
+</style> -->

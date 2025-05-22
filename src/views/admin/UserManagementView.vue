@@ -96,7 +96,7 @@
           <!-- 上传素材数 -->
           <template v-else-if="column.key === 'materialCount'">
             <a-button type="link" size="small" @click="viewUserMaterials(record)">
-              {{ record.materialCount }} 个素材
+              {{ record.materialCount || 0 }} 个素材
             </a-button>
           </template>
           
@@ -220,7 +220,7 @@
           <a-descriptions-item label="用户ID" span={3}>{{ selectedUser.id }}</a-descriptions-item>
           <a-descriptions-item label="注册时间">{{ formatDate(selectedUser.createdAt) }}</a-descriptions-item>
           <a-descriptions-item label="最近登录">{{ formatDate(selectedUser.lastLoginAt) }}</a-descriptions-item>
-          <a-descriptions-item label="上传素材数">{{ selectedUser.materialCount }} 个</a-descriptions-item>
+          <a-descriptions-item label="上传素材数">{{ selectedUser.materialCount || 0 }} 个</a-descriptions-item>
         </a-descriptions>
       </div>
     </a-modal>
@@ -247,6 +247,9 @@ import { useUserStore } from '@/stores/user';
 const router = useRouter();
 const userStore = useUserStore();
 const defaultAvatar = '/images/default-avatar.png';
+
+// API基础路径
+const API_BASE_URL = '/api/api';
 
 // 表格列定义
 const columns = [
@@ -368,7 +371,7 @@ function handleAvatarError(e) {
 
 // 处理表格变化（分页、排序、筛选）
 function handleTableChange(pag) {
-  pagination.current = pag.current;
+  pagination.current = Math.max(1, pag.current || 1); // 确保页码是正数
   pagination.pageSize = pag.pageSize;
   fetchUsers();
 }
@@ -380,7 +383,7 @@ async function fetchUsers() {
   try {
     // 构建请求参数
     const params = {
-      page: pagination.current - 1, // API可能是0基索引
+      page: pagination.current - 1, // 后端API使用0基索引
       pageSize: pagination.pageSize
     };
     
@@ -389,103 +392,40 @@ async function fetchUsers() {
     if (filters.status) params.status = filters.status;
     if (filters.keyword) params.keyword = filters.keyword;
     
-    // 调用用户管理API - 预留API，此处为模拟实现
-    // 实际项目中应该调用API
-    // const response = await axios.get('/api/admin/users', { params });
+    // 调用后端API获取用户列表
+    const response = await axios.get(`${API_BASE_URL}/admin/users`, { params });
     
-    // 模拟API响应
-    await new Promise(resolve => setTimeout(resolve, 500));
-    const result = getMockUsers();
-    
-    // 处理过滤
-    let filteredUsers = [...result];
-    if (filters.role) {
-      filteredUsers = filteredUsers.filter(user => user.role === filters.role);
+    if (response.data) {
+      // 更新用户数据
+      users.value = response.data.items || [];
+      
+      // 更新分页信息
+      pagination.total = response.data.totalElements || 0;
+      pagination.current = (response.data.number || 0) + 1; // 转换为1基索引
+      pagination.pageSize = response.data.size || 10;
+    } else {
+      users.value = [];
+      pagination.total = 0;
     }
-    
-    if (filters.status) {
-      filteredUsers = filteredUsers.filter(user => user.status === filters.status);
-    }
-    
-    if (filters.keyword) {
-      const keyword = filters.keyword.toLowerCase();
-      filteredUsers = filteredUsers.filter(user => 
-        user.username.toLowerCase().includes(keyword) || 
-        user.email.toLowerCase().includes(keyword)
-      );
-    }
-    
-    // 更新数据
-    users.value = filteredUsers;
-    pagination.total = filteredUsers.length;
-    
   } catch (error) {
     console.error('获取用户列表失败:', error);
-    message.error('获取用户列表失败，请稍后重试');
+    message.error('获取用户列表失败: ' + (error.response?.data?.message || error.message));
+    users.value = [];
+    pagination.total = 0;
   } finally {
     loading.value = false;
   }
 }
 
-// 模拟用户数据 (用于示例)
-function getMockUsers() {
-  return [
-    {
-      id: 1,
-      username: 'ZYongJie1224',
-      email: 'admin@example.com',
-      avatar: 'https://joeschmoe.io/api/v1/1',
-      role: 'ADMIN',
-      status: 'ACTIVE',
-      materialCount: 15,
-      createdAt: '2025-01-10T08:30:00Z',
-      lastLoginAt: '2025-05-20T08:28:02Z'
-    },
-    {
-      id: 2,
-      username: 'design_master',
-      email: 'design@example.com',
-      avatar: 'https://joeschmoe.io/api/v1/2',
-      role: 'USER',
-      status: 'ACTIVE',
-      materialCount: 28,
-      createdAt: '2025-02-15T14:20:00Z',
-      lastLoginAt: '2025-05-15T18:30:00Z'
-    },
-    {
-      id: 3,
-      username: 'creative_home',
-      email: 'creative@example.com',
-      avatar: 'https://joeschmoe.io/api/v1/3',
-      role: 'USER',
-      status: 'ACTIVE',
-      materialCount: 42,
-      createdAt: '2025-03-05T09:15:00Z',
-      lastLoginAt: '2025-05-14T11:20:00Z'
-    },
-    {
-      id: 4,
-      username: 'blockeduser',
-      email: 'blocked@example.com',
-      avatar: 'https://joeschmoe.io/api/v1/4',
-      role: 'USER',
-      status: 'BLOCKED',
-      materialCount: 5,
-      createdAt: '2025-04-18T16:40:00Z',
-      lastLoginAt: '2025-04-20T12:10:00Z'
-    }
-  ];
-}
-
 // 处理筛选条件变化
 function handleFilterChange() {
-  pagination.current = 1;
+  pagination.current = 1; // 重置为第一页
   fetchUsers();
 }
 
 // 处理搜索
 function handleSearch() {
-  pagination.current = 1;
+  pagination.current = 1; // 重置为第一页
   fetchUsers();
 }
 
@@ -527,33 +467,45 @@ function cancelEdit() {
 
 // 提交编辑
 async function handleEditSubmit() {
+  // 检查用户名是否是管理员自身
+  // const currentUser = await userStore.getCurrentUser();
+  if (editForm.username === userStore.username) {
+    
+      message.warning('不能修改自己的账号信息，请到个人资料修改');
+      return;
+    
+  }
+  
   editLoading.value = true;
   
   try {
-    // 这里应该调用管理员编辑用户API
-    // 预留API接口
-    // const response = await axios.put(`/api/admin/users/${editForm.id}`, editForm);
+    // 构建请求数据
+    const updateData = {
+      username: editForm.username,
+      email: editForm.email,
+      role: editForm.role,
+      status: editForm.status
+    };
     
-    // 模拟API调用
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // 调用后端API更新用户信息
+    const response = await axios.put(`${API_BASE_URL}/admin/users/${editForm.id}`, updateData);
     
-    // 更新本地状态
-    const index = users.value.findIndex(user => user.id === editForm.id);
-    
-    if (index !== -1) {
-      users.value[index] = {
-        ...users.value[index],
-        username: editForm.username,
-        email: editForm.email,
-        role: editForm.role,
-        status: editForm.status
-      };
+    if (response.data) {
+      // 更新本地状态
+      const index = users.value.findIndex(user => user.id === editForm.id);
+      if (index !== -1) {
+        users.value[index] = {
+          ...users.value[index],
+          ...response.data
+        };
+      }
+      
+      message.success('用户信息更新成功');
+      editVisible.value = false;
     }
-    
-    message.success('用户信息更新成功');
-    editVisible.value = false;
   } catch (error) {
-    message.error('更新用户信息失败');
+    console.error('更新用户信息失败:', error);
+    message.error('更新用户信息失败: ' + (error.response?.data?.message || error.message));
   } finally {
     editLoading.value = false;
   }
@@ -561,7 +513,12 @@ async function handleEditSubmit() {
 
 // 切换用户状态
 async function toggleUserStatus(record) {
-  if (record.username === 'ZYongJie1224') {
+    // const currentUser = await userStore.getCurrentUser();
+      console.log(userStore.username)
+  // if (record.username === currentUser.username) {
+    if (record.username === userStore.username) {
+      console.log(userStore.username)
+
     message.warning('无法修改当前登录管理员的状态');
     return;
   }
@@ -570,46 +527,53 @@ async function toggleUserStatus(record) {
   const statusText = newStatus === 'ACTIVE' ? '启用' : '禁用';
   
   try {
-    // 这里应该调用管理员切换用户状态API
-    // 预留API接口
-    // await axios.put(`/api/admin/users/${record.id}/status`, { status: newStatus });
+    // 构建请求数据
+    const updateData = {
+      status: newStatus
+    };
     
-    // 模拟API调用
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // 调用后端API更新用户状态
+    const response = await axios.put(`${API_BASE_URL}/admin/users/${record.id}`, updateData);
     
-    // 更新本地状态
-    const index = users.value.findIndex(user => user.id === record.id);
-    if (index !== -1) {
-      users.value[index].status = newStatus;
+    if (response.data) {
+      // 更新本地状态
+      const index = users.value.findIndex(user => user.id === record.id);
+      if (index !== -1) {
+        users.value[index].status = newStatus;
+      }
+      
+      message.success(`已${statusText}用户 ${record.username}`);
     }
-    
-    message.success(`已${statusText}用户 ${record.username}`);
   } catch (error) {
-    message.error(`${statusText}用户失败`);
+    console.error(`${statusText}用户失败:`, error);
+    message.error(`${statusText}用户失败: ` + (error.response?.data?.message || error.message));
   }
 }
 
 // 删除用户
 async function deleteUser(record) {
-  if (record.username === 'ZYongJie1224') {
+  if (record.username === userStore.username) {
     message.warning('无法删除当前登录管理员');
     return;
   }
   
   try {
-    // 这里应该调用管理员删除用户API
-    // 预留API接口
-    // await axios.delete(`/api/admin/users/${record.id}`);
-    
-    // 模拟API调用
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // 调用后端API删除用户
+    await axios.delete(`${API_BASE_URL}/admin/users/${record.id}`);
     
     // 更新本地状态
     users.value = users.value.filter(user => user.id !== record.id);
     
     message.success(`已删除用户 ${record.username}`);
+    
+    // 如果删除后当前页没有数据，且不是第一页，则跳转到上一页
+    if (users.value.length === 0 && pagination.current > 1) {
+      pagination.current -= 1;
+      fetchUsers();
+    }
   } catch (error) {
-    message.error('删除用户失败');
+    console.error('删除用户失败:', error);
+    message.error('删除用户失败: ' + (error.response?.data?.message || error.message));
   }
 }
 </script>
