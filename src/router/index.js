@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 
-// 精简路由配置
+// 精简路由配置.
 const routes = [
   {
     path: '/',
@@ -34,6 +34,19 @@ const routes = [
     path: '/admin',
     name: 'AdminLayout',
     component: () => import('@/views/admin/AdminLayout.vue')
+  },
+  // ⭐ 添加这两个缺失的路由
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: () => import('@/views/user/FavoritesView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/my-uploads',
+    name: 'MyUploads',
+    component: () => import('@/views/user/MyUploadsView.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/upload',
