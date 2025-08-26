@@ -1,25 +1,4232 @@
-{
-  "name": "decoration-sharing",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@vueuse/core": "^13.2.0",
-    "ant-design-vue": "^3.2.20",
-    "axios": "^1.9.0",
-    "echarts": "^5.6.0",
-    "pinia": "^3.0.2",
-    "vue": "^3.5.13",
-    "vue-cropper": "^0.6.5",
-    "vue-router": "^4.5.1"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
-    "vite": "^6.3.5"
-  }
-}
+H3CNE-RS+GB0-192 《构建中小企业网络 V7.0》
+提示：新版NE，去掉了老版本中的RIP、HDLC、帧中继等知识内容的考试题目，新增了SDN、NFV、SR基础知
+识考试题目。共计354题
+第 1 章 计算机网络概述
+问题1.
+以下关于星型网络拓扑结构的描述正确的是______ 。 (多选)
+A. 星型拓扑易于维护
+B. 在星型拓扑中，某条线路的故障不影响其它线路下的计算机通信
+C. 星型拓扑具有很高的健壮性，不存在单点故障的问题 中心结点故障
+D. 由于星型拓扑结构的网络是共享总线带宽，当网络负载过重时会导致性能下降
+Correct Answer: AB
+Section: part 1
+Explanation
+Hub 连接总线型网络共享总线带宽
+问题2.
+以下关于星型网络拓扑结构的描述错误的是______ 。 (多选)
+A. 星型拓扑易于维护
+B. 在星型拓扑中，某条线路的故障不影响其它线路下的计算机通信
+C. 星型拓扑具有很高的健壮性，不存在单点故障的问题
+D. 由于星型拓扑结构的网络是共享总线带宽，当网络负载过重时会导致性能下降
+Correct Answer: CD
+Section: part 1
+Explanation
+问题3.
+以下关于电路交换和分组交换的描述正确的是______ 。 (多选)
+A. 电路交换延迟小，传输实时性强
+B. 电路交换网络资源利用率高
+C. 分组交换延迟大，传输实时性差
+D. 分组交换网络资源利用率低
+Correct Answer: AC
+Section: part 1
+Explanation
+电路交换: 优点 延迟小，透明传输
+缺点 固定带宽，网络资源利用率低
+分组交换：优点 多路复用，网络资源利用率高
+缺点：延迟大，实时性差，设备功能复杂
+问题4.
+以下关于电路交换和分组交换的描述正确的是______ 。 (多选)
+A. 分组交换网络资源利用率低
+B. 分组交换延迟大，传输实时性差
+C. 电路交换网络资源利用率高
+D. 电路交换延迟小，传输实时性强
+Correct Answer: BD
+Section: part 1
+Explanation
+问题5.
+网络的延迟 (delay) 定义了网络把数据从一个网络节点传送到另一个网络节点所需要的时间。网络延迟包 括
+______。(多选)
+A. 传播延迟 (propagation delay)
+B. 交换延迟 (switching delay)
+C. 介质访问延迟 (access delay)
+D. 队列延迟 (queuing delay)
+Correct Answer: ABCD
+Section: part 1
+Explanation
+网络的延迟包括：传播延迟 PD 、交换延迟 SD 、介质访问延迟 AD 、队列延迟 QD
+第 2 章 OSI 参考模型与 TCP IP 模型
+问题6.
+以下工作于 OSI 参考模型数据链路层的设备是______。
+A. 广域网交换机
+B. 路由器
+C. 中继器
+D. 集线器
+Correct Answer: A
+Explanation/Reference:
+A.广域网交换机 B. 路由器 C. 中继器 D. 集线器
+数据链路 网络层 物理层 物理层
+问题7.
+集线器 (Hub) 工作在 OSI 参考模型的______。
+A. 物理层
+B. 数据链路层
+C. 网络层
+D. 传输层
+Correct Answer: A
+Section: part 1
+Explanation
+问题8.
+TCP/IP 协议栈包括以下哪些层次？ (多选)
+A. 网络层
+B. 传输层
+C. 会话层
+D. 应用层
+E. 网络接口层
+F. 表示层
+Correct Answer: ABDE
+应用层 APDU
+表示层 PPDU
+会话层 SPDU
+传输层 段 segment
+网络层 包 packet
+数据链路层 帧 frame
+物理层 比特流 bit
+问题9.
+OSI 参考模型具有以下哪些优点？ (多选)
+A. OSI 参考模型提供了设备间的兼容性和标准接口，促进了标准化工作。
+B. OSI 参考模型的一个重要特性是其采用了分层体系结构。分层设计方法可以将庞大而复杂的问题转化 为若干较
+小且易于处理的问题。
+C. OSI 参考模型是对发生在网络设备间的信息传输过程的一种理论化描述，并且定义了如何通过硬件和 软件实
+现每一层功能。
+D. 以上说法均不正确。
+Correct Answer: AB
+Section: part 1
+Explanation
+问题10.
+下面关于 OSI 参考模型各层功能的说法正确的是______ 。 (多选)
+A. 物理层涉及在通信信道 (Channel) 上传输的原始比特流，它定义了传输数据所需要的机械、 电气功 能及规程
+等特性。
+B. 网络层决定传输报文的最佳路由，其关键问题是确定数据包从源端到目的端如何选择路由。
+C. 传输层的基本功能是建立、维护虚电路，进行差错校验和流量控制。
+D. 会话层负责数据格式处理、数据加密等。
+E. 应用层负责为应用程序提供网络服务。
+Correct Answer: ABCE
+Section: part 1
+Explanation
+问题11.
+下面关于 OSI 参考模型各层功能的说法错误的是______。
+A. 物理层涉及在通信信道 (Channel) 上传输的原始比特流，它定义了传输数据所需要的机械、 电气功 能及规程
+等特性。
+B. 网络层决定传输报文的最佳路由，其关键问题是确定数据包从源端到目的端如何选择路由。
+C. 传输层的基本功能是建立、维护虚电路，进行差错校验和流量控制。
+D. 会话层负责数据格式处理、数据加密等。
+E. 应用层负责为应用程序提供网络服务。
+Correct Answer: D
+Section: part 1
+Explanation
+应用层 为应用进程提供网络服务
+表示层 定义数据格式与结构、协商上层数据格式、数据加密压缩
+会话层 主机间通信，建立、维护、终结应用程序间会话，文字处理、 邮件、表格
+传输层 分段上层数据，端到端连接，透明可靠传输，差错校验、重传，流量控制
+网络层 编址，路由，拥塞控制，异种网络互连
+数据链路层 编帧、链路建立/维持/释放，流量控制，差错校验，寻址，标识上层数据
+物理层 电压，接口，线缆，传输距离等物理参数。四大特性：机械、 电器、功能、规程
+问题12.
+下面关于 OSI 参考模型各层功能的说法正确的是______ 。 (多选)
+A. 会话层负责数据格式处理、数据加密等。
+B. 传输层的基本功能是建立、维护虚电路，进行差错校验和流量控制。
+C. 网络层决定传输报文的最佳路由，其关键问题是确定数据包从源端到目的端如何选择路由。
+D. 物理层涉及在通信信道 (Channel) 上传输的原始比特流，它定义了传输数据所需要的机械、 电气功 能及规程
+等特性。
+E. 应用层负责为应用程序提供网络服务。
+Correct Answer: BCDE
+Section: part 1
+Explanation
+问题13.
+下面关于 OSI 参考模型的说法正确的是______。
+A. 传输层的数据称为帧 (Frame)
+B. 网络层的数据称为段 (Segment)
+C. 数据链路层的数据称为数据包 (Packet)
+D. 物理层的数据称为比特 (Bit)
+Correct Answer: D
+Section: part 1
+Explanation
+问题14.
+OSI 参考模型物理层的主要功能是______。
+A. 物理地址定义
+B. 建立端到端连接
+C. 在终端设备间传送比特流，定义了电压、接口、 电缆标准和传输距离等
+D. 将数据从某一端主机传送到另一端主机
+Correct Answer: C
+Section: part 1
+Explanation
+问题15.
+IP 协议对应于 OSI 参考模型的第______层。
+A. 5
+B. 3
+C. 2
+D. 1
+Correct Answer: B
+Explanation
+应用层协议：见 T13
+传输层协议：TCP(6) UDP(17)
+网络层协议：IP,ICMP (ICMP 消息可分为 ICMP 差错消息和 ICMP 查询消息) ,IGMP (互联网组管理协议，负责
+管理组播组)
+网络接口层协议： 以太网、令牌环，HDLC,PPP,X.25,帧中继,PSTN,ISDN 等
+问题16.
+在 OSI 参考模型中，网络层的功能主要是______。
+A. 在信道上传输原始的比特流
+B. 确保到达对方的各段信息正确无误
+C. 确定数据包从源端到目的端如何选择路由
+D. 加强物理层数据传输原始比特流的功能，并且进行流量调控
+Correct Answer: C
+Section: part 1
+Explanation
+问题17.
+数据分段是在 OSI 参考模型中的______完成的。
+A. 物理层
+B. 网络层
+C. 传输层
+D. 接入层
+Correct Answer: C
+Section: part 1
+Explanation
+问题18.
+提供端到端可靠数据传输和流量控制的是 OSI 参考模型的______。
+A. 表示层
+B. 网络层
+C. 传输层
+D. 会话层
+Correct Answer: C
+Section: part 1
+Explanation
+问题19.
+在 OSI 参考模型中，加密是______ 的功能。
+A. 物理层
+B. 传输层
+C. 会话层
+D. 表示层
+Correct Answer: D
+Section: part 1
+Explanation
+问题20.
+TCP 属于 OSI 参考模型的______。
+A. 网络层
+B. 传输层
+C. 会话层
+D. 表示层
+Correct Answer: B
+Section: part 1
+Explanation
+问题21.
+UDP 属于 OSI 参考模型的______。
+A. 网络层
+B. 传输层
+C. 会话层
+D. 表示层
+Correct Answer: B
+Section: part 1
+Explanation
+传输层协议有 TCP/IP 协议族的 TCP/UDP , 以及 IPX/SPX 协议族的SPX 等
+问题22.
+DNS 工作于 OSI 参考模型的______。
+A. 网络层
+B. 传输层
+C. 会话层
+D. 应用层
+Correct Answer: D
+Section: part 1
+Explanation
+第 3 章 局域网基本原理
+问题23.
+用以太网线连接两台交换机，互连端口的 MDI 类型都配置为across ，则此以太网线应该为________。
+A. 只能使用交叉网线
+B. 只能使用直连网线
+C. 平行网线和交叉网线都可以
+D. 平行网线和交叉网线都不可以
+Correct Answer: A
+Section: part 2
+Explanation
+同层设备交叉线，不同层直连线以太网交换机
+接口类型 MDI/MDIX 自适应
+MDI 直通线
+MDIX 交叉线这里设置成
+MDI，只能用交叉线
+问题24.
+下列关于以太网的说法正确的是________ 。 (多选)
+A. 以太网是基于共享介质的网络
+B. 以太网采用 CSMA/CD 机制
+C. 以太网传输距离短，最长传输距离为 500m
+D. 以上说法均不正确
+Correct Answer: AB
+Section: part 2
+Explanation
+10BASE 以太网传输距离跟传输介质有关
+10BASE5 粗同轴电缆 500m 10BASE2 细同轴电缆 200m (同轴电缆布设繁琐，不便使用)
+10BASE-T 双绞线 三类 UTP 100m (逐渐成为以太网标准) 五类 150m
+问题25.
+100BASE-TX 的标准物理介质是______。
+A. 粗同轴电缆
+B. 细同轴电缆
+C. 3 类双绞线
+D. 5 类双绞线
+E. 光纤
+Correct Answer: D
+Section: part 2
+Explanation
+100BASE-TX 2 对五类双绞线
+100BASE-FX 多模光纤
+100BASE-T4 4 对三类双绞线
+1000BASE-SX 多模光纤
+LX 单模
+问题26.
+以下关于 CSMA/CD 的说法中正确的是______ 。 (多选)
+A. CSMA/CD 应用在总线型以太网中，主要解决在多个站点同时发送数据时如何检测冲突、确保数据有序 传输的
+问题。
+B. 当连在以太网上的站点要传送一个帧时，它必须等到信道空闲，即载波消失。
+C. 信道空闲时站点才能开始传送它的帧。
+D. 如果两个站点同时开始传送，它们将侦听到信号的冲突，并暂停帧的发送。
+Correct Answer: ABCD
+Section: part 2
+Explanation
+问题27.
+下列有关 MAC 地址的说法中哪些是正确的？ (多选)
+A. 以太网用 MAC 地址标识主机
+B. MAC 地址是一种便于更改的逻辑地址
+C. MAC 地址固化在 ROM 中，通常情况下无法改动
+D. 通常只有终端主机才需要 MAC 地址，路由器等网络设备不需要
+Correct Answer: AC
+Section: part 2
+Explanation
+FLASH 存储器：存储应用程序文件，配置文件 IP 地址在操作系统的 RAM (随机访问存储器，用于随机存 储，如
+当前配置) 中 MAC 地址固化在网卡 ROM (只读存储器，存储 BOOTROM 程序，，用于在应用程 序 or 配置文件
+故障时的回复手段) 中，理论不可改，全球唯一
+MAC 48 位 : 24 位 OUI (申请，标志厂商) + 24 位 EUI IP 地址将物理地址对上层隐藏，使 internet 表现 出统一
+地址格式，但实际通信 ip 地址不能被物理网络识别，物理网络使用依然物理地址，因此 arp 解析出 MAC 是必要
+的即设备之间数据通信既要知道 ip 地址也要解析 MAC 地址
+问题28.
+下列有关 MAC 地址的说法中哪些是错误的？ (多选)
+A. 以太网用 MAC 地址标识主机
+B. MAC 地址是一种便于更改的逻辑地址
+C. MAC 地址固化在 ROM 中，通常情况下无法改动
+D. 通常只有终端主机才需要 MAC 地址，路由器等网络设备不需要
+Correct Answer: BD
+Section: part 2
+问题29.
+下列有关光纤的说法哪些是正确的？ (多选)
+A. 多模光纤可传输不同波长不同入射角度的光
+B. 多模光纤的成本比单模光纤低
+C. 采用多模光纤时，信号的最大传输距离比单模光纤长
+D. 多模光纤的纤芯较细
+Correct Answer: AB
+Section: part 2
+Explanation
+问题30.
+WLAN (Wireless LAN) 是计算机网络与无线通信技术相结合的产物。下列哪些属于 WLAN 技术标 准？ (多选)
+A. 802.11a
+B. 802.11b
+C. 802.11c
+D. 802.11g
+Correct Answer: ABD
+Section: part 2
+Explanation
+问题31.
+802.11b 协议在 2.4GHz 频段定义了 14 个信道，相邻的信道之间在频谱上存在交叠。为了最大程度地利 用频段资
+源，可以使用如下哪组信道来进行无线覆盖？
+A. 1 、5 、9
+B. 1 、6 、11
+C. 2 、6 、10
+D. 3 、6 、9
+Correct Answer: B
+Section: part 2
+Explanation
+两两之间相差要≥5
+问题32.
+802.11b 协议在 2.4GHz 频段定义了 14 个信道，相邻的信道之间在频谱上存在交叠。为了最大程度地利 用频段资
+源，可以使用如下哪组信道来进行无线覆盖？
+A. 1 、5 、9
+B. 1 、6 、10
+C. 2 、7 、12
+D. 3 、6 、9
+Correct Answer: C
+Section: part 2
+Explanation
+两两之间相差要≥5
+第 4 章 广域网基本原理
+问题33.
+如图所示网络环境中，两台路由器以串口背靠背相连，要设置互连链路的速率为 2Mbps，下面说法 正确的是
+______
+A. 需要确定接口类型以及线缆满足 V.24 规程
+B. 在 RTA 的同步口上使用 baudrate 2048000 命令配置
+C. 在 RTB 的同步口上使用 baudrate 2048000 命令配置
+D. 在 RTB 的同步口上使用 virtual-baudrate 2048000 命令配置
+E. 在 RTA 的同步口上使用 bandrate 2048000 命令配置，在 RTB 的同步口上使用 virtual-baudrate 2048000
+命令配置
+Correct Answer: B Section: part 1
+Explanation
+V ．24 支持同、 异步： 异步最高速率 115200bps 同步最高速率 64000bps
+V ．35 只支持同步： 最高速率为 2048000bps= 2Mbps
+在 DCE 端配置带宽DCE (数据控制设备) 运行商设备，提供 DCE 、DTE 之间同步
+时钟信号 DTE (数据终端设备) 用户设备，接受 DCE 提供的时钟信号
+问题34.
+两台空配置的 MSR 路由器 RTA 、RTB 通过各自的 Serial1/0 接口背靠背互连。在两台路由器上做如下 配置：
+RTA：跳过
+[RouterA-Serial1/0] link-protocol fr ietf
+[RouterA-Serial1/0] ip address 10.1.1.1 30
+[RouterA-Seria11/0] fr map ip 10.1.1.2 30
+RTB：
+[RouterB-Serial1/0] link-protocol frietf
+[RouterB-Serial1/0] interface serial0/0.1
+[RouterB-Serial1/0.1] ip address 10.1.1.2 30
+[RouterB-Serial1/0.1] fr map ip 10.1.1.1 30
+路由器之间的物理链路良好，那么下面说法正确的是______ 。 (多选)
+A. 两台路由器上都没有配置 DLCI ，在 RTA 上不能 ping 通 RTB
+B. 在 RTA 上不能 ping 通 10.1.1.2
+C. 在 RTA 上可以 ping 通 10.1.1.2
+D. 在上述配置中，如果仅将 RTB 上子接口 serial0/0.1 的类型改为 P2MP ，那么在 RTA 上不能 ping 通
+10.1.1.2
+E. 在上述配置中，如果仅将 RTB 上子接口 serial0/0.1 的类型改为 P2MP ，那么在 RTA 上可以 ping 通
+10.1.1.2
+Correct Answer: BD
+Section: part 1
+Explanation
+问题35.
+对于分组交换方式的理解，下列说法中正确的是______ 。 (多选)
+A. 分组交换是一种基于存储转发 (Store-and-Forward switching) 的交换方式
+B. 传输的信息被划分为一定长度的分组，以分组为单位进行转发
+C. 每个分组都载有接收方和发送方的地址标识，分组可以不需要任何操作而直接转发，从而提高了效率
+D. 分组交换包括基于帧的分组交换和基于信元的分组交换
+Correct Answer: ABD
+Section: part 2
+Explanation
+对每个分组都要去查看源和目的，重新操作，逐一对分组进行转发，增加了延迟但资源利用率高，虽 然某一时刻
+线路是被某一分组独占，但是线路带宽在多路复用后，总的利用率高
+问题36.
+对于分组交换方式的理解，下列说法中正确的是______ 。 (多选)
+A. 分组交换是一种基于直通转发 (cut-through switching ) 的交换方式
+B. 传输的信息被划分为一定长度的分组，以分组为单位进行转发
+C. 分组交换包括基于帧的分组交换和基于信元的分组交换
+D. 每个分组都载有接收方和发送方的地址标识，分组可以不需要任何操作而直接转发，从而提高了效率
+Correct Answer: BC
+Section: part 2
+Explanation
+第 5 章 IP 基本原理
+问题37.
+IP 地址 202.135.111.77 对应的自然分类网段的广播地址为_____________。
+Correct Answer: 202.135.111.255
+Section: part 1
+Explanatio
+问题38. 、
+ping 实际上是基于______协议开发的应用程序。
+A. ICMP
+B. IP
+C. TCP
+D. UDP
+Correct Answer: A
+Section: part 2
+Explanation
+Ping 功能是基于 ICMP 协议来实现的：源端向目的端发送 ICMP 回显请求 (ECHO-REQUEST) 报文 后，根据是
+否收到目的端的 ICMP 回显应答 (ECHO-REPLY) 报文来判断目的端是否可达，对于可达 的目的端，再根据发送
+报文个数、接收到响应报文个数来判断链路的质量，根据 ping 报文的往返时间 来判断源端与目的端之间的“距
+离”。
+问题39.
+IP 地址 203.108.2.110 是______地址。
+A. A 类
+B. B 类
+C. C 类
+D. D 类
+Correct Answer: C
+Section: part 2
+Explanation
+问题40.
+IP 地址 133.18.2.110 是______地址。
+A. A 类
+B. B 类
+C. C 类
+D. D 类
+Correct Answer: B
+Section: part 2
+Explanation
+问题41.
+源主机 ping 目的设备时，如果网络工作正常，则目的设备在接收到该报文后，将会向源主机回应 ICMP______
+报文。
+A. Echo Request
+B. Echo Reply
+C. TTL-Exceeded
+D. Port-Unreachable
+Correct Answer: B
+Section: part 2
+Explanation
+Echo Request (请求）—————————>
+Echo Reply (正常) <————————
+TTL-Exceeded/ Port-Unreachable (超时/目的地址不可达)
+问题42.
+IP 地址 125.1.1.1 对应的自然分类网段的广播地址为____________。
+Correct Answer: 125.255.255.255
+Section: part 2
+Explanation
+问题43.
+IP 地址 172.15.1.1 对应的自然分类网段包含的可用主机地址数为___________ 。 (请填写阿拉伯数 字)
+Correct Answer: 65534
+问题44.
+IP 地址 165.110.20.67 对应的自然分类网段包含的可用主机地址数为 。 (请填写阿拉伯数字)
+Correct Answer: 65534
+问题45.
+根据来源的不同，路由表中的路由通常可分为以下哪几类？ (多选)
+A. 接口路由
+B. 直连路由
+C. 静态路由
+D. 动态路由
+Correct Answer: BCD
+Section: part 2
+Explanation
+问题46.
+以下关于 IP 地址的说法正确的是______ 。 (多选)
+A. IP 地址可以固化在硬件中，是独一无二的 MAC
+B. IP 地址分为 A 、B 、C 、D 、E 五类
+C. IP 地址通常用点分十六进制来表示，例如：10.110.192.111
+D. IP 地址是由 32 个二进制位组成的
+Correct Answer: BD
+Section: part 2
+Explanation
+IP 地址点分十进制：
+A 1.0.0.0~126.255.255.255 127 用作环路测试 127.0.0.1 表示本机
+B 128.0.0.0~191.255.255.255
+C 192.0.0.0~223.255.255.255
+D 224.0.0.0~239.255.255.255 组播地址
+E 240~ 保留用于研究
+问题47.
+以下关于 IP 地址的说法正确的是______ 。 (多选)
+A. IP 地址由两部分构成：网络号和主机号
+B. A 类地址的第一个字节为 0~126 (127 留作他用)
+C. IP 地址通常表示为点分十进制形式，例如：10.110.168.121
+D. 主机号部分二进制全为 1 的 IP 地址称为网络地址，用来标识一个网络的所有主机
+Correct Answer: AC
+Section: part 2
+Explanation
+A 类地址的第一个字节为 1~126
+问题48.
+以下关于 IP 地址的说法正确的是______ 。 (多选)
+A. A 类地址的第一个字节为 0~126 (127 留作他用)
+B. 主机号部分二进制全为 0 的 IP 地址称为网络地址，用来标识一个网络的所有主机。
+C. IP 地址通常表示为点分十进制形式，例如：10.110.168.121
+D. IP 地址由两部分构成：网络号和主机号
+Correct Answer: BCD
+Section: part 2
+Explanation
+问题49.
+在 Windows 操作系统中，哪一条命令能够显示 ARP 表项信息？
+A. display arp
+B. arp –a
+C. arp –d
+D. show arp
+Correct Answer: B
+Section: part 1
+Explanation
+arp – d 删除 arp 表项 arp –s IP MAC ——MAC 静态绑定 arp
+第 6 章 TCP 和 UDP 基本原理
+问题50.
+以下哪个选项描述的参数可以唯一确定一条 TCP 连接？
+A. 源端口号，源 IP 地址
+B. 目的端口号， 目的 IP 地址
+C. 源端口号， 目的端口号
+D. 源 MAC 地址， 目的 MAC 地址
+E. 以上都不对
+Correct Answer: E
+Section: part 2
+Explanation
+源 IP 地址、源端口、 目的 IP 地址、 目的端口 组成套接字socket 唯一确定一条 TCP 连接
+问题51.
+TCP 协议通过______来区分不同的连接。
+A. 端口号
+B. 端口号和 IP 地址
+C. 端口号和 MAC 地址
+D. IP 地址和 MAC 地址
+Correct Answer: B
+Section: part 2
+Explanation
+问题52.
+UDP 协议和 TCP 协议头部的共同字段有______ 。 (多选)
+A. 源 IP 地址
+B. 流量控制
+C. 校验和
+D. 序列号
+E. 目的端口
+F. 源端口
+Correct Answer: CEF
+Section: part 2
+Explanation
+UDP 头部： 由源端口， 目的端口，长度，校验和组成
+TCP 头部：源端口， 目的端口，校验和，序列号，确认号，窗口，数据便宜等等许多，确保了可靠性
+UDP 协议和 TCP 协议头部的共同字段：源端口、 目的端口、校验和
+问题53.
+UDP 协议和TCP 协议头部的共同字段有______。(多选)
+A. 源端口
+B. 目的端口
+C. 流量控制
+D. 源 IP 地址
+E. 校验和
+F. 序列号
+Correct Answer: ABE
+Section: part 2
+Explanation
+问题54.
+在如图所示的 TCP 连接的建立过程中，SYN 中的 X 部分应该填入________。
+A. a
+B. b
+C. a+1
+D. b+1
+Correct Answer: C
+Section: part 2
+Explanation
+X= a+1 (确认收到 a ，期望下次发送 a+1 )
+Y=a+1
+Z=b+1 (确认收到 b)
+问题55.
+在如图所示的 TCP 连接的建立过程中，SYN 中的 Y 部分应该填入________。
+A. a
+B. b
+C. a+1
+D. b+1
+Correct Answer: C
+Section: part 2
+Explanation
+问题56.
+在如图所示的 TCP 连接的建立过程中，SYN 中的 Z 部分应该填入________。
+A. a
+B. b
+C. a+1
+D. b+1
+Correct Answer: D
+Section: part 1
+Explanation
+Explanation/Reference:
+X= a+1 (确认收到 a ，期望下次发送 a+1 )
+Y=a+1
+Z=b+1 (确认收到 b)
+问题57.
+在如图所示的 TCP 连接的拆除过程中，ACK 中的 X 部分应该填入。______
+A. p
+B. q
+C. p+1
+D. q+1
+Correct Answer: C
+Section: part 2
+Explanation
+X=p+1 ，B 收到 A 发送的终止连接请求段，确认，同时关闭连接
+问题58.
+在如图所示的 TCP 连接的拆除过程中，FIN 中的 Y 部分应该填入______。
+A. p
+B. q
+C. p+1
+D. q+1
+Correct Answer: B
+Section: part 2
+Explanation
+第 7-10 章 路由器、交换机及其操作系统介绍，命令行
+的基础，网络设备的管理
+问题59.
+下列关于路由器特点的描述，正确的是______。
+(多选)
+A. 是网络层设备
+B. 根据链路层信息进行路由转发
+C. 提供丰富的接口类型
+D. 可以支持多种路由协议
+Correct Answer: ACD
+Section: part 2
+Explanation
+工作在底三层根据网络层信息
+进行路由转发
+接口类型丰富，可用来连接不同介质的网络
+问题60.
+下列关于 Comware 特点的描述，正确的是______。
+A. 支持 IPv4 和 IPv6 双协议
+B. 支持多 CPU
+C. 路由和交换功能融合
+D. 高可靠性和弹性拓展
+E. 灵活的裁减和定制功能
+Correct Answer: ABCDE
+Section: part 2
+Explanation
+问题61.
+通过控制台 (Console) 端口配置刚出厂未经配置的 MSR 路由器，终端的串口波特率应设置为_____。
+A. 9600
+B. 2400
+C. 115200
+D. 38400
+Correct Answer: A
+Section: part 2
+Explanation
+问题62.
+下面关于 H3C 设备中 VTY 特点的描述，正确的是______。
+A. 只用于对设备进行 Telnet
+B. 每台设备可以支持多个 VTY 用户同时访问
+C. 每个 VTY 用户对应一个物理接口
+D. 不支持无密码验证
+Correct Answer: B
+Section: part 2
+Explanation
+Vty 即虚拟登陆接口，支持多用户、支持认证
+Vty 0-4 5 个接口，可以有 5 个人同时访问逻辑线路 0-4 随机分配的，如果关闭 1-4，只剩下 0 ，但却未必随机到
+0 ，还是无法访问
+问题63.
+SSH 默认使用 TCP 端口号______。
+A. 20
+B. 21
+C. 22
+D. 23
+Correct Answer: C
+Section: part 2
+Explanation
+问题64.
+如果需要在 MSR 上配置以太口的 IP 地址，应该在______下配置。
+A. 系统视图
+B. 用户视图
+C. 接口视图
+D. 路由协议视图
+Correct Answer: C
+Section: part 2
+问题65.
+下面关于 H3C 网络设备升级的说法，正确的是______ 。 (多选)
+A. 使用 Xmodem 升级可以达到与 FTP 一样的速度
+B. 当使用 FTP 升级时，设备可以作为 FTP 服务器端或客户端
+C. 在设备无法引导到命令行模式而需要对操作系统软件进行升级时，可以使用 Xmodem 和 TFTP 方式
+D. 在客户端和服务器之间不便于复杂交互的环境下，可以使用 TFTP 进行升级
+Correct Answer: BCD
+Section: part 2
+Explanation
+Xmodem 升级速度蜗牛
+问题66.
+下列选项中对路由器系统的启动过程描述正确的是______。
+A. 内存检测------启动 bootrom------应用程序解压-------应用程序加载
+B. 启动 bootrom------ 内存检测------应用程序加载
+C. 应用程序解压------应用程序加载------启动 bootrom------ 内存检测
+D. 内存检测------应用程序解压------应用程序加载
+Correct Answer: A
+Section: part 2
+Explanation
+路由器系统的启动： 内存检测＞启动 bootrom＞应用程序解压＞应用程序加载
+问题67.
+A. 应用程序解压 B. 应用程序加载 C. 启动 bootrom D. 内存检测路由器系统的启动过程中各步的正确顺序 是
+_________ 。 (依次填入各步的代号，中间不能有空格，如：
+ABCD)
+Correct Answer: DCAB
+Section: part 3
+Explanation
+问题68.
+如果想对路由器升级却没有网线，可以用配置线缆，通过超级终端使用______协议进行升级。
+A. TFTP
+B. Xmodem
+C. Ymodem
+D. Zmodem
+Correct Answer: B
+Section: part 3
+Explanation
+TFTP 需要网线
+问题69.
+在 MSR 路由器上，配置文件是以______格式保存的文件。
+A. 批处理文件
+B. 文本文件
+C. 可执行文件
+D. 数据库文件
+Correct Answer: B
+Section: part 3
+Explanation
+问题70.
+如果用户指定的配置文件不存在，则路由器用_____进行初始化。
+A. 默认配置
+B. 最后保存的配置
+C. 使用最多的配置
+D. 使用最少的配置
+Correct Answer: A
+Section: part 3
+Explanation
+问题71.
+用______命令可指定下次启动使用的操作系统软件。
+A. startup
+B. boot-loader
+C. bootfile
+D. boot startup
+Correct Answer: B
+Section: part 1
+问题72.
+FTP 默认使用的数据传输端口是______。
+A. 20
+B. 21
+C. 23
+D. 22
+Correct Answer: A
+Section: part 3
+Explanation
+问题73.
+FTP 默认使用的控制协议端口是______。
+A. 20
+B. 21
+C. 23
+D. 22
+Correct Answer: B
+Section: part 1
+Explanation
+Explanation/Reference:
+A. 20 B. 21 C. 23 D. 22
+ftp 数据连接 ftp 控制连接 telnet ssh
+问题74.
+FTP 协议是基于______ 的协议。
+A. UDP
+B. TCP
+C. PX
+D. SSH
+Correct Answer: B
+Section: part 3
+Explanation
+问题75.
+TFTP 协议是基于______ 的协议。
+A. UDP
+B. TCP
+C. IPX
+D. SSH
+Correct Answer: A
+Section: part 3
+Explanation
+问题76.
+TFTP 采用的传输层知名端口号为______。
+A. 67
+B. 68
+C. 69
+D. 53
+Correct Answer: C
+Section: part 1
+Explanation
+TCP (6) ：ftp——20/21 ssh——22 telnet——23 smtp——25
+接收邮件pop3——110 发送邮件 DNS——53http—— 80https——443 http 安全版，下加入 ssl 层
+UDP(17) ：DNS——53
+Bootp——67 服务器/68 客户端 (就是 dhcp ，dhcp 基于 bootp 发展而来 )
+Tftp——69 Snmp——161/162 服务器监听的端口号 161 ，客户端监听端口号
+问题77.
+在 MSR 路由器上使用______命令可以关闭信息中心功能。
+A. info-center disable
+B. undo info-center enable
+C. disable info-center
+D. undo info-center
+Correct Answer: B
+Section: part 3
+Explanation
+问题78.
+在 MSR 路由器上可以为 Telnet 用户配置不同的优先级，关于此优先级的说法错误的是______ 。 (多
+选)
+A. 0 为访问级
+B. 1 为监控级
+C. 2 为设备级
+D. 3 为管理级
+E. 数值越小，用户的优先级越高
+F. 数值越小，用户的优先级越低
+Correct Answer: CE
+Section: part 3
+Explanation
+0 访问级 1 监控级 2 系统级 3 管理级 访问权限依次递增
+telnet console
+问题79.
+在 MSR 路由器上，如果以访问级登录设备后想要修改一些配置，可以使用______命令切换到 level 3。 (多选)
+A. super
+B. level 3
+C. password
+D. login
+Correct Answer: A
+Section: part 3
+Explanation
+TE 中可能碰到 super 3
+问题80.
+在查看配置的时候，如果配置命令较多，一屏显示不完，则在显示完一屏后，可以按下___显示下一页。
+A. <Ctrl+c>键
+B. <Enter>键
+C. <Ctrl+p>键
+D. <Space>键
+Correct Answer: D
+Section: part 3
+Explanation
+问题81.
+想要修改设备名称，应该使用______命令 (请写全命令) 。
+Correct Answer: sysname
+Section: part 3
+Explanation
+问题82.
+在 MSR 路由器上，默认情况下，配置文件是以______后缀的。
+A. .bin
+B. .sys
+C. .txt
+D. .cfg
+Correct Answer: D
+Section: part 3
+Explanation
+问题83.
+在 MSR 系列路由器上使用______命令显示文件系统的当前路径。
+A. dir
+B. pwd
+C. path
+D. current-path
+Correct Answer: B
+Section: part 3
+Explanation
+显示目录或文件信息 显示当前工作路径 P180
+路由器的 IOS 其实也是一个操作系统，大部分基于 unix 或 linux ，所以有些命令通用
+问题84.
+在命令行里，用户想要从当前视图返回上一层视图，应该使用______。
+A. return 命令
+B. quit 命令
+C. <Ctrl+z>键
+D. <Ctrl+c>键
+Correct Answer: B
+Section: part 3
+Explanation
+问题85.
+用户可以使用______命令查看历史命令。
+A. display history-cli
+B. display history-area
+C. display history-command
+D. display history-cache
+Correct Answer: C
+Section: part 3
+Explanation
+问题86.
+在路由器上配置好 Telnet 服务的相关配置后，从 PC 能够 ping 通路由器，但是 Telnet 路由器失败，PC 一直
+显示正在连接到 x.x.x.x ，可能的原因是______ 。 (多选)
+A. 中间网络路由配置不对
+B. Telnet密码设置不正确
+C. 路由器Telnet服务没有启动
+D. 中间网络阻止了PC对路由器的TCP端口23发起连接
+Correct Answer: CD
+Section: part 3
+Explanation
+中间网络路由配置不对 能连接说明路由配置正确
+Telnet 密码设置不正确 会直接提示密码错误
+中间网络阻止了 PC 对路由器的 TCP 端口 23 发起连接 配置 acl ，拒绝telnet ，或是 tcp
+问题87.
+如果要使当前配置在系统重启后继续生效，在重启设备前应使用_______命令将当前配置保存到配置文件 中。 (
+请写全命令)
+Correct Answer: save
+Section: part 3
+Explanation
+问题88.
+在 MSR 路由器上，键入命令的某个关键字的前几个字母，按下______ ，可以补全命令。
+A. <Esc>键
+B. <Space>键
+C. <Enter>键
+D. <Tab>键
+Correct Answer: D
+Section: part 3
+Explanation
+问题89.
+在 MSR 路由器上，如果已经设置某一个文件为启动文件，可使用______命令检查设置是否正确。
+A. display boot
+B. display begin
+C. display startup
+D. display start-configuration
+Correct Answer: C
+Section: part 3
+Explanation
+display startup：显示系统当前和下次启动时使用的配置文件
+display boot-loader：显示系统当前和下次启动使用的启动文件 系统升级
+问题90.
+在 MSR 路由器上，如果想从 FTP Server 下载文件，应使用 FTP 命令中的______命令。
+A. get
+B. Put（上传）
+C. download
+D. load
+Correct Answer: A
+Section: part 3
+Explanation
+问题91.
+在 MSR 路由器上，一旦系统时间不准确了，可使用______命令调整系统时间。
+A. time
+B. clock
+C. clock datetime
+D. set datetime
+Correct Answer: C
+Section: part 3
+Explanation
+clock
+datetime- 自己手动设置时间
+问题92.
+在 MSR 路由器上，使用______命令查看设备当前运行版本。
+A. display running
+B. display software
+C. display version
+D. display current-version
+Correct Answer: C
+Section: part 3
+Explanation
+问题93.
+在 MSR 路由器上，各个功能模块都有其对应的信息显示命令，一般情况下，要查看各个功能模块的运行 信息，
+需要逐条运行相应的 display 命令。为便于一次性收集更多信息，方便日常维护或问题定位，可以 在任意视图下
+执行______命令，显示系统当前各个主要功能模块运行的统计信息。
+A. display all
+B. display ip interface
+C. display system-information
+D. display diagnostic-information
+Correct Answer: D
+Section: part 3
+Explanation
+A C 错误命令 B 查看所有接口信息
+D 该命令危险，尽量在业务量小的时候用，会打印大量信息
+问题94.
+在系统启动过程中，根据提示键入______ ，系统将中断引导，进入 BootROM 模式。
+A. <Ctrl+a>
+B. <Ctrl+b>
+C. <Ctrl+z>
+D. <Ctrl+c>
+Correct Answer: B
+Section: part 3
+Explanation
+问题95.
+在 MSR 路由器上，使用不带参数的 delete 命令删除文件时，被删除的文件将被保存在______ 中。
+A. RAM
+B. ROM
+C. Memory
+D. Recycle-bin
+Correct Answer: D
+Section: part 3
+Explanation
+彻底删除 reset Recycle-bin P181
+问题96.
+在 MSR 路由器上，如果要彻底删除回收站中的某个废弃文件，可以执行______命令。
+A. clear trash
+B. reset recycle-bin
+C. clear all
+D. reset trash-bin
+Correct Answer: B
+Section: part 3
+Explanation
+问题97.
+在 MSR 路由器上，如果想查看回收站里的文件，可以使用______命令。
+A. dir recycle-bin
+B. dir trash
+C. dir /all
+D. dir all-file
+Correct Answer: C
+Section: part 3
+Explanation
+<r1>dir ?
+/all List all files
+STRING [drive][path][file
+name] flash: Device name
+<cr>
+问题98.
+在 MSR 路由器上，ping 命令的-t 参数指定 ICMP Echo Reply 报文的超时时间，取值范围为 1~ 65535 ，单位
+为毫秒，它的默认值为______毫秒。
+A. 200
+B. 100
+C. 2000
+D. 1000
+Correct Answer: C
+Section: part 3
+Explanation
+-a ————带源
+-f ———— 不允许对 ICMP Echo Request 报文进行分片
+-tos———— type of service tos 域的值 默认 0 (0-255)
+-s ————报文大小，默认 56 字节 (20-8100)
+-c ————报文数目，默认 5
+-h ————指定报文 ttl 值，默认 255 (0-255)
+-m————指定发送报文时间间隔， 默认 200 毫秒 (1-65535)
+-t ————报文超时时间 ，默认 2000 毫秒 (1-65535)
+-n 不进行域名解析
+问题99.
+在 MSR 路由器上，ping 命令的-m 参数指定发送 ICMP Echo Request 报文的时间间隔，取值范围 为 1~65535
+，单位为毫秒，它的默认值为______毫秒。
+A. 1000
+B. 100
+C. 200
+D. 2000
+Correct Answer: C
+Section: part 3
+Explanation
+问题100.
+从源设备到目的设备之间有两跳，使用tracert 命令检测路径。检测第一跳时，源设备对目的设备的某个较 大的端
+口发送一个 TTL 为 1 的 UDP 报文，当该报文到达中间一跳时，TTL 将变为 0 ，于是该设备对源设 备回应一个
+ICMP______消息。
+A. Time Exceeded
+B. Echo Request
+C. Echo Reply
+D. Port Unreachable
+Correct Answer: A
+Section: part 3
+Explanation
+没到达目的地，中间一跳回应 Time Exceeded ttl+1
+到达目的地，回应端口不可达 PortUnreachable
+问题101.
+从源设备到目的设备之间有两跳，使用tracert 命令检测路径。检测第一跳时，源设备发送一个 TTL 为 1 的 UDP
+报文到中间一跳；检测第二跳时，源设备发送一个 TTL 为 2 的 UDP 报文，报文首先到达中间一 跳， TTL 递减
+为 1 ，当该报文到达目的后，TTL 将递减为 0 ，这时目的设备将发送一个 ICMP______消息 给源，告知源设备其
+已经跟踪到目的地址。
+A. Time Exceeded
+B. Echo Request
+C. Echo Reply
+D. Port Unreachable
+Correct Answer: D
+Section: part 3
+Explanation
+问题102.
+在 MSR 路由器上，ping 命令的-tos 参数指定 ICMP Echo Request 报文中的 ToS (Type of Service ，服务类
+型) 字段值，取值范围为 0~255 ，默认值为______。
+A. 46
+B. 0
+C. 63
+D. 2
+Correct Answer: B
+Section: part 3
+Explanation
+问题103.
+在打开 debugging 调试以后，可以使用______命令关掉 debugging。
+A. no debugging all
+B. undo debugging all
+C. undo terminal monitor
+D. undo terminal debugging
+Correct Answer: B
+Section: part 3
+Explanation
+问题104.
+通常情况下，路由器会对长度大于接口 MTU 的报文分片。为了检测线路 MTU，可以带______参数 ping 目的地
+址。
+A. –a
+B. –d
+C. –f
+D. –c
+Correct Answer: C
+Section: part 1
+Explanation
+Explanation/Reference:
+-a ————带源
+-f ———— 不允许对 ICMP Echo Request 报文进行分片
+-tos———— type of service tos 域的值 默认 0 (0-255)
+-t ————报文超时时间 ，默认 2000 毫秒
+-s ————报文大小，默认 56 字节 (20-8100)
+-c ————报文数目，默认 5
+-h ——— —指定报文 ttl 值，默认 255 (0-255)
+-m————指定发送报文时间间隔，默认 200 毫秒 (1-65535)
+问题105.
+在 MSR 路由器上使用 ping 命令时，可以用______参数来设定所发送的 ICMP 报文长度。大小
+A. – n
+B. –c
+C. – b
+D. –s
+Correct Answer: D
+Section: part 3
+Explanation
+问题106.
+在 MSR 路由器上，如果想指定 ping 操作时发送的报文的源地址，应使用______参数。
+A. –s
+B. – I
+C. –a
+D. –d
+Correct Answer: C
+Section: part 3
+Explanation
+问题107.
+MSR 路由器上一次 ping 默认发 5 个包，如果想指定发送报文的数目，可使用______参数。
+A. – n
+B. –d
+C. –s
+D. –c
+Correct Answer: D
+Section: part 3
+Explanation
+问题108.
+在打开控制台对系统信息的监控功能后，使用______命令打开调试信息的屏幕输出。
+A. terminal monitor
+B. terminal debugging
+C. terminal screen
+D. terminal information
+Correct Answer: B
+Section: part 3
+Explanation
+开启控制台对信息监视功能 开启调试信息屏幕输出开关
+第 11 章 以太网交换机工作原理
+问题109.
+XYZ 公司网络如图所示。其中 Router 上没有配置任何逻辑接口；所有的主机之间均可以正常通信。 则
+此网络中有___个广播域。 (请填写阿拉伯数字)
+Correct Answer: 2
+Section: part 3
+Explanation
+问题110.
+XYZ 公司网络如图所示。其中 Router 上没有配置任何逻辑接口；所有的主机之间均可以正常通信。 则
+此网络中有___个冲突域。 (请填写阿拉伯数字)
+Correct Answer: 6
+Section: part 3
+Explanation
+问题111.
+二层以太网交换机在 MAC 地址表中查找与帧目的 MAC 地址匹配的表项，从而将帧从相应接口转发 出去，如果
+查找失败，交换机将______。
+A. 把帧丢弃
+B. 把帧由除入端口以外的所有其他端口发送出去
+C. 查找快速转发表
+D. 查找路由表
+Correct Answer: B
+Section: part 3
+Explanation
+交换机会把广播帧、组播和未知单播帧从所有其他端口发送出去 泛洪 P220
+问题112.
+交换机上的以太帧交换依靠 MAC 地址映射表，这个表可以通过______来建立。 (多选)
+A. 交换机自行学习
+B. 手工添加映射表项
+C. 交换机之间相互交换目的地的位置信息
+D. 生成树协议交互学习
+Correct Answer: AB
+Section: part 3
+Explanation
+问题113.
+某二层交换机上的 MAC 地址表如图所示。当交换机从 E1/0/1 接口收到一个广播帧时，会将该帧 ______ 。 (多
+选)
+A. 从 E1/0/1 接口发送出去
+B. 从 E1/0/2 接口发送出去
+C. 从 E1/0/3 接口发送出去
+D. 从 E1/0/4 接口发送出去
+E. 从交换机上的所有接口发送出去
+F. 直接丢弃
+Correct Answer: BCD
+Section: part 3
+Explanation
+问题114.
+某二层交换机上的 MAC 地址表如图所示。当交换机从 E1/0/2 接口收到一个目的 MAC 地址为
+00-13-72-8E-4E-C4 的帧时，交换机会将该帧______ 。 (多选)
+A. 从 E1/0/1 接口发送出去
+B. 从 E1/0/2 接口发送出去
+C. 从 E1/0/3 接口发送出去
+D. 从 E1/0/4 接口发送出去
+E. 从交换机上的所有接口发送出去
+F. 直接丢弃
+Correct Answer: ACD
+Section: part 3
+Explanation
+问题115.
+某二层交换机上的 MAC 地址表如图所示。当交换机从 E1/0/2 接口收到一个目的 MAC 地址为
+00-13-72-8E-4B-C1 的帧时，交换机会将该帧______。
+A. 从 E1/0/1 接口发送出去
+B. 从 E1/0/2 接口发送出去
+C. 从 E1/0/3 接口发送出去
+D. 从 E1/0/4 接口发送出去
+E. 从交换机上的所有接口发送出去
+F. 直接丢弃
+Correct Answer: F
+Section: part 3
+Explanation
+收到目的地址为自身的单播帧，丢弃
+第 12 章 配置 VLAN
+问题116.
+与传统的 LAN 相比，VLAN 具有以下哪些优势？ (多选)
+A. 减少移动和改变的代价
+B. 建立虚拟工作组
+C. 用户不受物理设备的限制，VLAN 用户可以处于网络中的任何地方
+D. 限制广播包，提高带宽的利用率
+E. 增强通讯的安全性
+F. 增强网络的健壮性
+Correct Answer: ABCDEF
+Section: part 3
+Explanation
+问题117.
+VLAN 划分的方法包括______ 。 (多选题)
+A. 基于端口的划分
+B. 基于 MAC 地址的划分
+C. 基于端口属性的划分
+D. 基于协议的划分
+E. 基于子网的划分
+Correct Answer: ABDE
+Section: part 3
+Explanation
+优先性：基于 MAC 地址＞基于 IP 子网＞基于协议＞基于端口
+问题118.
+根据交换机处理 VLAN 数据帧的方式不同，H3C 以太网交换机的端口类型分为
+______ 。 (多选)
+A. access 端口
+B. trunk 端口
+C. 镜像端口
+D. hybrid 端口
+E. monitor 端口
+Correct Answer: ABD
+Section: part 3
+Explanation
+问题119.
+以下关于 Trunk 端口、链路的描述正确的是______ 。 (多选)
+A. Trunk 端口的 PVID 值不可以修改
+B. Trunk 端口接收到数据帧时，当检查到数据帧不带有 VLAN ID 时，数据帧在端口加上相应的 PVID 值作为
+VLAN ID
+C. Trunk 链路可以承载带有不同 VLAN ID 的数据帧
+D. 在 Trunk 链路上传送的数据帧都是带 VLAN ID 的
+Correct Answer: BC
+Section: part 3
+Explanation
+问题120.
+以下关于 Trunk 端口、链路的描述错误的是______ 。 (多选)
+A. Trunk 端口的 PVID 值不可以修改
+B. Trunk 端口发送数据帧时，若数据帧不带有 VLAN ID ，则对数据帧加上相应的 PVID 值作为 VLAN ID
+C. Trunk 链路可以承载带有不同 VLAN ID 的数据帧
+D. 在 Trunk 链路上传送的数据帧都是带 VLAN ID 的
+Correct Answer: ABD
+Section: part 3
+Explanation
+B 情况不可能发生，从 trunk 端口发出数据帧，数据帧不可能不带有vlanid ，数据帧的vlan id 与 trunk 口相同则去
+标签 (D 错) ，不同则带标签通过
+问题121.
+以下关于 S 系列以太网交换机 access 端口和链路的描述正确的是______ 。 (多选)
+A. access 端口可以同时属于多个 VLAN
+B. access 链路只能承载不带 VLAN ID 的数据帧
+C. access 链路只能承载带 VLAN ID 的数据帧
+D. 当 access 端口接收到一个不带 VLAN ID 的数据帧时，加上端口的 PVID 值作为数据帧的 VLAN ID
+Correct Answer: BD
+Section: part 4
+Explanation
+问题122.
+要在以太网交换机之间的链路上配置 Trunk ，并允许传输 VLAN 10 和 VLAN 20 的信息，则必须在交换机 上配
+置______。
+A. [Switch-Ethernet0/1] port link-type trunk
+B. [Switch] port link-type trunk
+C. [Switch] port link-type access
+D. [Switch-Ethernet0/1] port trunk pvid 10
+Correct Answer: A
+Section: part 4
+Explanation
+第 13 章 生成树协议
+问题123.
+如果以太网交换机中某个运行 STP 的端口不接收或转发数据，接收并发送 BPDU ，不进行地址学习，那么 该端
+口应该处于______状态。
+A. Blocking
+B. Listening
+C. Learning
+D. Forwarding
+E. Waiting
+F. Disable
+Correct Answer: B
+Section: part 1
+Explanation
+问题124.
+如果以太网交换机中某个运行 STP 的端口不接收或转发数据，接收但不发送 BPDU ，不进行地址学习，那 么该
+端口应该处于______状态。
+A. Blocking
+B. Listening
+C. Learning
+D. Forwarding
+E. Waiting
+F. Disable
+Correct Answer: A
+Section: part 4
+Explanation
+问题125.
+如果以太网交换机中某个运行 STP 的端口不接收或转发数据，接收、处理并发送 BPDU ，进行地址学习， 那么
+该端口应该处于______状态。
+A. Blocking
+B. Listening
+C. Learning
+D. Forwarding
+E. Waiting
+F. Disable
+Correct Answer: C
+Section: part 4
+Explanation
+问题126.
+如果以太网交换机中某个运行 STP 的端口接收并转发数据，接收、处理并发送 BPDU ，进行地址学习，那 么该
+端口应该处于______状态。
+A. Blocking
+B. Listening
+C. Learning
+D. Forwarding
+E. Waiting
+F. Disable
+Correct Answer: D
+Section: part 4
+Explanation
+问题127.
+在下面列出的 STP 端口状态中，哪些属于不稳定的中间状态？ (多选)
+A. Blocking
+B. Listening
+C. Learning
+D. Forwarding
+E. Disabled
+Correct Answer: BC
+Section: part 4
+Explanation
+问题128.
+关于 STP 协议说法正确的是______ 。 (多选)
+A. BridgeID 值由网桥的优先级和网桥的 MAC 地址组合而成。前面是优先级，后面是 MAC 地址。
+B. H3C 以太网交换机的默认优先级值是 32768
+C. 优先级值越小优先级越低
+D. 优先级相同时，MAC 地址越小优先级越高
+E. BridgeID 值大的将被选为根桥
+Correct Answer: ABD
+Section: part 4
+Explanation
+桥 ID (越小越优先) ： 桥优先级+ MAC 地址桥优先级： 默认 32768 ， 只能为4096 倍数，0——4096*15
+优先级相同则比较 MAC
+问题129.
+关于 STP 协议说法正确的是______ 。 (多选)
+A. BridgeID 值由网桥的优先级和网桥的 MAC 地址组合而成。前面是 MAC 地址，后面是优先级。
+B. H3C 以太网交换机的默认优先级值是 32768
+C. 优先级值越大优先级越低
+D. 优先级相同时，MAC 地址越大优先级越高
+E. BridgeID 值小的将被选为根桥
+Correct Answer: BCE
+Section: part 4
+Explanation
+问题130.
+下列关于 STP 的说法正确的是______ 。 (多选)
+A. 在结构复杂的网络中，STP 会消耗大量的处理资源，从而导致网络无法正常工作。
+B. STP 通过阻断网络中存在的冗余链路来消除网络可能存在的路径环路
+C. 运行 STP 的网桥间通过传递 BPDU 来实现 STP 的信息传递
+D. STP 可以在当前活动路径发生故障时激活被阻断的冗余备份链路来恢复网络的连通性
+Correct Answer: BCD
+Section: part 4
+Explanation
+Stp 只会消耗大量资源
+问题131.
+关于 STP 、RSTP 和 MSTP 说法正确的是______ 。 (多选)
+A. MSTP 兼容 STP 和 RSTP。
+B. STP 不能快速收敛，当网络拓扑结构发生变化时，原来阻塞的端口需要等待一段时间才能变为转发状 态。
+C. RSTP 是 STP 协议的优化版。端口进入转发状态的延迟在某些条件下大大缩短，从而缩短了网络最终达 到
+拓扑稳定所需要的时间。
+D. MSTP 可以弥补 STP 和 RSTP 的缺陷，它既能快速收敛，也能使不同 VLAN 的流量沿各自的路径转 发，从而
+为冗余链路提供了更好的负载分担机制。
+Correct Answer: ABCD
+Section: part 4
+Explanation
+问题132.
+关于 STP 、RSTP 和 MSTP 说法正确的是______ 。 (多选)
+A. RSTP 是 STP 协议的优化版。端口进入转发状态的延迟在某些条件下大大缩短，从而缩短了网络最终达 到拓
+扑稳定所需要的时间。
+B. MSTP 不能快速收敛，当网络拓扑结构发生变化时，原来阻塞的端口需要等待一段时间才能变为转发状 态。
+C. MSTP 兼容 RSTP ，但不兼容 STP。
+D. MSTP 可以弥补 STP 和 RSTP 的缺陷，它既能快速收敛，也能使不同 VLAN 的流量沿各自的路径转 发，从而
+为冗余链路提供了更好的负载分担机制。
+Correct Answer: AD
+Section: part 4
+Explanation
+问题133.
+MSTP 的特点有______ 。 (多选)
+A. MSTP 兼容 STP 和 RSTP。
+B. MSTP 把一个交换网络划分成多个域，每个域内形成多棵生成树，生成树间彼此独立。
+C. MSTP 将环路网络修剪成为一个无环的树型网络，避免报文在环路网络中的增生和无限循环， 同时还可 以提
+供数据转发的冗余路径，在数据转发过程中实现 VLAN 数据的负载均衡。
+D. 以上说法均不正确
+Correct Answer: ABC
+Section: part 4
+Explanation
+问题134.
+下面说法正确的是______ 。 (多选)
+A. MSTP 和 RSTP 能够互相识别对方的协议报文，可以互相兼容
+B. 在 STP 兼容模式下，设备的各个端口将向外发送 STP BPDU 报文
+C. 在 RSTP 模式下，设备的各个端口将向外发送 RSTP BPDU 报文，当发现与 STP 设备相连时，该端 口会自
+动迁移到 STP 兼容模式下工作
+D. 在 MSTP 模式下，设备的各个端口将向外发送 MSTP BPDU 报文， 当发现某端口与 STP 设备相连 时，该
+端口会自动迁移到 STP 兼容模式下工作
+Correct Answer: ABCD
+Section: part 4
+Explanation
+问题135.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。根据图中的信息来看，哪台交换机会被选为 根桥？
+A. SWA
+B. SWB
+C. SWC
+D. 信息不足，无法判断
+Correct Answer: A
+Section: part 4
+Explanation
+问题136.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。根据图中的信息来看，哪台交换机会被选为 根桥？
+A. SWA
+B. SWB
+C. SWC
+D. 信息不足，无法判断
+Correct Answer: B
+Section: part 4
+Explanation
+问题137.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。根据图中的信息来看，哪台交换机会被选为 根桥？
+A. SWA
+B. SWB
+C. SWC
+D. SWD
+E. 信息不足，无法判断
+Correct Answer: C
+Section: part 4
+Explanation
+问题138.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。根据图中的信息来看，哪台交换机会被选为 根桥？
+A. SWA
+B. SWB
+C. SWC
+D. SWD
+E. 信息不足，无法判断
+Correct Answer: B
+Section: part 4
+Explanation
+问题139.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。SWA 被选为了根桥。根据图中的信息来 看，
+______端口应该被置为 Blocking 状态
+A. SWB 的 P1
+B. SWB 的 P2
+C. SWC 的 P1
+D. SWC 的 P2
+E. 信息不足，无法判断
+Correct Answer: D
+Section: part 4
+Explanation
+问题140.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。SWA 被选为了根桥。根据图中的信息来看，
+______端口应该被置为 Forwarding 状态。 (多选)
+A. SWA 的 P1
+B. SWA 的 P2
+C. SWC 的 P1
+D. SWC 的 P2
+E. 信息不足，无法判断
+Correct Answer: ABC
+Section: part 4
+Explanation
+问题141.
+在如图所示的交换网络中，所有交换机都启用了 STP 协议。SWA 被选为了根桥。根据图中的信息来看，
+_______端口应该被置为 Blocking 状态。 (多选)
+A. SWC 的 P1
+B. SWC 的 P2
+C. SWD 的 P1
+D. SWD 的 P2
+E. 信息不足，无法判断
+Correct Answer: BD
+Section: part 1
+Explanation
+Explanation/Reference:
+桥 ID ：桥优先级+MAC 地址,4096 倍数 最大 65535 默认 32768
+根桥选举：线比较桥优先级，在比较 MAC 地址，越小越优先
+问题142.
+配置交换机 SWA 的桥优先级为 0 的命令为______。
+A. [SWA] stp priority 0
+B. [SWA-Ethernet1/0/1] stp priority 0
+C. [SWA] stp root priority 0
+D. [SWA-Ethernet1/0/1] stp root priority 0
+Correct Answer: A
+Section: part 1
+Explanation
+第 14 章 交换机端口安全技术
+问题143.
+802.1x 定义了基于端口的网络接入控制协议，并且仅定义了接入设备与接入端口间点到点的连接方式。其 中接入
+端口只能是物理端口。
+A. 正确
+B. 错误
+Correct Answer: B
+Section: part 4
+Explanation
+针对 wlan 提出的，逻辑端口可以端口接入方式包括：
+基于端口： 端口下第一个用户认证成功，其他无需认证饥渴访问网络，，第一个下线，其他用户拒绝访问 基于
+MAC 地址：端口下所有用户单独认证，该用户下线不影响其他用户访问网络
+问题144.
+VLAN 技术和端口隔离技术均可以实现数据的二层隔离。
+A. 正确
+B. 错误
+Correct Answer: A
+Section: part 4
+Explanation
+问题145.
+下列选项中，哪些是基于 MAC 地址的 802.1x 验证的特点？ (多选)
+A. 端口下的所有接入用户需要单独验证
+B. 当端口下的第一个用户下线后，其他用户也会被拒绝使用网络
+C. 当某个用户下线时，只有该用户无法使用网络
+D. 只要端口下的第一个用户验证成功后，其他接入用户无须验证就可使用网络资源
+Correct Answer: AC
+Section: part 4
+Explanation
+问题146.
+下列选项中，哪些是基于端口的 802.1x 验证的特点？
+A. 端口下的所有接入用户需要单独验证
+B. 当端口下的第一个用户下线后，其他用户也会被拒绝使用网络
+C. 当某个用户下线时，只有该用户无法使用网络
+D. 只要端口下的第一个用户验证成功后，其他接入用户无须验证就可使用网络资源
+Correct Answer: BD
+Section: part 4
+Explanation
+第 15 章 配置链路聚合
+问题147.
+链路聚合的作用是______。
+A. 增加链路带宽。
+B. 可以实现数据的负载均衡。
+C. 增加了交换机间的链路可靠性。
+D. 可以避免交换网环路。
+Correct Answer: ABC
+Section: part 4
+Explanation
+问题148.
+某公司采购了 A 、B 两个厂商的交换机进行网络工程实施。需要在两个厂商的交换机之间使用链路聚合技 术。经
+查阅相关文档，得知 A 厂商交换机不支持 LACP 协议。在这种情况下，下列哪些配置方法是合理 的？ (多选)
+A. 一方配置静态聚合，一方配置动态聚合
+B. 一方配置静态聚合，一方配置动态聚合
+C. 双方都配置动态聚合
+D. 双方都配置静态聚合
+E. 无法使用链路聚合
+Correct Answer: D
+Section: part 4
+Explanation
+静态聚合：不需要启动聚合协议，如果一方不支持聚合协议 or 双方设备支持的聚合协议不兼容时使 用 (H3C￾Cisco) 用的较多动态聚合：双方系统使用 LACP 协议协商链路信息，交互聚合组中成员端 口状态。易出错
+问题149.
+根据用户的需求，管理员需要在交换机 SWA 上新建一个 VLAN ，并且该 VLAN 需要包括端口 Ethernet1/0/2 。
+根据以上要求，需要在交换机上配置下列哪些命令？
+A. [SWA]vlan 1
+B. [SWA-vlan1]port Ethernet1/0/2
+C. [SWA]vlan 2
+D. [SWA-vlan2]port Ethernet1/0/2
+Correct Answer: CD
+Section: part 4
+Explanation
+Vlan1 默认，一般用作管理 vlan
+问题150.
+根据用户需求，管理员需要将交换机 SWA 的端口 Ethernet1/0/1 配置为 Trunk 端口。下列哪个命令是正 确的配
+置命令？
+A. [SWA]port link-type trunk
+B. [SWA-Ethernet1/0/1]port link-type trunk
+C. [SWA]undo port link-type access
+D. [SWA-Ethernet1/0/1]undo port link-type access
+Correct Answer: B
+Section: part 4
+Explanation
+问题151.
+交换机 SWA 的端口 Ethernet1/0/1 原来是 Access 端口类型，现在需要将其配置为 Hybrid 端口类型。 下列哪
+个命令是正确的配置命令？
+A. [SWA]port link-type hybrid
+B. [SWA-Ethernet1/0/1]port link-type hybrid
+C. [SWA]undo port link-type trunk
+D. [SWA-Ethernet1/0/1]undo port link-type trunk
+Correct Answer: B
+Section: part 4
+Explanation
+trunk 和 hybrid 端口类型都只能从 access 类型转换，不能从 trunk 之间转换成 hybrid
+问题152.
+交换机 SWA 的端口 Ethernet1/0/24 已经配置成为 Trunk 端口类型。如果要使此端口允许 VLAN2 和 VLAN3 通
+过，则需要使用下列哪个命令？
+A. [SWA]port trunk permit vlan 2 3
+B. [SWA-Ethernet1/0/24]port trunk permit vlan 2 3
+C. [SWA]undo port trunk permit vlan 1
+D. [SWA-Ethernet1/0/24]undo port trunk permit vlan 2
+Correct Answer: B
+Section: part 4
+Explanation
+问题153.
+如果想在交换机上查看目前存在哪些 VLAN ，则需要用到如下哪一个命令？
+A. [SWA]display vlan all
+B. [SWA]display vlan
+C. [SWA]display vlan 1
+D. [SWA]display vlan 2
+Correct Answer: B
+Section: part 4
+Explanation
+[SWA]display vlan all 查看所有 vlan 具体信息
+[SWA]display vlan 查看存在那些 vlan
+问题154.
+在交换机 SWA 上执行 display vlan 2 命令后，交换机输出如下：
+<SWA> display vlan2
+VLAN ID: 2
+VLAN Type: static
+Route interface: not configured
+Description: VLAN 0002
+Tagged Ports: none
+Untagged Ports:Ethernet1/0/1 Ethernet1/0/3 Ethernet1/0/4
+从以上输出可以判断______ 。 (多选)
+A. 端口 Ethernet1/0/1 是一个 Trunk 端口
+B. VLAN2 中包含了端口 Ethernet1/0/1 、Ethernet1/0/3 和 Ethernet1/0/4
+C. 带有 VLAN2 标签的数据帧离开端口 Ethernet1/0/3 时需要剥离标签
+D. 当前交换机存在的 VLAN 只有 VLAN2 Vlan1 肯定存在
+Correct Answer: BC
+Section: part 4
+Explanation
+问题155.
+在交换机上启动生成树协议的命令是 stp global enable____。
+Correct Answer: stp enable
+Section: part 4
+Explanation
+问题156.
+交换机 SWA 的端口 Ethernet1/0/4 连接有一台路由器。管理员想在此端口上关闭生成树功能，则需要用到 如下
+哪个命令？
+A. [SWA]stp disable
+B. [SWA-Ethernet1/0/4] stp disable
+C. [SWA] undo stp enable
+D. [SWA-Ethernet1/0/4] undo stp enable
+Correct Answer: B
+Section: part 4
+Explanation
+问题157.
+配置交换机 SWA 工作在 RSTP 工作模式下的命令为______。
+A. [SWA]stp mode rstp
+B. [SWA-Ethernet1/0/4] stp mode rstp
+C. [SWA] undo stp mode stp
+D. [SWA-Ethernet1/0/4] undo stp mode stp
+Correct Answer: A
+Section: part 4
+Explanation
+问题158.
+配置交换机 SWA 上的接口 Ethernet1/0/1 为边缘端口的命令为______。
+A. [SWA] stp enable edged-port
+B. [SWA-Ethernet1/0/1] stp enable edged-port
+C. [SWA] stp edged-port enable
+D. [SWA-Ethernet1/0/1] stp edged-port enable
+Correct Answer: D
+Section: part 4
+Explanation
+问题159.
+在交换机 SWA 上执行 display stp 命令后，交换机输出如下：
+[SWA]display stp
+-------[CIST Global Info][Mode MSTP]-------
+CIST Bridge :32768.000f-e23e-f9b0
+Bridge Times :Hello 2s MaxAge 20s FwDly 15s MaxHop 20
+从以上输出可以判断______。
+A. 当前交换机工作在 RSTP 模式下
+B. 当前交换机工作在 MSTP 模式下
+C. 当前交换机的桥优先级是 32768
+D. 当前交换机是根桥
+Correct Answer: BC
+Section: part 4
+Explanation
+问题160.
+交换机 SWA 的端口 E1/0/1 连接有 PC 。如果想要使交换机通过 802.1X 协议对 PC 进行本地验证，则需 要在
+交换机上配置哪些命令？ (多选)
+A. [SWA]dot1x
+B. [SWA]dot1x interface ethernet1/0/1
+C. [SWA]local-user localuser
+D. [SWA-luser-localuser]password simple hello
+E. [SWA-luser-localuser]service-type lan-access
+Correct Answer: ABCDE
+Section: part 4
+Explanation
+问题161.
+PCA 、PCB 分别与 S3610 交换机 SWA 的端口 Ethernet1/0/2 、Ethernet1/0/3 相连，服务器与端口
+Ethernet1/0/1 相连。如果使用端口隔离技术使 PC 间互相隔离，但 PC 都能够访问服务器，则需要在交换 机上配
+置哪些命令？(多选)
+A. [SWA] port-isolate group 1
+B. [SWA-Ethernet1/0/2] port-isolate group 1
+C. [SWA-Ethernet1/0/3] port-isolate group 1
+D. [SWA-Ethernet1/0/1] port-isolate uplink-port
+Correct Answer: BCD
+Section: part 4
+Explanation
+问题162.
+PC 连接在交换机 SWA 的端口 E1/0/2 ，IP 地址为 10.1.1.1 ，MAC 地址为 00-01-02-01-21-23 。为了保证 网络
+安全，需要在端口 E1/0/2 上配置 MAC+IP+端口绑定。则下列哪个命令是正确的？
+A. [SWA] user-bind ip-address 10.1.1.1
+B. [SWA-Ethernet1/0/2]user-bind ip-address 10.1.1.1
+C. [SWA] user-bind ip-address 10.1.1.1 mac-address 0001-0201-2123
+D. [SWA-Ethernet1/0/2]user-bind ip-address 10.1.1.1 mac-address 0001-0201-2123
+Correct Answer: D
+Section: part 4
+Explanation
+问题163.
+在 S3610 交换机上创建包含有端口 Ethernet1/0/1 ，ID 为 2 的聚合端口，其正确命令是______。
+A. [SWA] interface bridge-aggregation 2
+B. [SWA] interface bridge-aggregation 2 port Ethernet1/0/1
+C. [SWA-Ethernet1/0/1] interface bridge-aggregation 2
+D. [SWA-Ethernet1/0/1] interface bridge-aggregation 2 mode static
+Correct Answer: B
+Section: part 4
+Explanation
+[SWA] interface bridge-aggregation 2
+[SWA-Ethernet1/0/1]port link-aggregation group 2
+问题164.
+如图所示，S3610 交换机 SWA 使用端口 E1/0/1 和 E1/0/2 连接到另外一台交换机 SWB 。为了增加带 宽，需
+要在交换机上配置静态链路聚合。下列哪个配置是正确的？ (多选)
+A. [SWA] interface bridge-aggregation 1
+B. [SWA-Ethernet1/0/1] port link-aggregation group 1
+C. [SWA-Ethernet1/0/2] interface bridge-aggregation 1
+D. [SWA]interface bridge-aggregation 1 port Ethernet1/0/1 Ethernet1/0/2
+Correct Answer: AB
+Section: part 4
+Explanation
+问题165.
+在交换机 SWA 上执行 display 命令后，交换机输出如下：
+<Switch>display link-aggregation
+summary Aggregation Interface Type:
+BAGG -- Bridge-Aggregation, RAGG -- Route-Aggregation
+Aggregation Mode: S -- Static, D -- Dynamic
+Loadsharing Type: Shar -- Loadsharing, NonS -- Non-Loadsharing
+Actor System ID: 0x8000, 000f-e267-6c6a
+AGG AGG Partner ID Select Unselect Share
+Interface Mode Ports Ports Type
+----------------------------------------------------------------------
+BAGG1 S none 3 0 Shar
+从以上输出可以判断______ 。 (多选)
+A. 聚合组的类型是静态聚合
+B. 聚合组的类型是动态聚合
+C. 聚合组中包含了 3 个处于激活状态的端口
+D. 聚合组中没有处于激活状态的端口
+Correct Answer: AC
+Section: part 4
+Explanation
+第 16 章 IP 子网划分
+问题166.
+IP 地址 10.0.10.32 和掩码 255.255.255.224 代表的是一个______。
+A. 主机地址
+B. 网络地址
+C. 广播地址
+D. 以上都不对
+Correct Answer: B
+10. 0. 10. 001 00000
+255.255.255.111 00000
+问题167.
+IP 地址 132.119.100.200 的子网掩码是 255.255.255.240 ，哪么它所在子网的广播地址是______。
+A. 132.119.100.207
+B. 132.119.100.255
+C. 132.119.100.193
+D. 132.119.100.223
+Correct Answer: A
+Section: part 1
+Explanation
+132.119.100. 1100 1000
+255.255.255.1100 0000
+132.119.100.1100 1111（207）… . 广播地址
+问题168.
+要设置一个子网掩码使 192.168.0.94 和 192.168.0.116 不在同一网段，使用的子网掩码可能是______。 (多选)
+A. 255.255.255.192
+B. 255.255.255.224
+C. 255.255.255.240
+D. 255.255.255.248
+Correct Answer: BCD
+Section: part 4
+Explanation
+192.168.0. 0101 1110
+192.168.0. 0111 0100
+不在同一网段，掩码≥27 224
+问题169.
+要设置一个子网掩码使 192.168.0.94 和 192.168.0.116 在同一网段，使用的子网掩码可能是______。
+A. 255.255.255.192
+B. 255.255.255.224
+C. 255.255.255.240
+D. 255.255.255.248
+Correct Answer: A
+Section: part 4
+Explanation
+192.168.0.0101 1110
+192.168.0.0111 0100
+在同一网段，掩码≤26 192
+问题170.
+要设置一个子网掩码使 192.168.0.78 和 192.168.0.94 在同一网段，使用的子网掩码不可能是______。
+A. 255.255.255.128
+B. 255.255.255.192
+C. 255.255.255.224
+D. 255.255.255.240
+Correct Answer: D
+Section: part 4
+Explanation
+192.168.0.0100 1110
+192.168.0.0101 1110
+在同一网段，掩码不能≥28
+问题171.
+A 类地址的默认子网掩码是______。
+A. 255.0.0.0
+B. 255.255.0.0
+C. 255.255.255.0
+D. 以上都不正确
+Correct Answer: A
+Section: part 4
+Explanation
+问题172.
+B 类地址的默认子网掩码是______。
+A. 255.0.0.0
+B. 255.255.0.0
+C. 255.255.255.0
+D. 以上都不正确
+Correct Answer: B
+Section: part 4
+Explanation
+问题173.
+对一个 B 类网段进行子网划分，如果子网掩码是 19 位，那么每个子网能够容纳的最大主机数为 ______ 。 (请
+填写阿拉伯数字)
+Correct Answer: 8190
+Section: part 4
+Explanation
+32-19=13——2^16-2=8190
+问题174.
+对一个 B 类网段进行子网划分，如果子网掩码是 19 位，那么最多能够划分的子网数为___ 。 (请填写阿拉
+伯数字)
+Correct Answer: 8
+Section: part 4
+Explanation
+问题175.
+对一个 B 类网段进行子网划分，如果子网掩码是 22 位，那么每个子网能够容纳的最大主机数为__ 。 (请
+填写阿拉伯数字)
+Correct Answer: 1022
+Section: part 4
+Explanation
+问题176.
+对一个 C 类网段进行子网划分，如果子网掩码是 28 位，那么每个子网能够容纳的最大主机数为____。 (请填写
+阿拉伯数字)
+Correct Answer: 14
+Section: part 5
+Explanation
+问题177.
+IP 地址 10.0.10.63 和掩码 255.255.255.224 代表的是一个______。
+A. 主机地址
+B. 网络地址
+C. 广播地址
+D. 以上都不对
+Correct Answer: C
+Section: part 5
+Explanation
+10.0.10.0011 1111
+1110 0000
+问题178.
+IP 地址 10.0.10.65 和掩码 255.255.255.224 代表的是一个______。
+A. 主机地址
+B. 网络地址
+C. 广播地址
+D. 以上都不对
+Correct Answer: A
+Section: part 5
+Explanation
+10.0.10.0100 0001
+1110 0000
+问题179.
+某企业网络管理员需要设置一个子网掩码将其负责的 C 类网络 211.110.10.0 划分为最少 8 个子网，请问可以采
+用多少位的子网掩码进行划分？ (多选)
+A. 28
+B. 27
+C. 26
+D. 29
+E. 25
+Correct Answer: ABD
+Section: part 5
+Explanation
+2^3=8 24+3=27 掩码≥27
+问题180.
+某企业网络管理员需要设置一个子网掩码将其负责的 C 类网络 211.110.10.0 划分为最少 10 个子网，请 问可以
+采用多少位的子网掩码进行划分？ (多选)
+A. 28
+B. 27
+C. 26
+D. 29
+E. 25
+Correct Answer: AD
+Section: part 5
+Explanation
+2^4=16 24+4=28 掩码≥28
+问题181.
+某企业网络管理员需要设置一个子网掩码将其负责的 C 类网络 211.110.10.0 划分为子网，要求每个子网的 主机
+数不少于 20 ，请问可以采用多少位的子网掩码进行划分？ (多选)
+A. 28
+B. 27
+C. 26
+D. 29
+E. 25
+Correct Answer: BCE
+Section: part 5
+Explanation
+2^5=32 32-5=27 掩码≤27
+问题182.
+某公司网络管理员需要设置一个子网掩码将其负责的 C 类网络 211.110.10.0 划分为 14 个子网，要求每 个子网
+包含尽可能多的主机，则他应采用_____位的子网掩码。 (请填写阿拉伯数字)
+Correct Answer: 28
+Section: part 5
+Explanation
+2^4=16 24+4=28
+问题183.
+XYZ 公司管理员正在为办公网划分子网。要求将一个 C 类网段划分成若干大小相等的子网供各部门办公用户使用，
+但不限制子网的大小，可以有____种划分方法。 (请填写阿拉伯数字)
+Correct Answer: 6
+Section: part 5
+Explanation
+192.168.1.0000 0000 从左数第 1 位划分全 0 全 1×
+第 8 位则等于没有划分子网 因此减 2
+2^1-2=0没有主机数了！
+问题184.
+XYZ 公司管理员正在为办公网划分子网。要求将一个 B 类网段划分成若干大小相等的子网供各部门办公 用户使用，
+但不限制子网的大小，可以有___种划分方法。 (请填写阿拉伯数字)
+Correct Answer: 14
+Section: part 5
+Explanation
+172.16.0000 0000.0000 0000
+8+6=14
+问题185.
+子网划分技术是在自然分类 IP 地址划分的基础上增加了哪个部分实现的？
+A. 网络号部分
+B. 主机号部分
+C. 子网号部分
+D. 前缀部分
+Correct Answer: C
+Section: part 5
+Explanation
+问题186.
+要求设置一个子网掩码将 B 类网络 172.16.0.0 划分成尽可能多的子网，每个子网要求容纳 15 台主机， 则子网
+掩码应为_____ 。 (点分十进制形式) 略
+Correct Answer: 255.255.255.224
+Section: part 5
+Explanation
+2^5-2=30>15
+1110 0000=224
+问题187.
+要求设置一个子网掩码将一个 B 类网络 172.16.0.0 划分成尽可能多的子网，每个子网要求容纳 500 台主 机，
+则子网掩码应为_____ 。 (点分十进制形式) 略
+Correct Answer: 255.255.254.0
+Section: part 5
+Explanation
+2^9-2=510>500
+1111 1110=254
+问题188.
+要求设置一个子网掩码将一个 B 类网络 172.16.0.0 划分成七个子网，每个子网要容纳的主机数尽可能多， 则子
+网掩码应为_____ 。 (点分十进制形式) 略
+Correct Answer: 255.255.224.0
+Section: part 5
+Explanation
+2^3=8>7
+1110 0000=224
+问题189.
+要求设置一个子网掩码将一个 B 类网络 172.16.0.0 划分成 30 个子网，每个子网要容纳的主机数尽可能 多，则
+子网掩码应为_____ 。 (点分十进制形式) 略
+Correct Answer: 255.255.248.0
+Section: part 5
+Explanation
+2^5=32>30
+1111 1000=248
+问题190.
+IP 地址 132.119.100.200 的子网掩码是 255.255.255.224 ，哪么它所在的 IP 子网地址是______。
+A. 132.119.100.0
+B. 132.119.100.192
+C. 132.119.100.193
+D. 132.119.100.128
+Correct Answer: B
+Section: part 5
+Explanation
+子网地址=网络地址=主机位全为0
+200——1100 1000
+224——1110 0000
+问题191.
+IP 地址 132.119.100.200 的子网掩码是 255.255.255.224 ，哪么它所在子网的广播地址是______。
+A. 132.119.100.255
+B. 132.119.100.225
+C. 132.119.100.193
+D. 132.119.100.223
+Correct Answer: D
+Section: part 5
+Explanation
+200——1100 1000
+224——1110 0000
+主机位全为1
+问题192.
+IP 地址 132.119.100.200 的子网掩码是 255.255.255.240 ，哪么它所在的 IP 子网地址是______。
+A. 132.119.100.0
+B. 132.119.100.193
+C. 132.119.100.192
+D. 132.119.100.128
+Correct Answer: C
+Section: part 5
+Explanation
+子网地址=网络地址=主机位全为0
+200——1100 1000
+240——1111 0000
+问题193.
+某主机的 IP 地址为 130.25.3.135 ，子网掩码为 255.255.255.192 ，那么该主机所在的子网的网络地址为
+______.
+A. 130.25.0.0
+B. 130.25.3.0
+C. 130.25.3.128
+D. 130.25.3.255
+Correct Answer: C
+Section: part 5
+Explanation
+135——1000 0111
+192——1100 0000
+主机位全为1
+问题194.
+如果全 0 和全 1 子网可以作为有效子网，C 类地址 192.168.1.0 用 26 位的子网掩码进行子网划分，可以 划分
+的有效子网个数为______。
+A. 2
+B. 4
+C. 6
+D. 8
+Correct Answer: B
+Section: part 5
+Explanation
+2^2=4
+问题195.
+如果全 0 和全 1 子网可以作为有效子网，C 类地址 192.168.1.0 用 27 位的子网掩码进行子网划分，可以 划分
+的有效子网个数为______。
+A. 2
+B. 4
+C. 6
+D. 8
+Correct Answer: D
+Section: part 5
+Explanation
+2^3=8
+问题196.
+将一个 C 类网进行子网划分，如果全 0 和全 1 子网不是有效子网，那么用 26 位的掩码对该网络进行子 网划分，
+可以划分的有效子网数为______ 。 (请填写阿拉伯数字)
+Correct Answer: 2
+Section: part 5
+Explanation
+2^2-2=2
+问题197.
+相对于标准的子网划分，变长子网掩码划分 (VLSM) 与之最大的区别是______。
+A. 对于一个自然分类 IP 网络，可以采用某一任意长度的子网掩码进行子网划分
+B. 一个自然分类 IP 网络进行子网划分后，各子网的子网掩码长度可以不同
+C. 可以形成超网
+D. 使用无类地址进行网络划分
+Correct Answer: B
+Section: part 5
+Explanation
+VLSM 特点：允许使用多个子网掩码划分子网
+问题198.
+子网划分中，子网号部分占用了自然分类 IP 地址中的哪部分的空间？
+A. 网络号部分
+B. 主机号部分
+C. 子网号部分
+D. 以上都不正确
+Correct Answer: B
+Section: part 5
+Explanation
+第 17 章 DNS
+问题199.
+下列域名中属于 FQDN 的是______。
+A. .www.abc.com
+B. www.abc.com.cn
+C. www.abc.com
+D. www.abc.com.
+Correct Answer: D
+Section: part 5
+Explanation
+完全合格域名：域名的域名以点 (域根) 结尾
+问题200.
+DNS 可以采用的传输层协议是______。
+A. TCP
+B. UDP
+C. TCP 或 UDP
+D. NCP
+Correct Answer: C
+Section: part 5
+Explanation
+DNS（域名系统）：域名与IP地址之间的转换
+问题201.
+DNS 采用的传输层协议知名端口号是______。
+A. 50
+B. 55
+C. 53
+D. 51
+Correct Answer: C
+Section: part 5
+Explanation
+问题202.
+DNS 域名服务器能够完成域名到 IP 地址的解析工作，能够提供具体域名映射权威信息的服务器肯定是______
+A. 本地域名服务器
+B. 主域名服务器
+C. 根域名服务器
+D. 授权域名服务器
+Correct Answer: D
+Section: part 5
+Explanation
+问题203.
+某 DNS 客户端向本地域名服务器查询www.sina.com.cn 的 IP 地址，本地域名服务器通常采用那种 DNS 查询方
+式进行应答？
+A. 递归查询
+B. 迭代查询
+C. 反向查询
+D. 模糊查询
+Correct Answer: A
+Section: part 5
+Explanation
+一般客户机与本地 DNS 域名服务器之间查询方式递归查询：本地域名与服务器如果不知道，则继续以客户端的方
+式向其他 DND 服务器请求本地域名服务器发送至根域名服务器查询方式
+迭代查询：本地域名与服务器如果不知道，则想客户端会送一个可能知道的域名服务器，有客户端继续向新 的服
+务器查询反向查询：DNS 客户端根据已知的 IP 地址查找主机对应的域名
+问题204.
+下列域名表示方式正确的是______ 。 (多选)
+A. www.95588.com
+B. 111.222.333.cn
+C. www.China_Finance.com
+D. KK114.com.cn
+Correct Answer: ABD
+Section: part 5
+Explanation
+域名含有的符号只有“ .”和“-”而“_”不在其内
+第 18 章 文件传输协议
+问题205.
+以下说法正确的是______ 。 (多选)
+A. FTP 的数据连接在整个 FTP 会话过程中一直保持打开
+B. FTP 的控制连接在整个 FTP 会话过程中一直保持打开
+C. FTP 的数据连接在数据传输结束后关闭
+D. FTP 的控制连接在数据传输结束后关闭
+Correct Answer: BC
+Section: part 5
+Explanation
+控制链接在整个 FTP 会话期间一直打开数据连接，数据传输结束即终止
+问题206.
+FTP 数据连接的作用包括______ 。 (多选)
+A. 客户机向服务器发送文件
+B. 服务器向客户机发送文件
+C. 服务器向客户机发送文件列表
+D. 服务器向客户机传送告警信息
+Correct Answer: ABC
+Section: part 5
+Explanation
+FTP 数据连接三大用途：客户机向服务器发送文件 (上传)
+服务器向客户机发送文件 (下载)
+服务器向客户机发送文件列表 (查看那些东西可以下载)
+问题207.
+以下说法正确的是______ 。 (多选)
+A. FTP 的主动传输模式由 FTP 客户端主动向服务器建立数据连接
+B. FTP 的主动传输模式由 FTP 服务器主动向客户端建立数据连接
+C. FTP 的被动传输模式的服务器及客户端均采用临时端口建立数据连接
+D. FTP 的被动传输模式使用 PORT 命令
+E. FTP 的被动传输模式使用 PASV 命令
+Correct Answer: BCE
+Section: part 5
+Explanation
+主动模式 PORT :服务器主动向客户端发起数据连接
+被动模式 PASV :服务器被动接收客户端发起连接
+客户端主动与服务器临时端口号建立数据传输通道 Standard 模式 FTP：客户端首先和 FTP Server 的 TCP 21 端
+口建立连接，通过这个通道发送命令，客户端需要接收数据的时候在这个通道上发送 PORT 命令。 PORT 命令
+包含了客户端用什么端口接收数据。在传 送数据的时候，服务器端通过自己的 TCP 20 端口发送数据。 FTP
+server 必须和客户端建立一个新的连 接用来传送数据。
+Passive 模式：在建立控制通道的时候和 Standard 模式类似，当客户端通过这个通道发送 PASV 命令的 时候，
+FTP server 打开一个位于 1024 和5000 之间的随机端口并且通知客户端在这个端口上传送数据的 请求，然后
+FTP server 将通过这个端口进行数据的传送，这个时候 FTP server 不再需要建立一个新的和 客户端之间的连接。
+问题208.
+FTP 常用文件传输类型包括______ 。 (多选)
+A. ASCII 码类型
+B. 二进制类型
+C. EBCDIC 类型
+D. 本地类型
+Correct Answer: AB
+Section: part 5
+Explanation
+第 19 章 DHCP
+问题209.
+DHCP 客户端收到 DHCP ACK 报文后如果发现自己即将使用的 IP 地址已经存在于网络中，那么它将 向 DHCP
+服务器发送什么报文？
+A. DHCP Request
+B. DHCP Release
+C. DHCP Inform
+D. DHCP Decline
+Correct Answer: D
+Section: part 5
+Explanation
+DHCP 四个阶段：广播发送报文发现阶段：
+客户端 DHCP-DISCOVER 服务器
+提供阶段：客户端 DHCP-OFFER 服务器
+选择阶段：客户端 DHCP-REQUEST 服务器 (当客户端收到多个服务器发来的 offer 报文，只接受第一 个)
+确认阶段：客户端 DHCP-ACK 服务器 IP 地址拒绝：客户端探测到服务器分配的地址已经被分配使 用，5) 发送
+DHCP Decline 报文 IP 地址释放：客户端放弃 IP 地址或租期，5) 发送 DHCP Release 报文
+问题210.
+DHCP 客户端向 DHCP 服务器发送_______报文进行 IP 租约的更新？
+A. DHCP Request
+B. DHCP Release
+C. DHCP Inform
+D. DHCP Decline
+E. DHCP ACK
+F. DHCP OFFER
+Correct Answer: A
+Section: part 5
+Explanation
+租约更新
+客户端 DHCP-REQUEST 服务器客户端 DHCP-ACK 服务器
+问题211.
+如果 DHCP 客户端发送给 DHCP 中继的 DHCP Discovery 报文中的广播标志位置 0 ，那么 DHCP 中继回应
+DHCP 客户端的 DHCP Offer 报文采用______。
+A. unicast（单播）
+B. Broadcast（广播）
+C. multicast
+D. anycast
+Correct Answer: B
+Section: part 5
+Explanation
+客户端 广播报文 中继器 单播报文 服务器
+客户端 广播报文 中继器 单播报文 服务器
+问题212.
+DHCP 中继和 DHCP 服务器之间交互的报文采用______。
+A. unicast
+B. broadcast
+C. multicast
+D. anycast
+Correct Answer: A
+Section: part 5
+Explanation
+第 20 章 IPv6 基础
+问题213.
+IPv6 采用______表示法来表示地址。
+A. 冒号十六进制
+B. 点分十进制
+C. 冒号十进制
+D. 点分十六进制
+Correct Answer: A
+Section: part 5
+Explanation
+问题214.
+IPv4 地址包含网络部分、主机部分、子网掩码等。与之相对应，IPv6 地址包含了______。
+A. 网络部分、主机部分、网络长度
+B. 前缀、接口标识符、前缀长度
+C. 前缀、接口标识符、网络长度
+D. 网络部分、主机部分、前缀长度
+Correct Answer: B
+Section: part 5
+Explanation
+问题215.
+IPv6 链路本地地址属于______地址类型。
+A. 单播
+B. 组播
+C. 广播
+D. 任播
+Correct Answer: A
+Section: part 5
+Explanation
+问题216.
+IPv6 站点本地地址属于______地址类型。
+A. 单播
+B. 组播
+C. 广播
+D. 任播
+Correct Answer: A
+Section: part 5
+Explanation
+IPV6 单播地址根据其作用范围不同可分为链路本地地址、站点本地地址、全球单播地址 +多播地址= 四种 IPV6
+地址
+问题217.
+IPv6 邻居发现协议中的路由器发现功能是指______。
+A. 主机发现网络中的路由器的 IPv6 地址
+B. 主机发现路由器及所在网络的前缀及其他配置参数
+C. 路由器发现网络中主机的 IPv6 地址
+D. 路由器发现网络中主机的前缀及其他配置参数
+Correct Answer: B
+Section: part 5
+Explanation
+IPV6 邻居发现协议：
+地址解析：与 V4 ARP 类似路由器发现/前缀发现：发现路由器及前缀，有利于自动配置地址自动配置： 自动生成
+地址其他：地址重复检测
+问题218.
+IPv6 主机 A 要与 IPv6 主机 B 通信，但不知道主机 B 的链路层地址，遂发送邻居请求消息。邻居请求消 息的目的
+地址是______。
+A. 广播地址
+B. 全部主机组播地址
+C. 主机 A 的被请求节点组播地址
+D. 主机 B 的被请求节点组播地址
+Correct Answer: D
+Section: part 5
+Explanation
+一个节点想要和另一个节点通信需要知道对方的链路层地址
+问题219.
+关于 IPv6 地址 2001:0410:0000:0001:0000:0000:0000:45FF 的压缩表达方式，下列哪些是正确的？ (多选)
+A. 2001:410:0:1:0:0:0:45FF
+B. 2001:41:0:1 :0:0:0:45FF
+C. 2001:410:0:1::45FF
+D. 2001:410::1::45FF
+Correct Answer: AC
+Section: part 5
+Explanation
+问题220.
+关于 IPv6 地址 2001:0410:0000:0001:0000:0001:0000:45FF 的压缩表达方式，下列哪些是正确的？ (多选)
+A. 2001:410:0:1:0:1:0:45FF
+B. 2001:41:0:1 :0:1:0:45FF
+C. 2001:410:0:1::45FF
+D. 2001:410::1::45FF
+Correct Answer: A
+Section: part 5
+Explanation
+问题221.
+下列哪些是正确的 IPv6 地址？ (多选)
+A. 2001:410:0:1:45FF
+B. 2001:410:0:1:0:0:0:0:45FF
+C. 2001:410:0:1:0:0:0:45FF
+D. 2001:410:0:1::45FF
+Correct Answer: CD
+Section: part 5
+Explanation
+问题222.
+下列哪些是正确的 IPv6 地址？ (多选)
+A. 2001:410:0:1::45FF
+B. 2001:410:0:1:0:0:0:0:45FF
+C. 2001:410:0:1:0:0:0:45FF
+D. 2001:410:0:1:45FF
+E. 2001:410::1:0:0:0:45FF
+Correct Answer: ACE
+Section: part 5
+Explanation
+问题223.
+IPv6 邻居发现协议实现的功能包括_____ 。 (多选)
+A. 地址解析
+B. 路由器发现
+C. 地址自动配置
+D. 建立 Master/Slave 关系
+E. 地址重复检测
+Correct Answer: ABCE
+Section: part 5
+Explanation
+IPV6 邻居发现协议：
+地址解析：与 V4 ARP 类似路由器发现/前缀发现：发现路由器及前缀，有利于自动配置地址自动配置： 自动生成
+地址其他：地址重复检测
+问题224.
+下列哪些消息是在 IPv6 地址解析中被使用的？ (多选)
+A. 邻居请求消息
+B. 邻居通告消息
+C. 路由器请求消息
+D. 路由器通告消息
+Correct Answer: AB
+Section: part 5
+Explanation
+IPV6 地址解析：
+组播发送邻居请求消息
+单播回应邻居通告消息
+IPV6 地址制动配置：
+主机发送路由器请求消息 (请求前缀和其他配置信息)
+路由器回应路由器通告消息 (告知前缀和其他)
+主机生成全球单播地址 (利用返回的路由器通告消息， 自动配置接口 IPV6 地址，生成全球单播
+地址)
+问题225.
+在交换机 SWA 上执行 display 命令后，交换机输出如下：
+<Switch> display arp all
+Type: S-Static D-Dynamic O-Openflow M-Multiport I-Invalid
+IP Address MAC Address VLAN Interface Aging Type
+172.16.0.1 001c-233d-5695 N/A GEO/O 17 D
+172.16.1.1 0013-728e-4751 N/A GE0/1 19 D
+从以上输出可以判断______ 。 (多选)
+A. 具有 IP 地址 172.16.0.1 的主机连接在端口 GE0/0 上
+B. 具有 MAC 地址 001c-233d-5695 的主机连接在端口 GE0/1 上
+C. 以上表项是由管理员静态配置的
+D. 以上表项是由交换机动态生成的
+Correct Answer: AD
+Section: part 5
+Explanation
+问题226.
+如图所示，路由器 RTA 连接有 PCA 和 PCB 。如果需要在 RTA 上启用 ARP 代理以使 RTA 能够在 PC 之间
+转发 ARP 报文，则下列哪项配置是正确的？ (多选)
+A. [RTA] proxy-arp enable
+B. [RTA-GigabitEthernet0/0] proxy-arp enable
+C. [RTA-GigabitEthernet0/1] proxy-arp enable
+D. [RTA] proxy-arp enable port G1/0/1
+Correct Answer: BC
+Section: part 6
+Explanation
+类似端口隔离，端口隔离加配上行端口 port-isolate enable Port-isolate uplink-port
+正常情况下，两个主机不能通信
+问题227.
+在路由器上开启 DHCP 服务的正确配置命令是______。
+A. [Router] dhcp
+B. [Router-dhcp-pool-0] dhcp
+C. [Router] dhcp enable
+D. [Router-dhcp-pool-0] dhcp enable
+Correct Answer: C
+Section: part 6
+Explanation
+问题228.
+在路由器 RTA 上启用 DHCP 后，需要设定地址池的地址范围为 192.168.1.0/24 ，给主机分配的默 认网关地址
+是 192.168.1.254 。下列哪些配置能够满足这些要求？ (多选)
+A. [Router] dhcp server ip-pool 0
+B. [Router-dhcp-pool-0] network 192.168.1.0 mask 255.255.255.0
+C. [Router-dhcp-pool-0] gateway-list 192.168.1.254
+D. [Router-dhcp-pool-0] dns-list 192.168.1.10
+Correct Answer: ABC
+Section: part 6
+Explanation
+dns-list ：DNS服务器地址
+问题229.
+在路由器上执行如下配置命令：
+[Router] dhcp enable
+[Router] server forbidden-ip 192.168.1.10
+[Router] server forbidden-ip 192.168.1.254
+[Router] dhcp server ip-pool 0
+[Router-dhcp-pool-0] network 192.168.1.0 mask 255.255.255.0
+[Router-dhcp-pool-0] gateway-list192.168.1.254
+[Router-dhcp-pool-0] dns-list 192.168.1.10
+[Router-dhcp-pool-0] expired day 5
+完成以上配置后，如下哪些说法是正确的？ (多选)
+A. 路由器具有 DHCP 中继功能
+B. 路由器可以分配给主机的地址有 252 个
+C. 路由器具有 DHCP 服务器功能
+D. 主机通过 DHCP 服务能够从路由器获得 DNS 服务器地址 192.168.1.10
+Correct Answer: BCD
+Section: part 6
+Explanation
+配置DHCP地址池中哪些IP地址不参与自动分配 server forbidden-ip
+路由器可以分配给主机的地址：0-255 256 -2 -2=252 全0 全1 DNS和网关
+第 21 章 IP 路由原理
+问题230.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0-----WAN-----S1/0--MSR-2--GE0/0----HostB
+两台 MSR 路由器通过广域网实现互连， 目前物理连接已经正常。MSR-1 的接口 S1/0 地址为3.3.3.1/30，
+MSR-2 的接口 S1/0 地址为 3.3.3.2/30 ，现在在 MSR-1 上配置了如下三条静态路由：
+ip route-static 192.168.1.0 255.255.255.0 3.3.3.2
+ip route-static 192.168.2.0 255.255.255.0 3.3.3.2
+ip route-static 192.168.0.0 255.255.255.0 3.3.3.2
+其中 192.168.0.0/22 子网是主机 HostB 所在的局域网段。那么如下描述哪些是正确的？ (多选)
+A. 这三条路由都会被写入 MSR-1 的路由表
+B. 只有第三条路由会被写入 MSR-1 的路由表
+C. 这三条路由可以被一条路由 ip route-static 192.168.0.0 255.255.252.0 3.3.3.2 代替
+D. 只有第一条路由会被写入 MSR-1 的路由表
+Correct Answer: AC
+Section: part 1
+Explanation
+问题231.
+如下关于 MSR 路由表的描述，哪些是正确的？ (多选)
+A. 如果到同一 目的网段的路由有多个来源，那么只把 Preference (优先级) 值最小的路由写入路由 表
+B. 如果到同一 目的网段的路由有多个来源，那么只把 Metric (度量) 值最小的路由写入路由表
+C. 如果到同一 目的网段的路由有多个来源，那么只把 Preference (优先级) 值最大的路由写入路由 表
+D. 如果到同一 目的网段的路由有多个来源，那么只把 Metric (度量) 值最大的路由写入路由表
+E. 如果同一路由协议发现到达同一 目的网段的多条路径，那么这些路由有可能都会被写入路由表
+F. 如果同一路由协议发现到达同一 目的网段的多条路径，那么这些路由不可能全部被写入路由表
+Correct Answer: AE
+Section: part 6
+Explanation
+如果到同一 目的网段有多条路由，优先选择 Preference 最小的路由，并且写入路由表对于同一路由协议的多条路
+由，开销相同时，都会加入路由表开销不同怎会优选开
+销小的加入路由表
+问题232.
+如果数据包在 MSR 路由器的路由表中匹配多条路由项，那么关于路由优选的顺序描述正确的是______。
+A. Preference 值越小的路由越优选
+B. Cost 值越小的路由越优选
+C. 掩码越短的路由越优先
+D. 掩码越长的路由越优先
+Correct Answer: D
+Section: part 6
+Explanation
+三大查表原则：最长掩码匹配、迭代、默认路由
+问题233.
+在一台 MSR 路由器上看到路由表如下：
+Destination/Mask Proto Pre Cost NextHop Interface
+0 100.1.1.1 GE0/0
+0 127.0.0.1 InLoop0
+0 100.1.1.1 GE0/0
+1 100.1.1.1 GE0/0
+A. 该路由器上接口 GE0/0 的 IP 地址为 100.1.1.1
+B. 目的网段为 8.8.8.8/32 的路由下一跳接口为 InLoop0 ，说明该路由下一跳是类似于 Null0 的虚接口， 该路由
+属于黑洞路由
+C. 该路由器运行的是 RIPv1 ，因为目的网段 30.0.0.0 的掩码是自然掩码
+D. 该路由表不是该路由器的完整路由表，完整的路由表至少应该有接口 GE0/0 的直连网段路由
+Correct Answer: D
+Section: part 6
+Explanation
+InLoop0 是路由器的环回口地址，跟 Null0 接口没关系未必 RIPv1 ，可能 V2 本身使能的接口网段就是 30.0.0.0/8,
+或者 V2 未开启自动聚合
+问题234.
+客户在路由器上要配置两条去往同一 目的地址的静态路由，实现互为备份的目的。那么关于这两条路由的配 置的
+说法正确的是______。
+A. 需要为两条路由配置不同的 Preference
+B. 需要为两条路由配置不同的 Priority
+C. 需要为两条路由配置不同的 Cost
+D. 需要为两条路由配置不同的 MED
+Correct Answer: A
+Section: part 6
+Explanation
+Priority 用于 ospf 配置优先级用于选举 DR BDR 越大越优先，相同则比较 router id ，默认 1
+静态路由度量值都为0 MED 用于 BGP 选路
+问题235.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0-----WAN-----S1/0--MSR-2--GE0/0----HostB 已知 MSR-2 的接口 GE0/0 的 IP 地
+址为 2.2.2.1/24 ， 目前网络运行正常，两边的主机 HostA 和 HostB 可以互通。如今在 MSR-2上配置如下的路
+由： ip route-static 2.2.2.1 24 NULL 0那么______ 。 (多选)
+A. HostA 依然可以 ping 通 2.2.2.1
+B. HostA 不能 ping 通 2.2.2.1
+C. 在 MSR-1 上依然可以 ping 通 2.2.2.1
+D. 在 MSR-1 上不能 ping 通 2.2.2.1
+Correct Answer: AC
+Section: part 6
+Explanation
+GE0/0 口是直连路由，最先被匹配，所以静态路由其实没起到作用
+问题236.
+在路由器的路由表中有一条目的网段为 10.168.100.0/24 的路由，其 Cost 为 15 ，Preference 为 100， 那么下
+列关于该路由的说法哪些是正确的？
+A. 这条路由有可能是一条手工配置的静态路由
+B. 这条路由有可能是通过 RIP 动态发现的路由
+C. 如果这是一条 RIP 路由，那么该路由是一条无效路由
+D. 这条路由一定是通过动态路由学习到的
+Correct Answer: BD
+Section: part 7
+Explanation
+RIP默认优先级100；静态默认优先级60，开销为0
+问题237.
+在路由器的路由表中有一条目的网段为 10.168.100.0/24 的路由，其 Cost 为 20 ，Preference 为 255， 那么关
+于该路由的说法，如下哪些是正确的？
+A. 这条路由一定是通过动态路由学习到的
+B. 这条路由的优先级是最高值，表示任何来自不可信源端的路由
+C. Cost 20 表示该路由的跳数是 20
+D. 这是一条有效的动态路由
+Correct Answer: AD
+Section: part 7
+Explanation
+A. 这条路由一定是通过动态路由学习到的 静态路由不存在cost
+B. 这条路由的优先级是最高值， 表示任何来自不可信源端的路由 bgp 优先级， 最低优先级
+C. Cost 20 表示该路由的跳数是20只在 rip 中表示条数， 因为 rip 路由中链路开销都为 1
+优先级值越大优先级越低
+问题238.
+在路由器上执行 display ip routing-table ，那么路由表中显示的下一跳接口有可能是______。
+A. InLoop0
+B. Null0
+C. Serial 6/0/1
+D. Vlan500
+Correct Answer: ABC
+Section: part 7
+Explanation
+display ip routing-table 查找路由表摘要信息
+问题239.
+在 MSR 路由器上看到路由表里有如下显示：
+Destination/Mask Proto
+127.0.0.0/8 Direct
+127.0.0.1/32 Direct
+192.168.96.0/19 Direct
+那么关于目的地址为 192.168.96.0/19 的路由的正确描述是______。
+A. 这是一条直连路由，度量值为 0
+B. 这是一条手工配置的静态路由，度量值为 0
+C. 该路由器的下一跳也即对端设备的 IP 地址为 192.168.120.153
+D. 在该路由器上 S6/0 的接口 IP 地址为 192.168.120.153
+Correct Answer: AD
+Section: part 7
+Explanation
+（题目不完整）
+目的地址： 出接口 下一跳
+直连网段 物理接口 本地设备接口地址
+直连地址 物理接口 对端设备接口地址
+Inloop
+直连地址 口 本地还回测试地址
+问题240.
+在 MSR 路由器上看到路由表里有如下显示：
+Destination/Mask Proto Pre Cost NextHop Interface
+127.0.0.0/8 Direct 0 0 127.0.0.1 InLoop0
+127.0.0.1/32 Direct 0 0 127.0.0.1 InLoop0
+192.168.96.0/24 Static 60 0 192.168.120.153 S6/0
+那么关于目的地址为 192.168.96.0/24 的路由的正确描述是______。
+A. 这是一条直连路由，度量值为 0
+B. 这是一条手工配置的静态路由，度量值为 0
+C. 该路由器的下一跳也即对端设备的 IP 地址为 192.168.120.153
+D. 在该路由器上 S6/0 的接口 IP 地址为 192.168.120.153
+Correct Answer: BC
+Section: part 7
+Explanation
+静态路由学到的网段只可能是下一台路由器对外的直连网段，故下一跳是对端设备入接口地址
+Interface指的是出接口，表示数据从此接口发送出去
+问题241.
+在路由器的路由表中有一条默认路由，其目的网段和掩码都是 0.0.0.0 ，而其下一跳是路由器的 S0/0 接 口，那么
+下列关于此路由的描述正确的是______ 。 (多选)
+A. 当路由器收到去往目的地址 120.1.1.1 的数据包时，如果路由器表中没有其他确切匹配项，那么该数据 包将匹
+配此默认路由
+B. 该路由的掩码最短，因此只有在没有其它路由匹配数据包的情况下，数据包才会按照默认路由转发
+C. 这条路由的度量值有可能是 3
+D. 这条路由的优先级有可能是 100
+Correct Answer: ABCD
+Explanation
+静态默认路由度量值为 0 ，不可能是3,。 如果是从其它来源的话 的度 量 值 可 能 是 3 （比如OSPF之类的）
+问题242.
+一台空配置的 MSR 路由器通过 GE0/0 接口连接本端局域网用户，通过 S1/0 接口直接连接远端路由器。 GE0/0
+接口和 S1/0 接口的 IP 地址分别为 10.1.1.1/24 和 172.16.1.1/30 。为了确保与远端局域网用户的互 通，在 MSR
+上配置了如下路由：
+[MSR] ip route 10.20.0.0 255.255.255.0 s1/0
+配置后，MSR 收到发往目的地址 10.20.0.254/24 的数据包，在路由表中查找到该静态路由之后，MSR 接 下来
+将如何处理该数据包？
+A. 丢弃该数据包，因为路由表中未列出目的主机
+B. 丢弃该数据包，因为路由表中未列出下一跳地址
+C. 将该 IP 报文封装成符合 S1/0 接口链路的帧，然后从 S1/0 接口转发出去
+D. 解析 S1/0 接口的 MAC 地址，更新目的 MAC 地址，然后将该 IP 报文重新封装
+E. 查找接口 S1/0 对应的 IP 地址，然后将该 IP 报文从 S1/0 接口转发
+Correct Answer: C
+Section: part 6
+Explanation
+题中声明空配置的 MSR ，说明串口使用的默认的链路层协议 PPP （点到点协议），因此是 P2P 链路，静态下一
+跳可以写出接口，数据链路层传递二层数据帧，而非三层 IP 包
+问题243.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0-----WAN-----S1/0--MSR-2--GE0/0----HostB 已知 MSR-2 的接口 GE0/0 的 IP 地
+址为 2.2.2.1/24 ， 目前网络运行正常，两边的主机 HostA 和 HostB 可以互通。如今在 MSR-2上配置如下的路
+由： ip route-static 2.2.2.1 24 NULL 0那么______ 。 (多选)
+A. HostA 依然可以 ping 通 2.2.2.1
+B. HostA 不能 ping 通 2.2.2.1
+C. 在 MSR-1 上依然可以 ping 通 2.2.2.1
+D. 在 MSR-1 上不能 ping 通 2.2.2.1
+Correct Answer: AC
+Section: part 6
+Explanation
+GE0/0 口是直连路由，最先被匹配，所以静态路由其实没起到作用
+第 22 章 直连路由和静态路由
+问题244.
+在一台 MSR 路由器的路由表中，可能有如下哪几种来源的路由？ (多选)
+A. 直连网段的路由
+B. 由网络管理员手工配置的静态路由
+C. 动态路由协议发现的路由
+D. 网络层协议发现的路由
+Correct Answer: ABC
+Section: part 6
+Explanation
+问题245.
+XYZ 公司深圳分公司的路由器的 Serial 0/0 和 Serial 0/1 接口通过两条广域网线路分别连接两个不同的 ISP ，通
+过这两个 ISP 都可以访问北京总公司的网站 202.102.100.2 。在深圳分公司的路由器上配置了如下 的静态路由：
+ip route-static 202.102.100.2 24 Serial 0/0
+ip route-static 202.102.100.2 24 Serial 0/1
+那么关于这两条路由的描述哪些是正确的？ (多选)
+A. 去往北京的流量通过这两条路由可以实现负载分担
+B. 去往北京的这两条路由可以互为备份
+C. 在该路由器的路由表中只会写入第二条路由
+D. 在该路由器的路由表中只会写入第一条路由
+Correct Answer: AB
+Section: part 6
+Explanation
+对于静态路由：
+当到同一 目的地址下一跳和优先级都不同时，优选优先级高的加入路由表，低的作为备份的，这是路由备份；
+当到同一 目的地址下一跳不同而优先级相同时，都会加入路由表，到目的地的流量将会均匀分担。这是负载分担。
+(因为度量值都为0)
+问题246.
+XYZ 公司深圳分公司的路由器的 Serial 0/0 和 Serial 0/1 接口通过两条广域网线路分别连接两个不同的 ISP ，通
+过这两个 ISP 都可以访问北京总公司的网站 202.102.100.2 ，在深圳分公司的路由器上配置了如下 的静态路由：
+ip route-static 202.102.100.2 24 Serial 0/0 preference 10
+ip route-static 202.102.100.2 24 Serial 0/1 preference 100
+那么关于这两条路由的描述哪些是正确的？ (多选)
+A. 两条路由的优先级不一样，路由器会把优先级高的第一条路由写入路由表
+B. 两条路由的优先级不一样，路由器会把优先级高的第二条路由写入路由表
+C. 两条路由的 Cost 值是一样的
+D. 两条路由目的地址一样，可以实现主备，其中第一条路由为主
+Correct Answer: ACD
+Section: part 6
+Explanation
+值越小优先级越高
+问题247.
+XYZ 公司深圳分公司的路由器 MSR1 的 Serial0/0 接口通过广域网线路直接连接到 ISP 路由器 MSR2 的 Serial0/0
+接口，MSR2 的 Serial0/0 接口地址为 100.126.12.1 。XYZ 公司通过这个 ISP 可以访问北京总 公司的网站
+202.102.100.2 。在 MSR1 上没有运行路由协议，仅配置了如下一条静态路由：
+ip route-static 202.102.100.2 24 100.126.12.1
+那么关于这条路由以及 MSR1 路由表的描述哪些是正确的？ (多选)
+A. 如果 100.126.12.1 所在网段地址不可达，那么该路由不会被写入路由表
+B. 只要该路由对应的出接口物理状态 up ，该路由就会被写入路由表
+C. 如果该路由所对应的出接口断掉，那么该路由一定会被从路由表中删除
+D. 这是一条优先级为 60 、Cost 为 0 的静态路由
+Correct Answer: ACD
+Section: part 6
+Explanation
+1) 出接口 UP
+2) 目的可达。该路由才会被写入路由表
+问题248.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0-----WAN-----S1/0--MSR-2--GE0/0----HostB
+两台路由器都是出厂默认配置。分别给路由器的四个接口配置了正确的 IP 地址，两台主机 HostA 、HostB 都正
+确配置了 IP 地址以及网关，假设所有物理连接都正常，那么______ 。 (多选)
+A. 每台路由器上各自至少需要配置 1 条静态路由才可以实现 HostA 、HostB 的互通
+B. 每台路由器上各自至少需要配置 2 条静态路由才可以实现 HostA 、HostB 的互通
+C. 路由器上不配置任何路由，HostA 可以 ping 通 MSR-2 的接口 S1/0 的 IP 地址
+D. 路由器上不配置任何路由，HostA 可以 ping 通 MSR-1 的接口 S1/0 的 IP 地址
+Correct Answer: AD
+Section: part 6
+Explanation
+问题249.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB
+其中路由器 MSR-1 与路由器 MSR-2 通过专线实现互连，在 MSR-1 上配置了如下三条静态路 由：
+ip route-static 10.1.1.0 255.255.255.0 3.3.3.1
+ip route-static 10.1.1.0 255.255.255.0 3.3.3.2
+ip route-static 10.1.1.0 255.255.255.0 3.3.3.3
+其中 10.1.1.0/24 是主机 HostB 所在的局域网段，那么如下描述哪些是正确的？
+A. 只有第三条路由会被写入 MSR-1 的路由表
+B. 这三条路由都会被写入 MSR-1 的路由表，形成等值路由
+C. 只有第一条路由会被写入 MSR-1 的路由表
+D. 以上都不对
+Correct Answer: D
+Section: part 6
+Explanation
+无法判断下一跳是谁，如果都不是，则下一跳不可达，都不会写入路由表
+问题250.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0-----WAN----S1/0--MSR-2--GE0/0----HostB
+两台 MSR 路由器通过广域网实现互连， 目前物理连接已经正常。MSR-1 的接口 S1/0 地址为3.3.3.1/30，
+MSR-2 的接口 S1/0 地址为 3.3.3.2/30 ，现在在 MSR-1 上配置了如下 4 条静态路由：
+ip route-static 192.168.1.0 255.255.255.0 3.3.3.2
+ip route-static 192.168.2.0 255.255.255.0 3.3.3.2
+ip route-static 192.168.3.0 255.255.255.0 3.3.3.2
+ip route-static 192.168.4.0 255.255.255.0 3.3.3.2
+其中 192.168.0.0/22 子网是 MSR-2 的局域网用户网段。那么如下描述哪些是错误的？ (多选)
+A. 这四条路由都会被写入 MSR-1 的路由表
+B. 只有第四条路由会被写入 MSR-1 的路由表
+C. 这四条路由可以被一条路由 ip route-static 192.168.1.0 255.255.252.0 3.3.3.2 代替
+D. 只有第一条路由会被写入 MSR-1 的路由表
+Correct Answer: BCD
+Section: part 6
+Explanation
+目的地址下一跳可达，因此都会被写入路由表汇总路由
+192.168.4.0 网段无法代替，需掩码29位
+问题251.
+客户的网络连接形如： N1-----MSR-1-----MSR-2----MSR-3-----N2
+在 MSR-1 上配置了如下的静态路由：
+iproute-static 192.168.100.0 255.255.0.0 null0
+那么关于此路由的解释正确的是______ 。 (多选)
+A. 在该路由器上，所有目的地址属于 192.168.100.0/16 的数据包都会被丢弃
+B. 在某些情况下，该路由可以避免环路
+C. 该静态路由永远存在于路由表中
+D. 如果匹配了这条静态路由，那么数据包会被丢弃而且不向源地址返回任何信息
+Correct Answer: BCD
+Section: part 6
+Explanation
+A) 匹配了目的地址属于 192.168.100.0/16 的数据包才会被丢弃，并且只要路由表中存在明细路由，就会被优先匹
+配，该网段的路由就不会被丢弃
+B) Null 0 口永远 UP ，下一跳永远可达，因此路由不会消失。
+问题252.
+客户的网络连接形如： HostA------MSR-1------MSR-2--------MSR-3------HostB
+已经在所有设备上完成了IP地址的配置。要实现 HostA可以访问 HostB，那么关于路由的配置，如下哪些说法是
+正确的？(多选)
+A. 在 MSR-1 上至少需要配置一条静态路由
+B. 在 MSR-2 上至少需要配置一条静态路由
+C. 在 MSR-2 上至少需要配置两条静态路由
+D. 在 MSR-3 上至少需要配置一条静态路由
+Correct Answer: ACD
+Section: part 6
+Explanation
+问题253.
+要在路由器上配置一条静态路由。已知目的地址为 192.168.1.0 ， 掩码是 20 位， 出接口为
+GigabitEthernet0/0 ，出接口 IP 地址为 10.10.202.1 ，那么下列配置中哪些是正确的？
+A. ip route-static 192.168.1.0 255.255.240.0 GigabitEthernet0/0
+B. ip route-static 192.168.1.0 255.255.248.0 10.10.202.1
+C. ip route-static 192.168.1.0 255.255.240.0 10.10.202.1
+D. ip route-static 192.168.1.0 255.255.248.0 GigabitEthernet0/0
+Correct Answer: C
+Section: part 6
+Explanation
+掩码20位：255.255.240.0
+只有在下一跳所属接口是 P2P 接口时 (PPP/HDLC) ，才可以使用本地出接口，下一跳所属接口是 broadcast 接口
+时 (Ethernet/vlan 接口) ，必须制定下一跳，答案似乎都不对， C)的 下一跳地址是本地出接口地址，A)的出接口
+千兆以太口，链路层协议 Ethernet ，默认广播型接口
+问题254.
+在路由器上依次配置了如下两条静态路由：
+ip route-static 192.168.0.0 255.255.240.0 10.10.202.1 preference 100
+ip route-static 192.168.0.0 255.255.240.0 10.10.202.1
+那么关于这两条路由，如下哪些说法正确？
+A. 路由表会生成两条去往 192.168.0.0 的路由，两条路由互为备份
+B. 路由表会生成两条去往 192.168.0.0 的路由，两条路由负载分担
+C. 路由器只会生成第 2 条配置的路由，其优先级为 0
+D. 路由器只会生成第 2 条配置的路由，其优先级为 60
+Correct Answer: D
+Section: part 6
+Explanation
+审清题意， 由于这 2 条路由下一跳和目的地址都一样，因此后配置的那条会覆盖原来配置要想实现静态路由的备
+份，需要下一跳不同
+问题255.
+某路由器通过 Serial1/0 接口连接运营商网络，要在此路由器上配置默认路由从而实现访问 Internet 的目 的，如
+下哪些配置一定是正确而且有效的？
+A. ip route-static 0.0.0.0 0 Serial1/0
+B. ip route-static 0.0.0.0 0.0.0.0 Serial1/0
+C. ip route-static 255.255.255.255 0.0.0.0 Serial1/0
+D. 以上配置都不正确
+Correct Answer: D
+Section: part 6
+Explanation
+不能保证接口一定是up的
+问题256.
+客户路由器通过 S1/0 接口连接运营商网络。S1/0 接口使用默认配置。在路由器上配置了如下路由：
+[MSR]ip route-static 0.0.0.0 0.0.0.0 Serial1/0
+但通过 display ip routing-table 查看路由表却发现该路由在路由表里没有显示，据此推测可能的原因是
+______。(多选)
+A. 配置错误，应该退出到系统视图下配置路由才能生效
+B. 配置错误，路由的下一跳应该输入对端的 IP 地址，而不是接口名 S1/0
+C. S1/0 接口被 shutdown
+D. S1/0 接口没有 IP 地址
+Correct Answer: CD
+Section: part 6
+Explanation
+1) 出接口 UP 2) 目的可达。该路由才会被写入路由表
+C 出接口 down D 下一条不可达
+问题257.
+在 MSR 路由器上要查看路由表的综合信息，如总路由数量、RIP 路由数量、OSPF 路由数量、激活路由 数量
+等，那么可以使用如下哪些命令？
+A. <MSR>display ip routing-table statistics
+B. [MSR-GigabitEthernet0/0]display ip routing-table statistics
+C. [MSR] display ip routing-table
+D. [MSR] display ip routing-table accounting
+Correct Answer: AB
+Section: part 7
+Explanation
+问题258.
+在 MSR 路由器上使用______命令配置静态路由。
+A. ip route-static
+B. route-static
+C. ip static-route
+D. static-route
+Correct Answer: A
+问题259.
+在一台 MSR 路由器上执行了如下命令：
+[MSR]display ip routing-table 100.1.1.1
+那么对此命令的描述正确的是______。
+A. 可以查看匹配目标地址为 100.1.1.1 的路由项
+B. 可以查看匹配下一跳地址为 100.1.1.1 的路由项
+C. 有可能此命令的输出结果是两条默认路由
+D. 此命令不正确，因为没有包含掩码信息
+Correct Answer: AC
+Section: part 7
+Explanation
+第 23 章 路由协议概述
+问题260.
+小 L 是一名资深网络技术工程师，想要自己独立设计一个比较完美的 IGP 路由协议，希望该路由协议在 Cost 上
+有较大改进，那么设计该路由协议的 Cost 的时候要考虑如下哪些因素？ (多选)
+A. 链路带宽
+B. 链路 MTU
+C. 链路可信度
+D. 链路延迟
+Correct Answer: ABCD
+Section: part 6
+Explanation
+通常影响路由度量值的因素：线路延迟、带宽、线路使用率、线路可信度、跳数、最大传输单元
+问题261.
+小 L 是一名资深 IP 网络专家，立志要开发一种新的动态路由协议。而一个路由协议的工作过程应该包括如 下哪
+些？ (多选题) (多选)
+A. 发现邻居
+B. 交换路由
+C. 计算路由
+D. 维护、更新路由
+Correct Answer: ABCD
+Section: part 6
+Explanation
+动态路由协议基本原理：
+邻居网络中所有路由器必须实现相同路由协议并已启动邻居发现、路由交换、路由计算、路由维护；
+路由器是分层设计的：数据转发平面、路由控制平面。
+动态路由协议完成控制平面任务：路由的发现、更新和维护。
+硬件完成数据转发平面任务
+问题262.
+如下关于路由的描述正确的是______ 。 (多选)
+A. 路由收敛指全网中路由器的路由表达到一致
+B. 一条完整的路由至少要包括掩码、 目的地址、下一跳
+C. 直连路由的优先级不可手动修改
+D. IGP 是一种基于 D-V 算法的路由协议
+Correct Answer: ABC
+Section: part 6
+Explanation
+直连路由优先级 0 不可改
+IGP： 内部网关协议，包括 rip ，ospf
+距离矢量 D-V 算法
+Ospf 链路状态 SPF 算法
+问题263.
+某路由协议是链路状态路由协议，那么此路由协议应该具有下列哪些特性？ (多选)
+A. 该路由协议关心网络中链路或接口的状态
+B. 运行该路由协议的路由器会根据收集到的链路状态信息形成一个包含各个目的网段的加权有向图
+C. 该路由协议算法可以有效防止环路
+D. 该路由协议周期性发送更新消息交换路由表
+Correct Answer: ABC
+Section: part 6
+Explanation
+采用增量更新机制，只有链路的状态发生变化时才发送路由更新信息
+OSPF每隔30分钟发送一次lsa
+该路由协议关心网络中链路或接口的状态，将已知的链路状态向该区域的其他路由器通告 (lsa) ，达到 网络所有路
+由器对网络结构相同认识 OSPF 通过传递链路状态来得到网络信息,维护一张网络有向拓扑图, 利用最小生成树算
+法 SPF 得到路由表 OSPF 路由表更新采用触发更新，增量更新发布 LSA ，网络变更时向另据发送 LSA 摘要，不
+变 30min更新一次
+问题264.
+假设一台 MSR 路由器获得两条去往目的网段 100.120.10.0/24 的路由，这两条路由的 Cost 分别是 120 和 10 ，
+优先级分别是 10 和 150 。那么去往此目的地址的数据包将______ 。 (多选)
+A. 优先匹配 Cost 为 120 的路由
+B. 优先匹配 Cost 为 10 的路由
+C. 优先匹配优先级为 10 的路由
+D. 优先匹配优先级为 150 的路由
+Correct Answer: C
+Section: part 6
+Explanation
+当到同一 目的地址：
+下一跳和优先级都不同时，优选优先级高的加入路由表，低的作为备份的，这是路由备份；
+下一跳不同，而 优先级相同时，cost 值相同则都会加入路由表，到目的地的流量将会均匀分担。这是负载分担。
+Cost 值不同则优选 cost 值小的加入路由表，作为备份查找路由表中的路由：掩码最长匹配
+第 24 章 OSPF 基础
+问题265.
+两台空配置的 MSR 路由器通过图示的方式连接，通过配置 IP 地址，两台路由器的 GE0/0 接口可以互通。
+如今分别在两台路由器上增加如下配置：
+RTA：
+[RTA]ospf
+[RTA-ospf-1]area 0
+[RTA-ospf-1-area-0.0.0.0]network 192.168.1.1 0.0.0.3
+[RTA-GigabitEthernet0/0]ospf dr-priority 2
+RTB：
+[RTB]ospf
+[RTB-ospf-1]area 0
+[RTB-ospf-1-area-0.0.0.0]network 192.168.1.1 0.0.0.3
+[RTB-GigabitEthernet0/0]ospf dr-priority
+那么在 OSPF 邻居状态稳定后，______。
+A. OSPF 接口优先级相同，在 192.168.1.0/30 网段上不进行 OSPF DR 选举
+B. 两台路由器中，一台为 DR ，一台为 BDR
+C. 两台路由器中，一台为 DR ，一台为 DRother
+D. 两台路由器的邻居状态分别为 FULL 、2-Way 、
+Correct Answer: B
+DR指定路由器；BDR备份指定路由器；DRother路由器
+[接口] ospf dr-priority (0-255) 修改接口优先级，默认为 1 ，优先级为 0 的不参与选举
+只有广播网，NBMA 网络中才有 DB,BDR 选举，千兆以太口默认接口类型广播
+修改 ospf 网络类型：[接口]ospf network-type ()
+DR,BDR 的选举是针对接口、 网段而言的的，并非该 RT是 DR,BDR 。
+通过比较接口优先级 (越大越优) ，一样则比较 router id (越大越优)
+DR other 之间的状态停留在 2-way
+问题266.
+一台空配置 MSR 路由器 RTA 分别通过 GE0/0 、GE1/0 连接两台运行在 OSPF Area 0 的路由器 RTB 和 RTC 。
+RTA 的接口 GE0/0 和 GE1/0 的 IP 地址分别为 192.168.3.2/24 和 192.168.4.2/24 。在 RTA 上
+添加如下配置：
+[MSR-ospf-1] area 0.0.0.0
+[MSR-ospf-1-area-0.0.0.0]network 192.168.0.0 0.0.3.255
+[MSR-GigabitEthernet0/0]ospf cost 2
+[MSR-GigabitEthernet1/0]ospf dr-priority 0
+那么关于上述配置描述正确的是_____ 。 (多选)
+A. 该配置在 MSR 路由器的 GE0/0 、GE1/0 上都启动了 OSPF
+B. 该配置只在 MSR 路由器的 GE0/0 接口上启动了 OSPF
+C. RTA 可能成为两个 GE 接口所在网段的 DR
+D. RTA 只可能成为其中一个 GE 接口所在网段的 DR
+E. 修改接口 GE0/0 的 Cost 不影响OSPF邻接关系的建立
+Correct Answer: BDE
+Section: part 1
+Explanation
+[MSR-ospf-1-area-0.0.0.0]network 192.168.0
+0.0.3.255 掩码 22，说明在接口网段为 0.0 、1.0、2.0 、3.0 上启动 ospf， GE1/0 处于4.0网段，C错
+G1/0 接口优先级改为 0 ，优先级为 0 的接口不参与 DR,BDR 选举
+问题267.
+下列关于网络中 OSPF 的区域(Area)说法正确的是？ (多选)
+A. 网络中的一台路由器可能属于多个不同的区域，但是必须有其中一个区域是骨干区域
+B. 网络中的一台路由器可能属于多个不同的区域，但是这些区域可能都不是骨干区域
+C. 只有在同一个区域的 OSPF 路由器才能建立邻居和邻接关系
+D. 在同一个 AS 内多个 OSPF 区域的路由器共享相同的 LSDB
+Correct Answer: BC
+Section: part 6
+Explanation
+AS：自治系统
+一个区域共享LSDB
+问题268.
+三台 MSR 路由器通过图示的方式连接，192.168.1.0/30 为 RTA 和 RTB 之间的互连网段，
+10.10.10.0/30 是 RTB 和 RTC 之间的互连网段。在三台路由器的互连接口上都运行了 OSPF 而且都属于 Area 0 ，
+同时在 Area 0 里都只发布了三台路由器互连接口网段。假设 OSPF 运行正常，OSPF 邻居建立成功，那么
+______ 。 (多选)
+A. 如果三台路由器之间的链路都是以太网，那么网络中至少有两个 DR
+B. 如果三台路由器之间的链路都是以太网，那么网络中可能只有一个 DR
+C. 三台路由器的 OSPF 邻居状态稳定后，三台路由器有同样的 LSDB
+D. RTB 的路由表中没有 OSPF 路由
+Correct Answer: ACD
+Section: part 6
+Explanation
+DR是某个网段中的概念,是针对路由器的接口而言的
+RTB中没有OSPF路由是因为直连
+问题269.
+三台 MSR 路由器通过图示的方式连接。三台路由器都属于 OSPF Area 0 ，同时在 Area 0 里通过 network 命 令
+发布了三台路由器的互连网段 。在 RTC 上， 网段 NET-1 也通过 network 命令在 OSPF Area 0 中发布 了。三
+台路由器之间的 OSPF Cost 如图所示。 目前三台路由器的邻居状态稳定，那么______ 。 (多选)
+A. 在 RTA 的路由表只有一条到达 NET-1 网段的 OSPF 路由
+B. 在 RTB 的路由表有两条去往目的网段 NET-1 的 OSPF 路由
+C. 对 RTB 而言，到达目的网段 NET-1 会优先选择 RTB--->RTC 路径
+D. 网络状态稳定后 ，在接下来的 45 分钟之内 ， 网络上 OSPF 邻居之间只有 Hello 报文传递
+Correct Answer: AB
+Section: part 6
+Explanation
+Ospf 采用增量更新机制。 网络变更时立即向另据发送 LSA 摘要信息；网络未变化，每隔30min 向邻居发送 LSA
+摘要邻居收到摘要，对比自身链路状态信息，发现对方具备自己没有的链路信息则发出请求，否则不做动作
+问题270.
+三台 MSR 路由器通过图示的方式连接。三台路由器都属于 OSPF Area 0 ， 同时在 Area 0 里通过 network 命令
+发布了三台路由器的互连网段。在 RTC 上，网段NET-1 也通过 network 命令在 OSPF Area 0 中发布了 。三台
+路由器之间的OSPF Cost 如图所示 。 目前三台路由器的邻居状态稳定，那么______ 。 (多选)
+A. 在 RTA 的路由表只有一条到达 NET-1 网段的 OSPF 路由
+B. 在 RTB 的路由表有两条去往目的网段 NET-1 的 OSPF 路由
+C. 对 RTB 而言，到达目的网段 NET-1 会优先选择 RTB--->RTA--->RTC 路径
+D. 网络状态稳定后 ，在接下来的 45分钟之内 ， 网络上 OSPF 邻居之间只有 Hello 报文传递
+Correct Answer: AC
+Section: part 6
+Explanation
+问题271.
+一台空配置的 MSR 路由器通过多个接口接入同一个 OSPF 网络，所有这些接口都启动了 OSPF ，配置完成后，
+该路由器已经成功学习到了网络中的 OSPF 路由。如今在该路由器的一个 OSPF 接口上运行如下命令：
+[MSR-GigabitEthernet0/0]ospf cost 256
+在保持其他配置不变的情况下，关于该配置的理解正确的是_____。
+A. 该配置可能影响数据包的转发路径
+B. 该配置不会影响数据包的转发路径
+C. 该配置命令无效，因为命令输入错误
+D. 该配置命令无效，因为 Cost 的最大值为 255
+Correct Answer: A
+Section: part 7
+Explanation
+开销大小决定了数据从哪个接口转发出去
+问题272.
+图示 4 种划分 OSPF 区域的方式，哪种是正确的？ (多选)
+A. 图 1
+B. 图 2
+C. 图 3
+D. 图 4
+Correct Answer: ABCD
+Section: part 7
+Explanation
+不一定非要有骨干区域，但是多区域之间互通必须通过骨干区域
+问题273.
+如果要达到全网互通，图示 4 种划分 OSPF 区域的方式，哪种是合理的？ (多选)
+A. 图 1
+B. 图 2
+C. 图 3
+D. 图 4
+Correct Answer: ABC
+Section: part 7
+Explanation
+只划分为非 0 区域也可以使用，但是非 0 区域之间需要使用area0 来连接 (虚连接的话也得有 area0) 。
+问题274.
+两台 MSR 路由器分别通过以太网、串行接口相连，如图所示。串行链路上运行 PPP 链路层协议，两台路 由器
+上运行了 OSPF ，而且都属于 Area 0 ， 同时在 Area 0 中通过 network 命令发布了每台路由器上的三个网段
+(GE 接口网段、串行接口网段、LAN 网段) ； 目前两端 OSPF 邻居状态稳定，那么______。 (多选)
+A. 如果没有修改 OSPF Cost 值，那么 RTA 到达 RTB 的 LAN 网段将优选 GE 链路
+B. 只要正确修改两台路由器 GE 接口和串行接口的 OSPF Cost 值，那么在 RTA 、RTB 上将能形成到达对方
+LAN 的两条等值路由
+C. 在 GE 链路上，RTA 、RTB 依然会进行 DR 、BDR 的选举
+D. 以上说法均正确
+Correct Answer: ABCD
+Section: part 7
+Explanation
+G0/1 开销 1 ，S1/0 开销 1562 ，优选开销小的
+问题275.
+如图所示，四台 MSR 路由器分别通过以太网、串行接口相连， 同时网络中运行 OSPF ，区域划分如图。已知所
+有互连链路的 OSPF Cost 值都是一样的，除了 RTB 与 RTC 之间的连接链路是 PPP 之外，其他互连链路都是
+以太网。那么______。(多选)
+A. 网络中至少有三个 DR
+B. 网络中至少有三个 BDR
+C. 如果 RTD 与 RTC 之间的链路出现故障，那么 RTD 、RTC 会立即向 RTA 、RTB 发送 LSA 摘要信 息，而
+不会等待固定的 LSA 更新周期
+D. 状态稳定后，四台路由器有同样的 LSDB
+Correct Answer: ABC
+Section: part 7
+Explanation
+DR/BDR选举是针对广播/NBMA链路进行选举
+相同区域内维护同一 LSDB
+Ospf 采用增量更新机制。网络变更时立即向另据发送 LSA 摘要信息
+网络未变化，每隔 30min 向邻居发送 LSA 摘要
+邻居收到摘要，对比自身链路状态信息，发现对方具备自己没有的链路信息则发出请求，否则不做动作
+问题276.
+如图，三台 MSR 路由器之间分别运行 OSPF 以及 RIP 。如今 RTA 与 RTB 之间的 OSPF 邻居状态稳 定，
+RTB 与 RTC 之间的 RIPv2 也工作正常，那么此刻起 40分钟之内，______ 。 (多选)
+A. 网络中一定有组播地址为 224.0.0.13 的报文
+B. 网络中一定有组播地址为 224.0.0.5 的报文
+C. RTB 向 RTC 发送了至少 10 次自己的全部路由表信息
+D. RTB 向 RTA 发送了至少 1 次自己的 LSA 摘要信息
+Correct Answer: BD
+Section: part 7
+Explanation
+组播地址范围:224.0.0.0～239.255.255.255
+网络中一定有组播地址为 224.0.0.13 的报文； 224.0.0.13 是vrrp 组播地址； 224.0.0.9是 rip 组播地址
+RTB 向 RTA 发送了至少 1 次自己的 LSA 摘要信息；网络未变化，每隔 30min 向邻居发送 LSA 摘要
+Rip 每30S 更新 ，既然 C 答案是错的，只能理解为错在发送“全部路由表信息表” ，RTB 上含有 3 个路由表：
+全 局路由表，OSPF 路由表，RIP 路由表，RTB 只会向 RTC 发送自己的 RIP 路由表，其他的不会发送，应表述
+为，发送了至少 10 次自己整张 rip 路由表，个人认为没必要咬文嚼字
+问题277.
+两台空配置的 MSR 路由器通过各自的 GE0/0 接口背靠背互连，其互连网段为 192.168.1.0/30 ，正确配置 IP 地
+址后，两台路由器的 GE0/0 接口可以互通。如今分别在两台路由器上增加如下 OSPF 配置：
+ospf 1
+area 0.0.0.1
+network 192.168.1.0 0.0.0.3
+那么下列哪些说法是正确的？
+A. 没有配置 Router ID ，两台路由器之间不能建立稳定的 OSPF 邻接关系
+B. 没有配置 Area 0 ，两台路由器之间不能建立稳定的 OSPF 邻接关系
+C. RTA 的路由表中会出现一条 OSPF 路由
+D. 两台路由器之间可以建立稳定的 OSPF 邻接关系，但是 RTA 和 RTB 的路由表中都没有 OSPF 路由
+Correct Answer: D
+Section: part 7
+Explanation
+直连路由优先级为0
+问题278.
+两台空配置的 MSR 路由器 MSR-1 和 MSR-2 通过各自的 GE0/0 接口直连，MSR-1 和 MSR-2 的接口 GE0/0
+上 IP 地址分别为 10.1.1.1/24 和 10.1.1.2/24 ，两个 GE0/0 接口之间具有 IP 可达性。然后在两台路 由器上分别添
+加了如下 OSPF 配置：
+MSR-1:
+[MSR-1-ospf-1] area 0.0.0.255
+[MSR-1-ospf-1-area-0.0.0.255] network 10.1.1.0 0.0.0.255
+MSR-2:
+[MSR-2-ospf-1] area 255
+[MSR-2-ospf-1-area-0.0.0.255] network 10.1.1.0 0.255.255.255
+那么关于上述配置描述正确的是_____ 。 (多选)
+A. MSR-1 上的命令 network 10.1.1.0 0.0.0.255 表示在该路由器的 GE0/0 接口启动 OSPF 并加入相应区域
+B. MSR-2 上的命令 network 10.1.1.0 0.255.255.255 不能在该路由器的 GE0/0 接口启动 OSPF
+C. 两台路由器的 OSPF 接口都属于 OSPF 区域 255
+D. 两台路由器的 OSPF 接口不属于同一个 OSPF 区域，其中一台路由器的 OSPF Area 配置错误
+Correct Answer: AC
+Section: part 7
+Explanation
+问题279.
+三台 MSR 路由器连接在同一个 LAN 网络中，如图所示。在三台路由器的 LAN 互连网段运行 OSPF ， RTA 、
+RTB 、 RTC 的 DR 优先级分别为 2 、2 、3 。 由于 RTC 的 LAN 链路故障， 目前只有 RTA 和 RTB 在正常工
+作，且 RTA 与 RTB 之间的 OSPF 邻居状态稳定。那么_____ 。 (多选)
+A. RTC 的链路恢复后，网络中将重新选择 DR ，RTC 将会成为新的 DR
+B. RTC 的链路恢复后，网络中将建立 3 个 OSPF 邻接关系
+C. RTC 的链路恢复后，网络中将建立 2 个 OSPF 邻接关系
+D. RTC 的链路恢复后，RTC 和 RTB 的 OSPF 邻接状态是 FULL
+Correct Answer: BD
+Section: part 7
+Explanation
+优先级越大越优先 (1-255) 默认 1，但不能更改有效的DR/BDR
+重新选举 A B 一个 DR 一个 BDR, RTC 为 DRother DR ohers 稳定后停留在 2-way 其他都 full
+问题280.
+两台 MSR 路由器通过 OSPF 实现动态路由学习，在其中一台路由器 MSR-1 上有三个接口 IP 地址分别为
+192.168.8.1/24、192.168.13.254/24 和 192.168.29.128/24 ，那么要通过一条 network 命令在这三个接口上 启动
+OSPF ，下列哪项配置是可行的？ (多选)
+A. [MSR-1] ospf
+[MSR- 1-ospf-1] area 0
+[MSR-1-ospf-1-area-0.0.0.0] network 192.168.1.0 0.0.255.255
+B. [MSR-1] ospf
+[MSR-1-ospf-1] area 0
+[MSR-1-ospf-1-area-0.0.0.0] network 192.168.1.0 0.0.32.255
+C. [MSR-1] ospf
+[MSR-1-ospf-1] area 0
+[MSR-1-ospf-1-area-0.0.0.0] network 192.168.1.0 0.0.63.255
+Correct Answer: AC
+Section: part 7
+Explanation
+8 0000 1000
+13 0000 1101
+29 0001 1101
+255-224=31
+255-192=63
+255-128=127
+255-0=255
+问题281.
+在一台运行 OSPF 的 MSR 路由器的 GE0/0 接口上做了如下配置：
+[MSR-GigabitEthernet0/0]ospf cost 2
+那么关于此配置命令描述正确的是______ 。 (多选)
+A. 该命令将接口 GE0/0 的 OSPF Cost 值修改为 2
+B. 该命令只对从此接口接收的数据的路径有影响
+C. 该命令只对从此接口发出的数据的路径有影响
+D. 默认情况下，MSR 路由器的接口 Cost 与接口带宽成正比关系
+Correct Answer: AC
+Section: part 7
+Explanation
+Cost=参考带宽 100/ 接口带宽 故反比 (0-65535)
+问题282.
+两台空配置的 MSR 路由器 MSR-1 、MSR-2 通过各自的 GE0/0 互连，其 IP 地址分别为
+192.168.1.2/30 和 192.168.1.1/30 。然后在两台路由器上都增加如下配置：
+[MSR-ospf-1]area 0
+[MSR-ospf-1-area-0.0.0.0]network 192.168.1.1 0.0.0.3
+两台路由器的 OSPF Router ID 分别为其各自的 GE0/0 接口地址，两台路由器上没有其他任何配置。那么要确保
+MSR-1 在下次选举中成为 OSPF DR ，还需要添加如下哪项配置？ (多选)
+A. 在 MSR-1 上配置：[MSR-1-GigabitEthernet0/0]ospf dr-priority 255
+B. 在 MSR-2 上配置：[MSR-2-GigabitEthernet0/0]ospf dr-priority 0
+C. 在 MSR-1 上配置：[MSR-1-ospf-1]ospf dr-priority 255
+D. 在 MSR-2 上配置：[MSR-1-ospf-1]ospf dr-priority 0
+Correct Answer: AB
+Section: part 7
+Explanation
+1) DR BDR 针对接口而非路由器，换言之，一个路由的多个接口可能既有 DR 也有BDR
+2) 优先级越大越优先 (1-255) 默认 1 ，优先级相同比较 router id
+3) 优先级为 0 的不参与选举
+对比 ISIS 选举 DIS
+1)优先级越大越优先 (0-127) 默认 64 ，优先级相同则比较 MAC 地址
+2)优先级为 0 参与选举，不过优先级最低
+问题283.
+如下关于 OSPF 信息显示与调试命令的说法正确的是_____ 。 (多选)
+A. 通过 display ospf peer 命令可以查看路由器的 OSPF 邻居关系
+B. 通过 display ospf lsdb 命令可以查看路由器的链路状态数据库，网络中所有 OSPF路由器的链路状态数据库应
+该都是一样的
+C. 通过 display ospf routing 命令可以查看路由器的 OSPF 路由情况，并不是所有的 OSPF路由都会被加入全局
+路由表
+D. 通过 display ospf fault 来查看 OSPF 出错的信息
+Correct Answer: AC
+Section: part 7
+Explanation
+第 25 章 用访问控制列表实现包过滤
+问题284.
+两台 MSR 路由器通过图示方式连接。 目前在两台路由器之间运行了 OSPF 。如今要在 RTA 上配置 ACL 来阻
+止 RTA 与 RTB 之间建立 OSPF 邻居关系，那么在 RTA 的 GE0/0 接口 outbound 方向应用如下哪 些 ACL 是
+可行的？
+A. acl number 3000
+rule 0 deny ip destination 224.0.0.5 0
+rule 5 permit ip
+B. acl number 3000
+rule 0 deny ip destination 224.0.0.5 0 eq 89
+rule 5 permit ip
+C. acl number 3000
+rule 0 deny udp destination-port eq 89
+rule 5 permit ip
+D. acl number 3000
+rule 0 deny ospf
+rule 5 permit ip
+Correct Answer: AD
+Section: part 7
+Explanation
+组播地址224.0.0.5，hello报文寻找邻居
+Ospf的协议号为89、UDP是17、IP包含太多
+[H3C-acl-adv-3000]ru 0
+permit ? <0-255> Protocol
+number
+gre GRE tunneling(47)
+icmp Internet Control Message Protocol(1)
+igmp Internet Group Management Protocol(2)
+ip Any IP protocol
+ipinip IP in IP tunneling(4)
+ospf OSPF routing protocol(89)
+tcp Transmission Control Protocol (6)
+udp User Datagram Protocol (17)
+DR ,BD 向 Drother 发送 DD,LSR,LSU 时目的地址 224.0.0.5 ，即 Drother 侦听224.0.0.5
+Drther 向 DR,BDR 发送 DD,LSR,LSU 时目的地址 224.0.0.6 ，即 DR 侦听224.0.0.6
+问题285.
+客户路由器的接口 GigabitEthernet0/0 下连接了局域网主机 HostA ，其 IP 地址为192.168.0.2/24；接口
+Serial6/0 接口连接远端， 目前运行正常。现增加 ACL 配置如下：
+firewall enable
+Firewall default permit
+acl number 3003
+rule 0 permit tcp
+rule 5 permit icmp
+acl number 2003
+rule 0 deny source 192.168.0.0 0.0.0.255
+Interface GigabitEthernet0/0
+firewall packet-filter 3003 inbound
+firewall packet-filter 2003 outbound
+ipaddress 192.168.0.1 255.255.255.0
+interface Serial6/0
+link-protocol ppp
+ip address 6.6.6.2 255.255.255.0
+假设其他相关配置都正确，那么______ 。 (多选)
+A. HostA 不能 ping 通该路由器上的两个接口地址
+B. HostA 不能 ping 通 6.6.6.2 ，但是可以 ping 通 192.168.0.1
+C. HostA 不能 ping 通 192.168.0.1 ，但是可以 ping 通 6.6.6.2
+D. HostA 可以 Telnet 到该路由器上
+Correct Answer: CD
+Section: part 1
+Explanation
+A可以ping通6.6.6.2/24
+ACL 实际上起限制作用的只有 2003 3003 ，允许 tcp icmp ，默认允许无意义
+注意：拒绝掉的是源地址 192.168.0.0/24 的所有报文，包括 icmp 的 echo ，echo-reply 等，用在的是 G0/0 接口
+的 outbound 方向，当 A ping 网关时，网关返回的 icmp echo reply 报文被 deny ；如果用在 G0/0 inbound 方向，
+A ping 网关时，发送的 icmp echo 报文被 deny Ping 6.6.6.2 同理
+Ping通是有来有回
+问题286.
+一台 MSR 路由器通过 S1/0 接口连接 Internet ，GE0/0 接口连接局域网主机，局域网主机所在网段为
+10.0.0.0/8，在 Internet 上有一台 IP 地址为 202.102.2.1 的 FTP 服务器。通过在路由器上配置 IP 地址和路由，
+目前局域网内的主机可以正常访问 Internet(包括公网 FTP 服务器) ，如今在路由器上增加如下配置：
+firewall enable
+acl number 3000
+rule 0 deny tcp source 10.1.1.1 0 source-port eq ftp destination 202.102.2.1 0
+然后将此 ACL 应用在 GE0/0 接口的 inbound 和 outbound 方向，那么这条 ACL 能实现下列哪些意图？
+A. 禁止源地址为 10.1.1.1 的主机向目的主机 202.102.2.1 发起 FTP 连接
+B. 只禁止源地址为 10.1.1.1 的主机到目的主机 202.102.2.1 的端口为 TCP 21 的 FTP 控制连接
+C. 只禁止源地址为 10.1.1.1 的主机到目的主机 202.102.2.1 的端口为 TCP 20 的 FTP 数据连接
+D. 对从 10.1.1.1 向 202.102.2.1 发起的 FTP 连接没有任何限制作用
+Correct Answer: D
+Section: part 8
+Explanation
+ftp 是 source (客户端) 的随机端口访问 dest (服务器) 的 TCP 21 和 TCP 20 ，故限制 FTP 应该是在 dest 而非
+source
+rule 0 deny tcp source 10.1.1.1 0 destination 202.102.2.1 0 destination -port eq ftp
+eq是等于的意思，这个题目考的是你对acl的理解和ftp建立链接的理解。在ftp建立链接的时候不管你是主动还是被
+动 客户端都是采用的临时端口 而这个命令只是禁止了21端口（source-port eq ftp：意思是源端口等于21，如果ftp
+是ftp-data 就是20端口）因此客户端端口是随机的所以不能确定就是21，所以b是错的；c，即使客户端的端口是
+确定的21和20，但是这个命令也只是禁止了21端口，所以c是错的；同样A也是错的。所以选D
+问题287.
+在路由器 MSR-1 上看到如下信息：
+[MSR-1]display acl 3000
+Advanced ACL 3000, named -none-, 2
+rules, ACL's step is 5
+rule 0 permit ip source 192.168.1.0 0.0.0.255
+rule 10 deny ip (19 times matched)
+该 ACL 3000 已被应用在正确的接口以及方向上。据此可知_______ 。 (多选)
+A. 这是一个基本 ACL
+B. 有数据包流匹配了规则 rule 10
+C. 至查看该信息时，还没有来自 192.168.1.0/24 网段的数据包匹配该 ACL
+D. 匹配规则 rule 10 的数据包可能是去往目的网段 192.168.1.0/24 的
+Correct Answer: BCD
+Section: part 8
+Explanation
+matched相匹配的
+rule 10 deny ip source any destination any
+问题288.
+某网络连接形如：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB
+两台 MSR 路由器 MSR-1 、MSR-2 通过各自的 S1/0 接口背靠背互连，各自的 GE0/0 接口分别连接客户端主
+机 HostA 和 HostB 。其中 HostA 的 IP 地址为 192.168.0.2/24 ，MSR-2 的 S0/0 接口地址为 1.1.1.2/30 ，通
+过配置其他相关的 IP 地址和路由目前网络中 HostA 可以和 HostB 实现互通。如今客户要求不允许 HostA 通 过
+地址 1.1.1.2 Telnet 登录到 MSR-2 。那么如下哪些配置可以满足此需求？ (多选)
+A. 在 MSR-1 上配置如下 ACL 并将其应用在 MSR-1 的 GE0/0 的 inbound 方向：
+[MSR-1]firewall enable
+[MSR-1]acl number 3000
+[MSR-1-acl-adv-3000]rule 0 deny tcp source 192.168.0.1 0.0.0.255 destination 1.1.1.2 0.0.0.3 destination-port
+eq telnet
+B. 在 MSR-1 上配置如下 ACL 并将其应用在 MSR-1 的 GE0/0 的 outbound 方向：
+[MSR-1]firewall enable
+[MSR-1]acl number 3000
+[MSR-1-acl-adv-3000]rule 0 deny tcp source 192.168.0.2 0 destination 1.1.1.2 0 destination- port eq telnet
+C. 在 MSR-1 上配置如下 ACL 并将其应用在 MSR-1 的 S1/0 的 inbound 方向：
+[MSR-1]firewall enable
+[MSR-1]acl number 3000
+[MSR-1-acl-adv-3000]rule 0 deny tcp source 192.168.0.1 0.0.0.255 destination 1.1.1.2 0 destination-port eq
+telnet
+D. 在 MSR-1 上配置如下 ACL 并将其应用在 MSR-1 的 S1/0 的 outbound 方向：
+[MSR-1]firewall enable
+[MSR-1]acl number 3000
+[MSR-1-acl-adv-3000]rule 0 deny tcp source 192.168.0.2 0 destination 1.1.1.2 0.0.0.3 destination￾port eq telnet
+Correct Answer: AD
+Section: part 8
+Explanation
+匹配目的地址范围可大不可小
+问题289.
+某网络连接形如：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB 两台 MSR 路由器 MSR1 、MSR2 通 过各
+自的 S1/0 接口背靠背互连，各自的 GigabitEthernet0/0 接口分别连接客户端主机 HostA 和 HostB 。通过配置
+IP 地址和路由目前网络中 HostA 可以和 HostB 实现互 通。如今在 MSR-2 上增加了如下配置：
+firewall enable
+acl number 3000
+rule 0 deny tcp destination-port eq telnet
+interface Serial1/0
+link-protocol ppp
+ip address 1.1.1.2 255.255.255.252
+firewall packet-filter 3000 inbound
+firewall packet-filter 3000 outbound
+interface GigabitEthernet0/0
+ip address 10.1.1.1 255.255.255.0
+那么如下哪些说法是正确的？ (多选)
+A. 后配置的 firewall packet-filter 3000 outbound 会取代 firewall packet-filter 3000 inbound 命令
+B. 在 HostB 上无法成功 Telnet 到 MSR-1 上
+C. 在 HostB 上可以成功 Telnet 到 MSR-1 上
+D. 最后配置的 firewall packet-filter 3000 outbound 不会取代 firewall packet-filter 3000 inbound 命令
+Correct Answer: BD
+Section: part 8
+Explanation
+B. 在 HostB 上无法成功 Telnet 到 MSR-1 上 outbound 生效，telnet 不同于 21 题 icmp 报文的有去有回
+问题290.
+某网络连接形如：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB
+其中两台 MSR 路由器 MSR-1 、MSR-2 通过各自的 S1/0 接口背靠背互连，各自的 GE0/0 接口分别连接客户
+端主机 HostA 和 HostB 。通过配置 IP 地址和路由， 目前网络中 HostA 可以和 HostB 实现互通。HostA 的 IP
+地址为 192.168.0.2/24 ，默认网关为 192.168.0.1 。MSR-1 的 GE0/0 接口地址为 192.168.0.1/24 。在 MSR-1
+上增加了如下配置：
+firewall enable
+firewall default permit
+acl number 3003
+rule 0 deny icmp source 192.168.0.2 0 icmp-type echo-reply
+interface GigabitEthernet0/0
+firewall packet-filter 3003 inbound
+那么______ 。 (多选)
+A. 在 HostA 上无法 ping 通 MSR-1
+B. 在 HostA 上可以 ping 通 MSR-1
+C. 在 MSR-1 上无法 ping 通 HostA
+D. 在 MSR-1 上可以 ping 通 HostA
+Correct Answer: BC
+Section: part 8
+Explanation
+echo-reply回复
+问题291.
+在一台路由器上配置了如下的
+ACL：
+acl number 2000 match-order auto
+rule 0 deny
+rule 5 permit source 192.168.9.0 0.0.7.255
+假设该 ACL 应用在正确的接口以及正确的方向上，那么______ 。 (多选)
+A. 源网段为 192.168.15.0/24 发出的数据流被允许通过
+B. 源网段为 192.168.9.0/21 发出的数据流被允许通过
+C. 源网段为 192.168.9.0/21 发出的数据流被禁止通过
+D. 源网段为 192.168.9.0/22 发出的数据流被禁止通过
+E. 任何源网段发出的数据流都被禁止通过
+Correct Answer: AB
+Section: part 8
+Explanation
+acl number 2000 match-order auto 深度优先匹配：地址范围小的被优先匹配 故先匹配 rule 5
+192.168.9.0 0.0.7.255 掩码 21 位 192.168.00001001.0000 0000 故可以匹配 8.1.— 15.254
+问题292.
+客户的一台 MSR 路由通过广域网接口 S1/0 连接 Internet ，通过局域网接口 GE0/0 连接办公网络， 目前办公
+网络用户可以正常访问 Internet 。在路由器上增加如下的 ACL 配置：
+firewall enable
+firewall default deny #
+acl number 3003
+rule 0 deny icmp
+rule 5 permit tcp destination-port eq 20 #
+interface GigabitEthernet0/0
+firewall packet-filter 3000 inbound
+firewall packet-filter 3000
+outbound 那么______。
+A. 办公网用户发起的到 Internet 的 ICMP 报文被该路由器禁止通过
+B. 办公网用户发起的到达该路由器的 FTP 流量可以正常通过
+C. 办公网用户发起的到达该路由器 GE0/0 的 Telnet 报文可以正常通过
+D. 办公网用户发起的到 Internet 的 FTP 流量被允许通过该路由器，其他所有报文都被禁止通过该路由器
+Correct Answer: A
+Section: part 8
+Explanation
+ACL 策略默认为 deny ，只允许访问端口 20 的 FTP 数据流量端口通过。但访问端口 21 的 FTP 控制连接 建立被
+拒绝
+问题293.
+客户的路由器 MSR-1 的 GE0/0 接口下连接了一台三层交换机，而此三层交换机是其所连接的客户办公网 络的
+多个网段的默认网关所在。MSR-1 通过串口 S1/0 连接到 Internet 。全网已经正常互通，办公网用户 可以访问
+Internet 。在该路由器上添加如下 ACL 配置：
+firewall enable
+acl number 3004
+rule 0 deny ip source 192.168.1.0 0.0.0.255
+rule 5 permit tcp source 192.168.0.00.0.255.255
+rule 10 permit icmp
+同时将 ACL 3004 应用在 GE0/0 的 inbound 方向，那么______ 。 (多选)
+A. 该路由器允许 192.168.2.0/24 网段的用户对 Internet 发出的 FTP 数据流通过
+B. 该路由器允许所有用户的 ICMP 报文通过
+C. 该路由器禁止 192.168.1.0/24 网段用户对 Internet 的所有 IP 流量通过
+D. 该路由器允许 192.168.1.0/24 网段用户对 Internet 的 WWW 业务流量通过
+Correct Answer: AC
+Section: part 8
+Explanation
+TCP包括Telnet、FTP、http、SMTP，UDP包括：DNS/TFTP/SNMP/BOOTIP
+WWW基于HTTP
+rule 0 deny ip source 192.168. 1.0 0.0.0.255 拒绝 192.168.1.0 用户对外 IP 流量
+rule 5 permit tcp source 192.168.0.0 0.0.255.255 允许 192.168.0.0 用户对外 TCP 流量 (除去 rule 0 拒绝 的)
+rule 10 permit icmp 允许所有 icmp 流量通过 (除去 rule 0 拒绝的)
+deny 掉的为 IP 报文，包括 ICMP 以及封装上层的 TCP/UDP
+问题294.
+客户的路由器 MSR-1 的 GigabitEthernet0/0 接口下连接了一台三层交换机，而此三层交换机为客户办公网络 的
+多个网段的默认网关所在。 同时该路由器的广域网接口连接到 Internet ，而 Internet 上有 DNS 服务器为客 户
+局 域 网 内 的 主 机 提 供 服 务，客户的办公网络可以正常访问 Internet，如今在 MSR-1的 GigabitEthernet0/0的
+inbound 方向应用了如下
+ACL：
+firewall enable
+acl number 3006
+rule 0 deny tcp source 192.168.1.0 0.0.0.255
+rule 5 permit ip
+那么______ 。 (多选)
+A. 192.168.1.0/24 网段的客户可以通过 Outlook 等邮件客户端正常收发外部邮件
+B. 192.168.1.0/24 网段的客户不能通过 WWW 方式打开外部网页
+C. 192.168.0.0/24 网段的客户可以通过 FTP 方式从 Internet 上下载数据
+D. 192.168.1.0/24 网段的客户不能够通过 Outlook 等邮件客户端收发外部邮件
+Correct Answer: BCD
+Section: part 8
+Explanation
+防火墙默认规则允许
+TCP包括Telnet、FTP、http、SMTP，UDP包括：DNS/TFTP/SNMP/BOOTIP
+Ssh——23
+telnet——23
+smtp——25
+UDP(17) ： DNS——53
+Bootp——67/68
+Tftp——69
+Snmp——161
+问题295.
+客户的网络结构如图所示。要实现如下需求：
+1. Host C 与 Host B 互访
+2. Host B 和 Host A 不能互访
+3. Host A 和 Host C 不能互 访那么______ 。 (多选)
+A. 只在 MSR-1 的接口 GE0/0 上应用高级 ACL 可以实现该需求
+B. 只在 MSR-1 的接口 GE0/0 上应用 ACL 无法实现该需求
+C. 分别在两台路由器的接口 GE0/0 上应用高级 ACL 可以实现该需求
+D. 分别在 MSR-1 的接口 S1/0 、GE0/0 上应用高级 ACL 可以实现该需求
+Correct Answer: ACD
+Section: part 8
+Explanation
+A 不能与 B 、 C 通信， 只需在 MSR-1 G0/0 接口 inbound 上拒绝 HostA 访问外部流量
+A 、C 、D 选项都包含该功能,而在 S1/0 outbound 方向拒绝 则达不到 A 、C 不能互访的要求
+问题296.
+在路由器 MSR-1 上看到如下提示信息：
+[MSR-1]display firewall-statistics all
+Firewall is enable, default filtering method is
+'permit'. Interface: GigabitEthernet0/0
+In-bound Policy: acl 3000
+Fragments matched normally
+From 2008-11-08 2:25:13 to 2008-11-08
+2:25:46 0 packets, 0 bytes, 0% permitted,
+4 packets, 240 bytes, 37% denied,
+7 packets, 847 bytes, 63% permitted default,
+0 packets, 0 bytes, 0% denied default, Totally
+7 packets, 847 bytes, 63% permitted, Totally 4
+packets, 240 bytes, 37% denied.
+据此可以推测______ 。 (多选)
+A. 由上述信息中的 37% denied 可以看出已经有数据匹配 ACL 3000 中的规则
+B. 有一部分数据包没有匹配 ACL 3000 中的规则，而是匹配了默认的 permit 规则
+C. ACL 3000 被应用在 GigabitEthernet0/0 的 inbound 方向
+D. 上述信息中的 0% denied default 意味着该 ACL 的默认匹配规则是 deny
+Correct Answer: ABC
+Section: part 8
+Explanation
+问题297.
+客户路由器 MSR-1 的以太网口 Ethernet1/0 配置如下：
+interface Ethernet0/0
+ip address 192.168.0.1 255.255.255.0
+该 接 口 连 接 了 一 台 三 层 交 换 机 ， 而 此 三 层 交 换 机 为 客 户办 公 网 络 的 网 段 192.168.7.0/24 ~
+192.168.83.0/24 的默认网关所在。现在客户要求在 MSR-1 上配置 ACL 来禁止办公网络所有用户向 MSR-1 的
+地址 192.168.0.1 发起 Telnet ，那么下面哪项配置是正确的？
+A. acl number 3000
+rule 0 deny 0.0.0.0 255.255.255.255 destination 192.168.0.1 0 destination-port eq telnet
+interface Ethernet0/0
+ip address 192.168.0.1 255.255.255.0
+firewall packet-filter 3000 inbound
+B. acl number 3000
+rule 0 deny 0.0.0.0 255.255.255.255 destination 192.168.0.1 0 destination-port eq telnet
+interface Ethernet0/0
+ip address 192.168.0.1 255.255.255.0
+firewall packet-filter 3000 outbound
+C. acl number 3000
+rule 0 deny 255.255.255.255 0 destination 192. 168.0.1 0 destination-port eq telnet
+interface Ethernet0/0
+ip address 192.168.0.1 255.255.255.0
+firewall packet-filter 3000 inbound
+D. acl number 3000
+rule 0 deny 255.255.255.255 0 destination 192. 168.0.1 0 destination-port eq telnet
+interface Ethernet0/0
+ip address 192.168.0.1 255.255.255.0
+firewall packet-filter 3000 outbound
+Correct Answer: A
+Section: part 8
+Explanation
+问题298.
+路由器 MSR-1 的以太网口 Ethernet0/0 配置如下：
+interface Ethernet0/0
+ip address 192.168.0.1 255.255.255.0
+在该接口下连接了一台三层交换机，而此三层交换机为客户办公网络的多个网段的默认网关所在，出于安全考虑，
+现在客户要求在 MSR-1 的接口 Ethernet0/0 上配置 ACL (不限制应用的方向) 来禁止办公 网络所有用户 ping 通
+192.168.0.1 ，可以用如下哪种配置？ (多选)
+A. acl number 3000
+rule 0 deny icmp destination 192.168.0.1 0 icmp-type echo-reply
+B. acl number 3000
+rule 0 deny icmp destination192.168.0.1 0 icmp-type echo
+C. acl number 3000
+rule 0 deny icmp destination 192.168.0.1 0
+D. acl number 3000
+rule 0 deny ip destination 192.168.0.1 0 eq icmp
+Correct Answer: BC
+Section: part 8
+Explanation
+icmp-type echo为ping请求回显报文，icmp-type echo reply为ping回显应答报文
+acl number 3000
+rule 0 deny icmp source 192.168.0.2 0 icmp-type echo-reply
+拒绝 192.168.0.2 返回的 icmp echo-reply 报文，说明主机 ping 不通网关192.168.0.2
+acl number 3000
+rule 0 deny icmp destination 192.168.0.1 0 icmp-type echo-reply
+拒绝返回给 192.168.0.1 的 icmp echo-reply 报文，说明网关 192.168.0.1 ping 不通主机
+问题299.
+某网络连接如下所示：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB
+客户要求仅仅限制 HostA 与 HostB 之间的 ICMP 报文，如下哪些做法是可行的？ (多选)
+A. 在 MSR-1 上配置 ACL 禁止源主机 HostA 到目的主机 HostB 的 ICMP 报文，并将此 ACL 应用 在 MSR-1
+的 GE0/0 的 outbound 方向
+B. 在 MSR-1 上配置 ACL 禁止源主机 HostA 到目的主机 HostB 的 ICMP 报文，并将此 ACL 应用 在 MSR-1
+的 S1/0 的 outbound 方向
+C. 在 MSR-1 上配置 ACL 禁止源主机 HostB 到目的主机 HostA 的 ICMP 报文，并将此 ACL 应用 在 MSR-1
+的 S1/0 的 outbound 方向
+D. 在 MSR-1 上配置 ACL 禁止源主机 HostB 到目的主机 HostA 的 ICMP 报文，并将此 ACL 应用 在 MSR-1
+的 GE0/0 的 outbound 方向
+Correct Answer: BD
+Section: part 8
+Explanation
+无论哪个方向的都可以，只需注意应用接口方向即可
+问题300.
+两台 MSR 路由器 MSR-1 、MSR-2 通过各自的 S1/0 接口背靠背互连，各自的 GigabitEthernet0/0 接口分别连
+接客户端主机 HostA 和 HostB ： HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2-- GE0/0----HostB
+通过配置 IP 地址和路由目前网络中 HostA 可以和 HostB 实现互通，如今在路由器 MSR-1 上增加如 下 ACL 配
+置：
+acl number 3000
+rule 0 deny icmp icmp-type echo
+interface GigabitEthernet0/0
+ip address 192.168.0.1 255.255.255.0
+firewall packet-filter 3000 inbound
+那么如下说法哪些是正确的？ (多选题)
+A. 在 HostA 上将 ping 不通自己的网关地址，即 MSR-1 上的 GE0/0 的接口地址
+B. 在 HostA 上 ping 不通 HostB
+C. 在 HostB 上能 ping 通 HostA
+D. 在 MSR-1 上能 ping 通 HostB
+Correct Answer: ABCD
+Section: part 8
+Explanation
+icmp-type echo为ping请求回显报文，icmp-type echo reply为ping回显应答报文
+deny 掉的时来自主机 A 的 ping 请求报文。其他不受影响。
+A) 如果是acl 用在 S 1/0 的出方向上，则 HostA 就能 ping 通自己的网关地址
+C) 拒绝的是所有 icmp 请求报文，而回复报文 echo-reply 使可以通过的， 即 HostB ping HostA 是有 echo- reply
+报文返回的
+D) MSR- 1 出接口的 ping 请求报文是可以正常通过的，如果 G0/0 inbound 方向acl 匹配的是 echo-reply则无效
+outbound echo
+问题301.
+路由器 MSR-1 的 GE0/0 接口地址为 192.168.100.1/24 ，该接口连接了一台三层交换机，而此三层交换机 为客
+户办公网络的多个网段的默认网关所在。MSR-1 通过串口 S1/0 连接到 Internet 。全网已经正常互 通，办公网
+用户可以访问 Internet 。出于安全性考虑，需要禁止客户主机 ping MSR-1 的 GE0/0 接口，于 是在该路由器上
+配置了如下
+ACL： acl number 3008
+rule 0 deny icmp source 192.168.1.0 0.0.0.255
+同时该 ACL 被应用在 GE0/0 的 inbound 方向。发现局域网内 192.168.0.0/24 网段的用户依然可以 ping 通
+GE0/0 接口地址。根据如上信息可以推测_______。
+A. 该 ACL 没有生效
+B. 该 ACL 应用的方向错误
+C. 防火墙默认规则是允许
+D. 对接 口 GE0/0 执行 shutdown 和 undo shutdown 命令后 ，才会实现192.168.0.0/24网段ping不通 MSR-1
+以太网接口地址
+Correct Answer: C
+Section: part 8
+Explanation
+此题命题有问题，局域网内网段 192.168.0.0/24 与网关 192.168.100.1/24 根本不在同一网段。忽略这 点，陷阱
+在于acl策略匹配的网段与 ping 的网段不一致，注意 24 位掩码，故只能选 C
+问题302.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB
+该网络已经正确配置了 IP 地址和路由， 目前网络中 HostA 可以和 HostB 实现互通。出于某种安全考 虑，客
+户要求 HostB 不能 ping 通 HostA ，但同时 HostA 可以 ping 通 HostB ，且 HostA 与 HostB 之 间的其他报文
+传递不受限制，那么如下哪些说法是正确的？ (多选)
+A. 仅在 MSR-1 上配置 ACL 无法实现此需求
+B. 仅在 MSR-2 上配置 ACL 无法实现此需求
+C. 仅在 MSR-1 上配置 ACL 就可以实现此需求
+D. 仅在 MSR-2 上配置 ACL 就可以实现此需求
+E. 使用 ping 命令时两主机之间的 ICMP 报文是双向的，这个单项互通的需求无法实现
+Correct Answer: CD
+Section: part 8
+Explanation
+MSR-1 上拒绝 B 返回给 A 的 echo reply
+MSR-2 上拒绝 B 发送给 A 的 echo
+问题303.
+在一台路由器 MSR-1 上看到如下信息：
+[MSR-1]display arp all
+Type: S-Static D-Dynamic
+IP Address MAC Address VLAN ID Interface Aging Type
+192.168.0.2 0123-4321-1234 N/A GE0/0 20 D
+经查该主机有大量病毒，现在客户要禁止该主机发出的报文通过 MSR-1 ，那么_______ 。 (多选)
+A. 可以在路由器上配置基本 ACL 并应用在 GE0/0 的入方向来实现
+B. 可以在路由器上配置基本 ACL 并应用在 GE0/0 的出方向来实现
+C. 可以在路由器上配置高级 ACL 并应用在 GE0/0 的入方向来实现
+D. 可以在路由器上配置高级 ACL 并应用在 GE0/0 的出方向来实现
+Correct Answer: AC
+Section: part 8
+Explanation
+问题304.
+客户的网络如下所示：
+HostA----GE0/0--MSR-1--S1/0---------S1/0--MSR-2--GE0/0----HostB
+在两台路由器上的广域网接口分别作了如下配置：
+MSR-1 ：
+Firewall enable
+Acl number 3000
+rule 0 deny ip source 192.168.0.0 0.0.0.255
+rule 5 permit ip
+interface Serial1/0
+link-protocol ppp
+firewall packet-filter 3000 outbound
+ip address 6.6.6.2 255.255.255.0
+MSR-2：
+interface Serial1/0
+link-protocol ppp
+ip address 6.6.6. 1 255.255.255.0
+假设 HostA 的 IP 地址为 192.168.0.2/24 ，路由以及其他相关接口配置都正确，那么_______ 。 (多选)
+A. HostA 可以 ping 通 6.6.6.2 ，但是不能 ping 通 6.6.6.1
+B. HostA 不能 ping 通 6.6.6.2 ，同时也不能 ping 通 6.6.6.1
+C. HostA 能 ping 通 6.6.6.2 ，同时也能 ping 通 6.6.6.1
+D. 在 MSR-2 上能 ping 通 HostA
+Correct Answer: A
+Section: part 8
+Explanation
+A. HostA 可以 ping 通 6.6.6.2 ， 但是不能 ping 通 6.6.6.1
+在出方向上过滤， 能 ping 通网关， 在 GE0/0 入方向则 ping 不通网关
+MSR-2 上能 ping 通 HostA MSR-2 ping HostA icmp 的 echo reply 报文回不去， 因为 A→ B 主机 A 的 IP 流量被
+滤，ip 数据流包括 icmp 、tcp 、udp ，故 icmp 的 echo 和 echo reply 都被拒绝了
+问题305.
+在 MSR 路由器上配置了如下
+ACL：
+acl number 3999
+rule permit tcp source 10.10.10.1 255.255.255.255 destination 20.20.20.1 0.0.0.0 time-range lucky
+那么对于该 ACL 的理解正确的是_______ 。 (多选)
+A. 该 rule 只在 lucky 时间段内生效
+B. 该 rule 只匹配来源于 10.10.10.1 的数据包
+C. 该 rule 只匹配去往 20.20.20.1 的数据包
+D. 该 rule 可以匹配来自于任意源网段的 TCP 数据包
+E. 该 rule 可以匹配去往任意目的网段的 TCP 数据包
+Correct Answer: ACD
+Section: part 8
+B. 该 rule 只匹配来源于 10.10.10.1 的数据包 反掩码 255.255.255.255 ， 即掩码 0.0.0.0 ， 匹配任意源
+C. 该 rule 只匹配去往 20.20.20.1 的数据包 反掩码 0.0.0.0 即掩码 255.255.255.255 只匹配指定目的
+第 26 章 网络地址转换
+问题306.
+如图所示网络环境中，在 RTA 上执行如下 NAT 配置：
+[RTA]acl number 2000
+[RTA-acl-basic-2000]rule 0 permit source 100.0.0.0 0.0.0.255
+[RTA-acl-basic-2000]nat address-group 1 200.76.28.11 200.76.28.11
+[RTA]interface Ethernet0/1
+[RTA-Ethernet0/1]nat outbound 2000 address-group 1
+配置后，Client_A 和 Client_B都在访问 Server ，则此时 RTA 的 NAT 表可能为______。
+A. Protoco l GlobalAddr Port InsideAddr Port DestAddr Port 1
+200.76.28.11 12289 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 12288 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status: 11, TTL: 00:01:00, Left: 00:00:51
+B. Protoco l GlobalAddr Port InsideAddr Port DestAddr Port 1
+200.76.28.11 12289 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: 11,TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.12 12288 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status: 11,TTL: 00:01:00, Left: 00:00:51
+C. Protoco l GlobalAddr Port InsideAddr Port DestAddr Port 1
+200.76.28.12 12289 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: 11, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 12288 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status: 11, TTL: 00:01:00, Left: 00:00:51
+D. Protoco l GlobalAddr Port InsideAddr Port DestAddr Port 1
+200.76.28.11 12289 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: 11, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 12288 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status: 11,TTL: 00:01:00, Left: 00:00:51
+Correct Answer: D
+Section: part 1
+Explanation
+使用的是Napt技术， 且地址池只分配了一个地址
+问题307.
+NAPT 主要对数据包的______信息进行转换？ (多选)
+A. 数据链路层
+B. 网络层
+C. 传输层
+D. 应用层
+Correct Answer: BC
+Section: part 7
+Explanation
+NAPT:多个私网地址对应一个公网地址的多个端口号
+问题308.
+在配置完 NAPT 后，发现有些内网地址始终可以 ping 通外网，有些则始终不能，可能的原因有______。
+A. ACL 设置不正确
+B. NAT 的地址池只有一个地址
+C. NAT 设备性能不足
+D. NAT 配置没有生效
+Correct Answer: A
+Section: part 7
+Explanation
+问题309.
+下面关于 Easy IP 的说法中，错误的是______。
+A. Easy IP 是 NAPT 的一种特例
+B. 配置 Easy IP 时不需要配置 ACL 来匹配需要被 NAT 转换的报文
+C. 配置 Easy IP 时不需要配置 NAT 地址池
+D. Easy IP 适合用于 NAT 设备拨号或动态获得公网 IP 地址的场合
+Correct Answer: B
+Section: part 7
+Explanation
+问题310.
+下面关于 Easy IP 的说法中，正确的是______ 。 (多选)
+A. Easy IP 是 NAPT 的一种特例
+B. 配置 Easy IP 时不需要配置 ACL 来匹配需要被 NAT 转换的报文
+C. 配置 Easy IP 时不需要配置 NAT 地址池
+D. Easy IP 适合用于 NAT 设备拨号或动态获得公网 IP 地址的场合
+Correct Answer: ACD
+Section: part 8
+Explanation
+问题311.
+若 NAT 设备的公网地址是通过 ADSL 由运营商动态分配的，在这种情况下，可以使用______。
+A. 静态 NAT
+B. 使用地址池的 NAPT
+C. Basic NAT
+D. Easy IP
+Correct Answer: D
+Section: part 8
+Explanation
+问题312.
+在 MSR 路由器上，可以使用______命令清除 NAT 会话表项。
+A. clear nat
+B. clear nat session
+C. reset nat session
+D. reset nat table
+Correct Answer: C
+Section: part 8
+Explanation
+问题313.
+要查看 NAT 数据包的debug 信息，应使用______命令打开 debug 信息并输出到显示器上。
+A. terminal monitor debugging nat
+B. terminal debugging debugging nat
+C. terminal monitor terminal debugging debugging nat packet
+D. terminal monitor terminal debugging debug nat
+Correct Answer: C
+Section: part 8
+Explanation
+问题314.
+私网设备 A 的 IP 地址是 192.168.1.1/24 ，其对应的公网 IP 是 2.2.2.1 ；公网设备 B 的 IP 地址是 2.2.2.5 。现
+需要设备 A 对公网提供 Telnet 服务，可以在 NAT 设备上使用下列哪项配置？
+A. acl number 2000
+rule 0 permit source 192.168.1.1 0.0.0.255
+nat address-group 1 2.2.2.1
+interface Ethernet 0/1
+nat outbound 2000 address-group 1
+B. acl number 2000
+rule 0 permit source 192.168.1.1 0.0.0.255
+nat address-group 1 2.2.2.1
+interface Ethernet 0/1
+nat outbound 2000 address-group 1 no-pat
+C. nat server protocol telnet global 2.2.2.1 inside 192.168.1.1
+D. nat server protocol tcp global 2.2.2.1 telnet inside 192.168.1.1
+E. nat server protocol tcp global 2.2.2.1 23 inside 192.168.1.1 23
+Correct Answer: E
+Section: part 8
+Explanation
+设备 A 对公网提供 Telnet 服务， 即公网访问私网，配置 nat sever；Telnet端口号23
+[H3C-Serial0/2/0]nat server protocol ?
+<1-255> Protocol number of the server
+icmp Internet Control Message Protocol (1)
+tcp Transmission Control Protocol (6)
+udp User Datagram Protocol (17)
+[H3C-Serial0/2/0]nat server protocol tcp global 2.2.2.1 ?
+<0-65535> Port number of the server
+CHARgen Character generator (19)
+any Any protocol (0)
+bgp Border Gateway Protocol (179)
+cmd Remote commands (rcmd, 514) … .
+问题315.
+使用______命令查看 NAT 表项。
+A. display nat table
+B. display nat entry
+C. display nat
+D. display nat session
+Correct Answer: D
+Section: part 8
+Explanation
+问题316.
+网络环境如图所示。在路由器 RTA 上做如下 NAT 配置：
+[RTA]acl number 2000
+[RTA-acl-basic-2000]rule 0 permit source 100.0.0.0
+0.0.0.255 [RTA]nat address-group 1 200.76.28.11
+200.76.28.20 [RTA]interface Ethernet0/1
+[RTA-Ethernet0/1]nat outbound 2000 address-group 1 no-pat
+配置后，Client_A 和Client_B 同时访问 Server ，则此时 RTA 的 NAT 表内容可能为______。
+A. Protocol GlobalAddr Port InsideAddr Port DestAddr Port
+--- 200.76.28.11 --- 100.0.0.2 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:04:00
+--- 200.76.28.12 --- 100.0.0.1 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:03:59
+1 200.76.28.12 1024 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 512 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status:NOPAT, TTL: 00:01:00, Left: 00:01:00
+B. Protocol GlobalAddr Port InsideAddr Port DestAddr Port
+200.76.28.11 --- 100.0.0.2 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:04:00
+200.76.28.12 --- 100.0.0.1 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:03:59
+1 200.76.28.12 1024 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 511 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:01:00
+C. Protocol GlobalAddr Port InsideAddr Port DestAddr Port
+- 200.76.28.11 --- 100.0.0.2 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:04:00
+- 200.76.28.12 --- 100.0.0.1 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:03:59
+1 200.76.28.21 1024 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 512 100.0.0.2 512 200.76.29.4 512
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:01:00
+D. Protocol GlobalAddr Port InsideAddr Port DestAddr Port
+- 200.76.28.11 --- 100.0.0.2 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:04:00
+- 200.76.28.12 --- 100.0.0.1 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:03:59
+1 200.76.28.12 1023 100.0.0.1 1024 200.76.29.4 1024
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:00:59
+1 200.76.28.11 511 100.0.0.2 511 200.76.29.4 512
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:01:00
+Correct Answer: A
+Section: part 8
+Explanation
+no-pat IP 地址一对一转换，端口号保持一致
+问题317.
+在 MSR 路由器上，使用______命令查看路由器的 NAT 老化时间。
+A. display nat time
+B. display nat expire
+C. display nat aging-time
+D. display nat time-out
+Correct Answer: C
+Section: part 8
+Explanation
+问题318.
+在 MSR 路由器上，使用______命令配置 NAT 地址池。
+A. nat address-group
+B. nat ip pool
+C. nat net pool
+D. nat pool
+Correct Answer: A
+Section: part 8
+Explanation
+问题319.
+使用 display nat session 命令查看 NAT 信息，显示如下：
+There are currently 4 NAT sessions
+Protocol GlobalAddr Port InsideAddr Port DestAddr Port
+- 198.80.28.11 --- 10.0.0.2 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:04:00
+- 198.80.28.12 --- 10.0.0.1 --- --- ---
+VPN: 0, status: NOPAT, TTL: 00:04:00, Left: 00:03:59
+1 198.80.28.12 1024 10.0.0.1 1024 198.80.29.4 1024
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:00:59
+1 198.80.28.11 512 10.0.0.2 512 198.80.29.4 512
+VPN: 0, status: NOPAT, TTL: 00:01:00, Left: 00:01:00
+由此信息可知私网地址是______ 。 (多选)
+A. 192.80.28.12
+B. 10.0.0.1
+C. 192.80.29.4
+D. 10.0.0.2
+E. 192.80.28.11
+Correct Answer: BD
+Section: part 8
+Explanation
+问题320.
+在 MSR 路由器上，如果想查看 NAT 转换的报文数量，应该使用______命令。
+A. display nat counter
+B. display nat
+C. display acl
+D. display nat session
+Correct Answer: C
+Section: part 8
+Explanation
+问题321.
+某私网设备 A 的 IP 地址是 192.168.1.1/24 ，其对应的公网 IP 地址是 2.2.2.1 ；公网设备 B 的 IP 地址是
+2.2.2.5。若希望 B 能 ping 通 A ，可以在 NAT 设备上使用下列哪项配置？
+A. acl number 2000
+rule 0 permit source 192.168.1.10.0.0.255
+nat address-group 1 2.2.2.1
+interface Ethernet 0/1
+nat outbound 2000 address-group 1
+B. acl number 2000
+rule 0 permit source 192.168.1.1 0.0.0.255
+nat address-group 1 2.2.2.1
+interface Ethernet 0/1
+nat outbound 2000 address-group 1 no-pat
+C. nat server protocol icmp global 2.2.2.1 inside 192.168.1.1
+D. nat server protocol icmp global 192.168.1.1 inside 2.2.2.1
+Correct Answer: C
+Section: part 8
+Explanation
+公网访问私网用nat server
+问题322.
+网络环境如图所示，______是正确的 NAPT 配置。 (多选)
+A. acl number 2000
+rule 0 permit source 192.168.0.2 0.0.0.255 nat address-group 1 1.1.1.1
+interface Ethernet 0/1
+nat outbound 2000 address-group 1
+B. acl number 2000
+rule 0 permit source 192.168.0.2 0.0.0.255 nat address-group 1 1.1.1.1
+interface Ethernet 0/1
+nat outbound 2000 address-group 1 no-pat（basic nat）
+C. acl number 2000
+rule 0 permit source 192.168.0.2 0.0.0.255
+interface Ethernet 0/1
+nat outbound 2000 address-group 1 no-pat
+D. acl number 2000
+rule 0 permit source 192.168.0.2 0.0.0.255
+interface Ethernet 0/1
+nat outbound 2000
+Correct Answer: AD
+Section: part 8
+Explanation
+NATP网络地址端口转换，加no-pat表示禁止端口转换
+第 27 章 配置 PPP
+问题323.
+下面对 PPP PAP 验证的描述，正确的是______ 。 (多选)
+A. PAP 验证是一个二次握手协议
+B. PAP 的用户名是明文的，但是密码是机密的
+C. PAP 的用户名是密文的，密码是明文的
+D. PAP 的用户名和密码都是明文的
+Correct Answer: AD
+Section: part 8
+Explanation
+问题324.
+在 LCP 协商阶段，PPP 会协商哪些内容？ (多选)
+A. 链路层封装协议类型
+B. 验证方式
+C. 最大传输单元
+D. 网络层协议类型
+Correct Answer: BC
+Section: part 8
+Explanation
+LCP :建立、拆除、监控数据链路
+NCP ：协商网络层协议，协商数据链路上传输数据包的格式与类型
+问题325.
+PPP 在建立链路之前要经历一系列的协商过程，正确的协商次序是______。
+A. LCP>PAP/Chap>NCP
+B. PAP/CHAP>LCP>NCP
+C. LCP> NCP>PAP/CHAP
+D. NCP>LCP>PAP/CHAP
+Correct Answer: A
+Section: part 8
+Explanation
+问题326.
+PPP 在建立链路之前要经历一系列的协商过程，正确的协商次序是___ 。
+(依次填入各步的代号，中间不能 有空格，如：ABC)
+A. PAP/CHAP B. NCP C. LCP
+Correct Answer: CAB
+Section: part 8
+Explanation
+问题327.
+两台 MSR 路由器通过各自的 Serial1/0 接口背靠背互连，在广域网接口上封装 PPP 链路层协议，对于此 网络
+中 PPP 链路的说法正确的是______ 。 (多选)
+A. PPP 链路上承载的网络层协议类型需要在 NCP 协商中确定
+B. PPP 链路开始建立时，LCP 和 NCP 协商就同时开始了
+C. 在此 PPP 链路上可以承载 IPX 协议
+D. 如果两端都不配置 PPP 验证，该 PPP 链路不能正常建立
+Correct Answer: AC
+Section: part 8
+Explanation
+问题328.
+下列关于 PPP 特点的说法正确的是______ 。 (多选)
+A. PPP 支持在同异步链路
+B. PPP 支持身份验证，包括 PAP 验证和 CHAP 验证
+C. PPP 可以对网络地址进行协商
+D. PPP 可以对 IP 地址进行动态分配
+Correct Answer: ABCD
+Section: part 8
+Explanation
+问题329.
+在 PPP 会话建立的过程中，当物理层不可用时，PPP 链路处于______阶段。
+A. Establish
+B. Network
+C. Authentication
+D. Dead
+E. Terminate
+Correct Answer: D
+Section: part 8
+Explanation
+问题330.
+在 PPP 会话建立的过程中，当物理层可用时，PPP 链路进入______阶段。
+A. Establish
+B. Network
+C. Authentication
+D. Dead
+E. Terminate
+Correct Answer: A
+Section: part 8
+Explanation
+问题331.
+在 PPP 会话建立的过程中，当设置了验证且验证通过时，PPP 链路进入______阶段。
+A. Establish
+B. Network
+C. Authentication
+D. Dead
+E. Terminate
+Correct Answer: B
+Section: part 8
+Explanation
+问题332.
+在 PPP 会话建立的过程中，当设置了验证但验证失败时，PPP 链路进入______阶段。
+A. Establish
+B. Network
+C. Authentication
+D. Dead
+E. Terminate
+Correct Answer: E
+Section: part 8
+Explanation
+问题333.
+在 display interface 命令的显示中，下列哪项的 LCP 和 NCP 的状态表示 PPP 链路已经建立完成？
+A. LCP Closed ，IPCP Opened
+B. LCP Closed ，IPCP Closed
+C. LCP Opened ，IPCP Opened
+D. LCP Initial ，IPCP Closed
+Correct Answer: C
+Section: part 9
+Explanation
+问题334.
+某网络连接形如：
+HostA----GE0/0--MSR-1--S1/0------S1/0--MSR-2--GE0/0----HostB
+其中，两台空配置的 MSR 路由器 MSR-1 和 MSR-2 通过各自的 S1/0 接口背靠背互连，各自的 GE0/0 接口分
+别连接客户端主机 HostA 和 HostB 。所有物理连接都正常。现在在 MSR-2 的 S1/0 接口下增加 如下配置：
+interface Serial1/0
+link-protocol ppp
+ppp pap local-user 123 password simple 456
+ip address 6.6.6.1 255.255.255.0 那么______ 。 (多选)
+A. 在 MSR-1 的 S1/0 接口上只需配置 PPP 封装以及 IP 地址 6.6.6.2/24 即可互通
+B. 在 MSR-1 的 S1/0 接口上如果只配置 PPP 封装以及 IP 地址 6.6.6.2/24 则不可互通
+C. 在进行 PAP 验证时，MSR-2 会先把用户名 123 和密码 456 发给 MSR-1
+D. 在进行 PAP 验证时，MSR-2 会先把密码 456 以明文的方式发送给 MSR-1
+Correct Answer: AC
+Section: part 9
+Explanation
+Pap 被验证方先发起验证请求，两次握手； 明文发送用户名密码。
+Chap 主验正方先发起验证请求，三次握手；不发送密码。
+问题335.
+一台 MSR 路由器通过广域网接口连接到 Internet ，在该 MSR 路由器上看到如下接口显示信息：
+Mp-group1 current state: UP
+Line protocol current state: UP
+Description: Mp-group1 Interface
+The Maximum Transmit Unit is 1500, Hold timer is 10(sec)
+Internet Address is 172.16.1.100/24 Primary
+Link layer protocol is PPP
+LCP opened, MP opened, IPCP opened
+Physical is MP, baudrate: 64000 bps
+那么对如上显示信息分析正确的是_____ 。 (多选题)
+A. 该接口使用的物理电缆为 MP 电缆
+B. 该接口封装的链路层协议为 PPP
+C. 该接口 Mp-group1 至少包含了两个物理接口
+D. 该接口运行的网络层协议为 IP
+Correct Answer: BD
+Section: part 9
+Explanation
+MP表示多链路捆绑，没有专用线缆
+问题336.
+客户的网络连接形如：
+HostA----GE0/0--MSR-1--S1/0-----WAN----S1/0--MSR-2--GE0/0----HostB
+在两台路由器 MSR-1和MSR-2的广域网接口S1/0上都只封装了 PPP 协议并配置 IP 地址 。 目前 HostA 与
+HostB 可 以 互相 ping 通 。 在 MSR-1 接 口 S1/0 下增加命令 ppp authentication-mode chap ，然后对 MSR-1 的
+S1/0 执行 shutdown 和 undo shutdown 操作。那么______ 。 (多选)
+A. 此时 HostA 与 HostB 依然可以互相 ping 通
+B. 此时 HostA 与 HostB 之间无法互相 ping 通
+C. MSR-2 会发送 Challenge ，同时附带本端的用户名一起发送给 MSR-1 开始 CHAP 验证
+D. MSR-1 会发送 Challenge ，同时附带本端的用户名一起发送给 MSR-2 开始 CHAP 验证
+Correct Answer: BD
+Section: part 9
+Explanation
+Pap 被验证方先发起验证请求，两次握手。 明文发送用户名密码。
+Chap 主验证方先发起验证请求，三次握手。不发送密码。
+主验证方配置 ppp authentication chap
+问题337.
+客户的两台路由器 MSR-1 、MSR-2 的广域网链路采用 PPP 协议，同时要求 MSR-1 作为主验证方， 通过
+CHAP 方式验证 MSR-2 ，那么如下哪些配置是 MSR-2 可能需要的？ (多选)
+A. [MSR-2]ppp chap user user
+B. [MSR-2]ppp chap password simple password
+C. [MSR-2-Serial1/0] ip address ppp-negotiate
+D. [MSR-2-Serial1/0] ip address 10.10.10.1 22
+Correct Answer: AB
+Section: part 9
+Explanation
+MSR-2是被验证方
+问题338.
+客户的两台路由器 MSR-1 、MSR-2 的广域网链路采用 PPP 协议，同时要求 MSR-1 作为主验证方通过 PAP 方
+式验证 MSR-2 ，那么在 MSR-2 上需要哪些配置？
+A. [MSR-2-Serial0/0] ppp pap user user
+B. [MSR-2-Serial0/0] ppp pap password simple password
+C. [MSR-2] ppp pap local-user user password simple password
+D. [MSR-2-Serial0/0] ppp pap local-user user password simple password
+Correct Answer: D
+Section: part 9
+Explanation
+被验证方配置用户名
+问题339.
+XYZ 公司的两个分公司处于不同地区，其间要搭建广域网连接。根据规划，广域网采用 PPP 协议，考虑 到网络
+安全，要求密码类的报文信息不允许在网络上明文传送，那么该采取如下哪种 PPP 验证协议？
+A. PAP
+B. CHAP
+C. MD5
+D. 3DES
+Correct Answer: B
+Section: part 9
+Explanation
+Chap 网络上只传输用户名
+问题340.
+在一个 PPP 连接中，关于 NCP 的说法错误的是______。
+A. NCP 用于协商验证方式
+B. NCP 用于协商数据链路上所传输的数据包的格式与类型
+C. NCP 用来建立、拆除和监控数据链路
+D. NCP 可以配置不同的网络层协议
+Correct Answer: AC
+Section: part 9
+Explanation
+LCP :建立、拆除、监控数据链路
+NCP ：协商网络层协议，协商数据链路上传输数据包的格式与类型
+PPP 建立链路之前首先进行 LCP 协商，协商内容包括工作方式是 SP 还是 MP 、验证方式和最大传输 单元 NCP
+协商包括 IPCP 协商，IPCP 协商主要包括双方的 IP 地址
+问题341.
+在图中方框处应使用的设备是______。
+A. 路由器
+B. CSU/DSU
+C. 广域网交换机
+D. 调制解调器
+部分新内容题目
+问题342.
+在PPPoE应用中，接入端的以太网MAC地址在PPPoE的_______阶段确定。
+答案：discovery
+问题343.
+如果要使当前配置在系统重启后继续生效，在重启前应使用___命令将当前配置保存到配置文件中。（填命令）
+Save
+问题344.
+想要修改设备名称，应该使用___命令（填写命令）。sysname
+问题345.
+我们通常在手机或者笔记本电脑上搜索可接入无线网络时,搜索出来的网络名称是？答案：C
+A. APname
+B. BSS
+C. SSID
+D. Radioname
+问题346.
+SDN网络中控制器通过南向接口连接设备，以下属于控制器南向协议的是？答案： BCD
+A. RestAPI
+B. OpenFlow
+C. NETCONF
+D. SNMP
+问题347.
+SDN网络架构分为哪几层？ABC
+A.应用层
+B.控制层
+C.转发层
+D.传输层
+问题348.
+NFV必须在部署SDN的网络环境中进行网络功能虚拟化？ 答案：b
+a.正确
+b.错误
+问题349.
+NFV架构主要包含以下哪些组件？ABC
+A. NFVI
+B. VNF
+C. NFVM&O
+D. OSS/BSS
+问题350.
+基于VMM所在位置与虚拟化范围，计算虚拟化可以分为哪类型？ABD
+A. 寄居虚拟化
+B. 裸金属虚拟化
+C. 半虚拟化
+D. 操作系统虚拟化容器
+问题351.
+当SR标签栈所有标签都被弹出后，网络报文按照什么转发？D
+A. 路由快转表
+B. MPLS标签转发
+C. MAC地址表
+D. IP路由表
+问题352.
+在PPPoE的PPPSession阶段，PPPoEclient和PPPoEserver之间交换以太网数据帧中，其目的MAC地址可以
+是______。答案：CD
+A. 广播MAC地址
+B. 组播MAC地址
+C. PPPoEclient的MAC地址
+D. PPPoEserver的MAC地址
+问题353.
+在PPPoE协商过程中，下列的PPPoE报文中，哪些必须包含Service-Name信息？ABC
+A. PADI（PPPoEActiveDiscoveryInitiation）
+B. PADO（PPPoEActiveDiscoveryOffer）
+C. PADR（PPPoEActiveDiscoveryRequest）
+D. PADT（PPPoEActiveDiscoveryTerminate）
